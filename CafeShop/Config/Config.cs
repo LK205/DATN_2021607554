@@ -4,7 +4,7 @@
     {
         public static string Connection()
         {
-            string conn = @"Data Source=LMK205\SQLEXPRESS;Initial Catalog=cafe;User ID=sa;Password=Leminhkhoi2003;Trust Server Certificate=True";
+            string conn = @"Data Source=LMK205\SQLEXPRESS;Initial Catalog=CafeShop;User ID=sa;Password=Leminhkhoi2003;Trust Server Certificate=True";
             return conn;
         }
 

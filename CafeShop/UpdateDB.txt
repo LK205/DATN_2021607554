@@ -1,0 +1,1 @@
+Scaffold-DbContext -Connection "Data Source=LMK205\SQLEXPRESS;Initial Catalog=cafe;user id=sa;password=Leminhkhoi2003 ; TrustServerCertificate=True"  Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context ApplicationDbContext
