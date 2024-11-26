@@ -254,11 +254,11 @@ namespace CafeShop.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Code).HasMaxLength(250);
+                entity.Property(e => e.ProductCode).HasMaxLength(250);
 
                 entity.Property(e => e.Description).HasMaxLength(250);
 
-                entity.Property(e => e.Name).HasMaxLength(250);
+                entity.Property(e => e.ProductName).HasMaxLength(250);
 
                 entity.Property(e => e.ProductTypeId).HasColumnName("ProductTypeID");
             });

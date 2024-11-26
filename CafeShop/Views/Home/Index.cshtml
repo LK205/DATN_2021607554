@@ -92,7 +92,7 @@
         {
             <div class="col-12 col-md-3 p-2">
                 <a asp-controller="Shop" asp-action="IndexDetails" asp-route-prId ="@item.Id"><img src="@item.ImageUrl" class="rounded-square img-fluid rounded-3 pb-2"></a>
-                <h5 class="text-center mb-2">@item.Name</h5>
+                <h5 class="text-center mb-2">@item.ProductName</h5>
                 <p class="text-center"><a class="btn btn-success" asp-controller="Shop" asp-action="Index">Cửa hàng</a></p>
             </div>
         }
@@ -132,7 +132,7 @@
                                 </li>
                                 <li class="text-muted text-right">@item.Price.ToString("N0") VNĐ</li>
                             </ul>
-                            <a class="h3 text-decoration-none text-dark">@item.Name</a>
+                            <a class="h3 text-decoration-none text-dark">@item.ProductName</a>
                             <p class="text-muted">Đánh giá (@item.Id) </p>
                         </div>
                     </div>

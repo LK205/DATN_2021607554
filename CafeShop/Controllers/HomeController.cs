@@ -51,7 +51,7 @@ namespace CafeShop.Controllers
         public IActionResult Privacy(string Email = "", string PassWord = "")
         {
             string passwordHash = MaHoaMD5.EncryptPassword(PassWord);
-            Account acc =_accRepo.GetAll().FirstOrDefault(x=>x.Email == Email && x.Password == passwordHash) ?? new Account();
+            Account acc =_accRepo.GetAll().FirstOrDefault(x=>x.Email == Email && x.Password == passwordHash && x.IsDelete == false) ?? new Account();
             if (acc.Id <= 0)
             {
                 ViewBag.Error = "Tài khoản hoặc mật khẩu không chính xác!";

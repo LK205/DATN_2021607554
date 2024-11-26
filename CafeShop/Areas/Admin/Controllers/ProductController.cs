@@ -39,15 +39,15 @@ namespace CafeShop.Areas.Admin.Controllers
         }
         public async Task<JsonResult> CreateOrUpdate([FromBody] ProductDto data)
         {
-            bool isCheck = _pro.GetAll().Where(p => p.Id != data.Id && p.Code == data.Code).Any();
+            bool isCheck = _pro.GetAll().Where(p => p.Id != data.Id && p.ProductCode == data.ProductCode).Any();
             if (isCheck) return Json(new { status = 0, message = "Mã sản phẩm đã bị trùng!", result = 0 });
 
             //Lưu sản phẩm
             Product newPro = _pro.GetByID(data.Id) ?? new Product();
 
             newPro.Id = data.Id;
-            newPro.Code = data.Code;
-            newPro.Name = data.Name;
+            newPro.ProductCode = data.ProductCode;
+            newPro.ProductName = data.ProductName;
             newPro.IsActive = data.IsActive;
             newPro.Description = data.Description;
             newPro.ProductTypeId = data.ProductTypeId;
@@ -152,10 +152,11 @@ namespace CafeShop.Areas.Admin.Controllers
         // ===================================================================  END =========================================================================
 
         [HttpPost]
-        public async Task<IActionResult> UploadFile(int Id)
+        public async Task<IActionResult> UploadFile(Product product)
         {
             try
             {
+                ProductType productType = _proType.GetByID(product.ProductTypeId) ?? new ProductType();
                 string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
                 var files = Request.Form.Files;
                 List<ProductImage> listFiles = new List<ProductImage>();
@@ -166,9 +167,9 @@ namespace CafeShop.Areas.Admin.Controllers
                     {
                         ImageUrl = timestamp + "_" + file.FileName,
                         ImageName = file.FileName,
-                        ProductId = Id,
+                        ProductId = product.Id,
                     });
-                    string pathUpload = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images");
+                    string pathUpload = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Images\\Product\\{productType.TypeName}\\{product.ProductName}");
                     string imagePath = pathUpload + $"\\{timestamp+ "_" + file.FileName}";
                     if (System.IO.File.Exists(imagePath))
                     {
