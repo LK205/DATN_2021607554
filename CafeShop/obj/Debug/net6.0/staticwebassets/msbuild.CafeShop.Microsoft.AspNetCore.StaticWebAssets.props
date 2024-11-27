@@ -7376,6 +7376,182 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Nóng\20241127_225812_897_1636647328_arme-nong_3c118e3822444aadb7f0e1a162d5264a.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê máy/Americano Nóng/20241127_225812_897_1636647328_arme-nong_3c118e3822444aadb7f0e1a162d5264a.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Nóng\20241127_225812_897_1636647328_arme-nong_3c118e3822444aadb7f0e1a162d5264a.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Nóng\20241127_225812_897_1645968775_americano-copy_bb5a408f247646f0935eb17932a6d0d0.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê máy/Americano Nóng/20241127_225812_897_1645968775_americano-copy_bb5a408f247646f0935eb17932a6d0d0.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Nóng\20241127_225812_897_1645968775_americano-copy_bb5a408f247646f0935eb17932a6d0d0.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Đá\20241127_225707_481_1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê máy/Americano Đá/20241127_225707_481_1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Đá\20241127_225707_481_1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Đá\20241127_225707_481_classic-cold-brew_791256_d4d8388a3d724f879845680c0239ff68.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê máy/Americano Đá/20241127_225707_481_classic-cold-brew_791256_d4d8388a3d724f879845680c0239ff68.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Đá\20241127_225707_481_classic-cold-brew_791256_d4d8388a3d724f879845680c0239ff68.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Đá\20241127_231757_734_1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê máy/Americano Đá/20241127_231757_734_1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Đá\20241127_231757_734_1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Đá\20241127_231757_734_classic-cold-brew_791256_d4d8388a3d724f879845680c0239ff68.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê máy/Americano Đá/20241127_231757_734_classic-cold-brew_791256_d4d8388a3d724f879845680c0239ff68.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Americano Đá\20241127_231757_734_classic-cold-brew_791256_d4d8388a3d724f879845680c0239ff68.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Cappuccino Đá\20241127_230102_744_capu-da_487470_e06d3835cbc84e51bd635b04d541494e.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê máy/Cappuccino Đá/20241127_230102_744_capu-da_487470_e06d3835cbc84e51bd635b04d541494e.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Cappuccino Đá\20241127_230102_744_capu-da_487470_e06d3835cbc84e51bd635b04d541494e.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Cà Phê Sữa Hạnh Nhân Kem Cheese\20241127_225959_541_1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê máy/Cà Phê Sữa Hạnh Nhân Kem Cheese/20241127_225959_541_1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê máy\Cà Phê Sữa Hạnh Nhân Kem Cheese\20241127_225959_541_1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê việt\Bạc sỉu\20241127_225847_761_1639377904_bac-siu_525b9fa5055b41f183088c8e479a9472.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê việt/Bạc sỉu/20241127_225847_761_1639377904_bac-siu_525b9fa5055b41f183088c8e479a9472.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê việt\Bạc sỉu\20241127_225847_761_1639377904_bac-siu_525b9fa5055b41f183088c8e479a9472.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê việt\Bạc sỉu\20241127_225847_761_1645962337_bac-siu-da-2_e2c96c8ab5f44365bfbc32b0849c0f62.webp))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê việt/Bạc sỉu/20241127_225847_761_1645962337_bac-siu-da-2_e2c96c8ab5f44365bfbc32b0849c0f62.webp</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê việt\Bạc sỉu\20241127_225847_761_1645962337_bac-siu-da-2_e2c96c8ab5f44365bfbc32b0849c0f62.webp))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê việt\Cà phê đen đá\20241127_225910_171_1639377797_ca-phe-den-da_6f4766ec0f8b4e929a8d916ae3c13254.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>Images/Product/Cà phê việt/Cà phê đen đá/20241127_225910_171_1639377797_ca-phe-den-da_6f4766ec0f8b4e929a8d916ae3c13254.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\Cà phê việt\Cà phê đen đá\20241127_225910_171_1639377797_ca-phe-den-da_6f4766ec0f8b4e929a8d916ae3c13254.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\js\Admin\account.js))">
       <SourceType>Package</SourceType>
       <SourceId>CafeShop</SourceId>
@@ -8527,6 +8703,38 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\LICENSE.txt))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\lib\select2-select2-45f2b83\select2.css))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>lib/select2-select2-45f2b83/select2.css</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\lib\select2-select2-45f2b83\select2.css))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\lib\select2-select2-45f2b83\select2.js))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>lib/select2-select2-45f2b83/select2.js</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\lib\select2-select2-45f2b83\select2.js))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

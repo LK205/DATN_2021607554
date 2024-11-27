@@ -46,6 +46,12 @@ namespace CafeShop.Areas.Admin.Controllers
 
         public JsonResult CreateOrUpdate([FromBody] Account data)
         {
+            Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+            if (acc == null)
+            {
+                return Json(new { status = 0, message = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
+            }
+
             bool isCheck = _accRepo.GetAll().Any(p => p.Id != data.Id && p.Email.ToLower().Equals(data.Email.ToLower()));
             if(isCheck)
             {
@@ -55,16 +61,28 @@ namespace CafeShop.Areas.Admin.Controllers
             Account model = _accRepo.GetByID(data.Id) ?? new Account();
 
             model.Email = data.Email;
-            model.Password = MaHoaMD5.EncryptPassword(data.Password);
+            //model.Password = MaHoaMD5.EncryptPassword(data.Password);
             model.Role = data.Role;
             model.FullName = data.FullName;
             model.Gender = data.Gender;
             model.PhoneNumber = data.PhoneNumber;
             model.Address = data.Address;
             model.IsActive = data.IsActive;
+            model.IsDelete = false;
 
-            if (model.Id > 0) _accRepo.Update(model);
-            else _accRepo.Create(model);
+            if (model.Id > 0)
+            {
+                model.Password = MaHoaMD5.EncryptPassword("1");
+                model.UpdatedDate = DateTime.Now;
+                model.UpdatedBy = acc.FullName;
+                _accRepo.Update(model);
+            }
+            else
+            {
+                model.CreatedDate = DateTime.Now;
+                model.CreatedBy = acc.FullName;
+                _accRepo.Create(model);
+            }
 
             return Json(new { status = 1, message = "Thành công!" });
         }

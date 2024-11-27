@@ -111,8 +111,8 @@ function GetAll() {
                                 <button class="btn btn-sm btn-primary" onclick="GetById(${item.id})" ><i class="bi bi-pencil-square"></i> Sửa</button>
                                 <button class="btn btn-sm btn-danger" onclick="DeleteById(${item.id})"><i class="bi bi-trash3"></i> Xóa</button>
                             </td>
-                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.id})">${item.code} </a></td>
-                            <td scope="col">${item.name}</td>
+                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.id})">${item.sizeCode} </a></td>
+                            <td scope="col">${item.sizeName}</td>
                             <td scope="col">${item.description ?? ""}</td>
                             
                         </tr>`;
@@ -126,7 +126,7 @@ function GetAll() {
         },
 
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 }
@@ -146,14 +146,13 @@ function GetById(id) {
         },
         contentType: 'application/json',
         success: function (data) {
-            $('#formCode').val(data.code);
-            $('#formName').val(data.name);
-            $('#formGroupType').val(data.groupType);
+            $('#formCode').val(data.sizeCode);
+            $('#formName').val(data.sizeName);
             $('#formNote').val(data.description);
 
         },
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
     showModal();
@@ -161,11 +160,11 @@ function GetById(id) {
 function CreateOrUpdate() {
     var obj = {
         Id: parseInt(productTypeId),
-        Code: $("#formCode").val(),
-        Name: $("#formName").val(),
+        SizeCode: $("#formCode").val(),
+        SizeName: $("#formName").val(),
         Description: $("#formNote").val(),
     };
-
+    console.log(obj);
     let _url = "/Admin/ProductSize/CreateOrUpdate";
     $.ajax({
         type: 'POST',
@@ -173,8 +172,13 @@ function CreateOrUpdate() {
         contentType: 'application/json;charset=utf-8',
         data: JSON.stringify(obj),
         success: function (result) {
-            CloseModal();
-            GetAll();
+            if (result.status == 1) {
+                alert(result.statusText)
+            }
+            else {
+                CloseModal();
+                GetAll();
+            }
         },
         error: function (err) {
             MessageError(err.responseText);

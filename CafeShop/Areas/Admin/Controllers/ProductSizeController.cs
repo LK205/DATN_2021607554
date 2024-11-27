@@ -38,15 +38,44 @@ namespace CafeShop.Areas.Admin.Controllers
             return Json(_sizeRepo.GetByID(Id));
         }
 
-        public bool CreateOrUpdate([FromBody] ProductSize data )
+        public JsonResult CreateOrUpdate([FromBody] ProductSize data )
         {
+            Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+            if(acc == null)
+            {
+                return Json(new { status = 1, statusText = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
+            }
+
+            if (string.IsNullOrWhiteSpace(data.SizeName))
+            {
+                return Json(new { status = 1, statusText = "Vui lòng nhập Tên size sản phẩm!" });
+            }
+
+            if (string.IsNullOrWhiteSpace(data.SizeCode))
+            {
+                return Json(new { status = 1, statusText = "Vui lòng nhập Mã size sản phẩm!" });
+            }
+
             ProductSize model = _sizeRepo.GetByID(data.Id) ?? new ProductSize();    
             model.SizeCode = data.SizeCode;
             model.SizeName = data.SizeName;
             model.Description = data.Description;
-            if (model.Id > 0) _sizeRepo.Update(model);
-            else _sizeRepo.Create(model);
-            return true;
+            model.IsDelete = false;
+            
+            if (model.Id > 0)
+            {
+                model.UpdatedDate = DateTime.Now;
+                model.UpdatedBy = acc.FullName;
+                _sizeRepo.Update(model);
+            }
+            else 
+            {
+                model.CreatedDate =  DateTime.Now;
+                model.CreatedBy = acc.FullName;
+                _sizeRepo.Create(model); 
+            }
+
+            return Json(new {status = 0, statusText = "success"});
         }
 
         public bool Delete(int Id)

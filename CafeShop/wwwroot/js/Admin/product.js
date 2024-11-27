@@ -2,12 +2,14 @@
     GetAll();
     GetAllSize();
     GetAllProductType();
+
 });
 var pageNumber = 1;
 var totalPage = 0;
 var productId = 0;
 var htmlSize = "";
 var _attachFiles = [];
+var lstFileDeleted = []
 $('#request').keydown(function (e) {
     if (e.keyCode == 13) {
         pageNumber = 1;
@@ -73,6 +75,7 @@ function showModal() {
     }
 }
 function CloseModal() {
+    lstFileDeleted = [];
     document.getElementById('form').reset();
     $('#tbodySteps').html('');
     productId = 0;
@@ -109,8 +112,8 @@ function GetAll() {
                                 <button class="btn btn-sm btn-primary" onclick="GetById(${item.id})" ><i class="bi bi-pencil-square"></i> Sửa</button>
                                 <button class="btn btn-sm btn-danger" onclick="DeleteById(${item.id})"><i class="bi bi-trash3"></i> Xóa</button>
                             </td>
-                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.id})">${item.code} </a></td>
-                            <td scope="col">${item.name}</td>
+                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.id})">${item.productCode} </a></td>
+                            <td scope="col">${item.productName}</td>
                             <td class="text-center" scope="col">${item.isActive == 1 ? "Mở bán" : "Ngưng bán"}</td>
                             <td scope="col">${item.productTypeName ?? ""}</td>
                             <td scope="col">${item.description ?? ""}</td>
@@ -120,7 +123,7 @@ function GetAll() {
             let total = Math.ceil(data.totalCount.totalCount / 10);
             totalPage = total > 0 ? total : 1;
             $('#tbody').html(html);
-            $('#page_details').text(`Trang ${pageNumber} / ${totalPage}`);           
+            $('#page_details').text(`Trang ${pageNumber} / ${totalPage}`);
             $('#pageNumber').val(pageNumber);
             Pagination();
         },
@@ -145,8 +148,8 @@ function GetById(id) {
         contentType: 'application/json',
         success: function (data) {
             productId = data.data.id
-            $('#formCode').val(data.data.code);
-            $('#formName').val(data.data.name);
+            $('#formCode').val(data.data.productCode);
+            $('#formName').val(data.data.productName);
             $('#formProductTypeId').val(data.data.productTypeId);
             $('#formNote').val(data.data.description);
             $("#formIsActive").val(data.data.isActive == true ? 1 : 0)
@@ -170,6 +173,20 @@ function GetById(id) {
             $(".productSizeId").each(function (index, el) {
                 $(el).val(data.details[index].productSizeId);
             });
+            console.log(data.images);
+
+            var htmlImage = '';
+            _attachFiles = data.images.map(x => ({ id: x.id, name: x.imageName }));
+
+            console.log(_attachFiles);
+
+            $.each(_attachFiles, function (key, item) {
+                htmlImage += `
+                <p class="m-0 px-1 text-nowrap text-dark">${item.name} <span class="text-danger" onclick="return onRemoveFile(${key},${item.id})"><i class="bi bi-x"></i></span></p> `;
+            })
+            console.log(htmlImage);
+            $('#AttachFiles').html(htmlImage);
+
             showModal();
         },
         error: function (err) {
@@ -206,15 +223,16 @@ function Validate() {
             let sizeId = $(el).find(".productSizeId").val();
             if (sizeId == null || sizeId <= 0) {
                 alert("Hãy nhập Size sản phẩm!");
-                isValid = false;
+                return false;
             }
             if (price == null || price.trim().length <= 0) {
                 alert("Hãy nhập đủ giá tiền cho Size sản phẩm!");
-                isValid = false;
+                return false;
             }
         });
     }
-    return isValid;}
+    return isValid;
+}
 function CreateOrUpdate() {
     if (Validate()) {
         let arrDetails = [];
@@ -236,12 +254,13 @@ function CreateOrUpdate() {
         let note = $("#formNote").val();
         var obj = {
             Id: productId,
-            Code: code,
-            Name: name,
+            ProductCode: code,
+            ProductName: name,
             IsActive: parseInt(status) == 1 ? true : false,
             Description: note,
             ProductTypeId: productTypeId,
-            ListDetails: arrDetails
+            ListDetails: arrDetails,
+            ListFileIDs: lstFileDeleted
         };
         let _url = "/Admin/Product/CreateOrUpdate";
         $.ajax({
@@ -251,19 +270,20 @@ function CreateOrUpdate() {
             data: JSON.stringify(obj),
             success: function (result) {
                 if (result.status == 1) {
+                    alert(result.statusText)
+                } else {
                     UploadFile(result.result.id);
                     CloseModal();
                     GetAll();
-                } else {
-                    alert(result.message)
+
                 }
             },
             error: function (err) {
-                MessageError(err.responseText);
+                alert(err.responseText);
             }
         });
     }
-} 
+}
 function DeleteById(id) {
     if (confirm("Bạn có chắc chắn muốn thực hiện thao tác này?") == true) {
         let _url = "/Admin/Product/Delete";
@@ -278,7 +298,7 @@ function DeleteById(id) {
                 CloseModal();
                 pageNumber = 1;
                 GetAll();
-            },            error: function (err) {
+            }, error: function (err) {
                 MessageError(err.responseText);
             }
         });
@@ -293,9 +313,9 @@ function GetAllSize() {
         success: function (result) {
             htmlSize = `<option value="0" disabled selected hidden>Chọn Size sản phẩm</option>`;
             result.forEach(e => {
-                htmlSize += `<option value="${e.id}">${e.name}</option>`;
+                htmlSize += `<option value="${e.id}">${e.sizeName}</option>`;
             })
-        },        error: function (err) {
+        }, error: function (err) {
             MessageError(err.responseText);
         }
     });
@@ -309,7 +329,7 @@ function GetAllProductType() {
         success: function (result) {
             let html = `<option value="0" disabled selected hidden>Chọn loại sản phẩm</option>`;
             result.forEach(e => {
-                html += `<option value="${e.id}">${e.name}</option>`;
+                html += `<option value="${e.id}">${e.typeName}</option>`;
             })
             $("#formProductTypeId").html(html);
         },
@@ -370,13 +390,13 @@ function UploadFile(productId) {
                 },
 
                 error: function (err) {
-                    MessageError(err.responseText);
+                    alert(err.responseText);
                 }
             });
         }
 
     } catch (e) {
-        MessageError(e);
+        alert(e);
     }
 }
 //Sự kiện chọn file đính kèm
@@ -389,20 +409,22 @@ function onSelectedFile() {
     })
 
     $.each(_attachFiles, function (key, item) {
-        html += `<p class="m-0 px-1 text-nowrap text-dark">${item.name} <span class="text-danger" onclick="return onRemoveFile(${key})"><i class="fas fa-times"></i></span></p>`;
+        html += `<p class="m-0 px-1 text-nowrap text-dark">${item.name} <span class="text-danger" onclick="return onRemoveFile(${key},0)"><i class="bi bi-x"></i></span></p>`;
     })
 
     $('#AttachFiles').html(html);
 }
 //Sự kiện remove file đính kèm
-function onRemoveFile(index) {
+function onRemoveFile(index, fileID) {
     if (confirm("Bạn có chắc muốn xóa ảnh này không?")) {
         _attachFiles.splice(index, 1);
         var html = '';
         $.each(_attachFiles, function (key, item) {
-            html += `<p class="m-0 px-1 text-nowrap">${item.name} <span class="text-danger" onclick="return onRemoveFile(${key})"><i class="fas fa-times"></i></span></p>`;
+            html += `<p class="m-0 px-1 text-nowrap">${item.name} <span class="text-danger" onclick="return onRemoveFile(${key},${item.id})"><i class="bi bi-x"></i></span></p>`;
         });
         $('#AttachFiles').html(html);
     }
+    let idFile = parseInt(fileID);
+    if (idFile > 0) lstFileDeleted.push(idFile);
 
 }

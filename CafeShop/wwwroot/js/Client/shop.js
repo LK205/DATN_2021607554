@@ -69,6 +69,7 @@ function GetAll() {
         contentType: 'application/json',
         success: function (data) {
             var html = '';
+            console.log(data)
             $.each(data.result.data, function (index, item) {
                 html += `<div class="col-md-3" style="font-size: 10px; text-align: center;">
                         <div class="card mb-4 product-wap rounded-0">
@@ -83,7 +84,7 @@ function GetAll() {
                             </div>
                             <div class="card-body" style="height: 160px;">
                             <div style="height: 50px;">
-                                <a href="Shop/IndexDetails?prId=${item.id}" class="h3 text-decoration-none" >${item.name}</a>
+                                <a href="Shop/IndexDetails?prId=${item.id}" class="h3 text-decoration-none" >${item.productName}</a>
                                 </div>
                                 <ul class="list-unstyled d-flex justify-content-center mb-1">
                                     <li>
@@ -122,13 +123,13 @@ function GetAllProductType() {
             let htmlTea = ``;
             let htmlDifferent = ``;
             result.coffe.forEach(e => {
-                htmlCoffe += `<li class="ps-2 mt-1"><a class="text-decoration-none fs-5 ps-2" href="#" onclick="changeType(${e.id})">${e.name}</a></li>`;
+                htmlCoffe += `<li class="ps-2 mt-1"><a class="text-decoration-none fs-5 ps-2" href="#" onclick="changeType(${e.id})">${e.typeName}</a></li>`;
             })
             result.tea.forEach(e => {
-                htmlTea += `<li class="ps-2 mt-1"><a class="text-decoration-none fs-5 ps-2" href="#" onclick="changeType(${e.id})">${e.name}</a></li>`;
+                htmlTea += `<li class="ps-2 mt-1"><a class="text-decoration-none fs-5 ps-2" href="#" onclick="changeType(${e.id})">${e.typeName}</a></li>`;
             })
             result.different.forEach(e => {
-                htmlDifferent += `<li class="ps-2 mt-1"><a class="text-decoration-none fs-5 ps-2" href="#" onclick="changeType(${e.id})">${e.name}</a></li>`;
+                htmlDifferent += `<li class="ps-2 mt-1"><a class="text-decoration-none fs-5 ps-2" href="#" onclick="changeType(${e.id})">${e.typeName}</a></li>`;
             })
 
             $("#coffe_list").html(htmlCoffe);

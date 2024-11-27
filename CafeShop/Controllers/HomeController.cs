@@ -65,7 +65,11 @@ namespace CafeShop.Controllers
             HttpContext.Session.SetInt32("AccountId", acc.Id);
             HttpContext.Session.SetInt32("AccountRole", acc.Role ?? 1);
             HttpContext.Session.SetString("FullName", acc.FullName ?? "");
-            return  RedirectToAction("Index", "Home");
+            if(acc.Role > 1)
+            {
+               return RedirectToAction("Index", "Admin");
+            }
+            else return  RedirectToAction("Index", "Home");
         }
     }
 }

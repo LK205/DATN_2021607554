@@ -25,9 +25,9 @@ namespace CafeShop.Controllers
         }
         public JsonResult GetAllProductType()
         {
-            List<ProductType> Coffe = SQLHelper<ProductType>.SqlToList("SELECT * FROM ProductType WHERE GroupType = 1");
-            List<ProductType> Tea = SQLHelper<ProductType>.SqlToList("SELECT * FROM ProductType WHERE GroupType = 2");
-            List<ProductType> Different = SQLHelper<ProductType>.SqlToList("SELECT * FROM ProductType WHERE GroupType = 3");
+            List<ProductType> Coffe = SQLHelper<ProductType>.SqlToList("SELECT * FROM ProductType WHERE GroupTypeID = 1");
+            List<ProductType> Tea = SQLHelper<ProductType>.SqlToList("SELECT * FROM ProductType WHERE GroupTypeID = 2");
+            List<ProductType> Different = SQLHelper<ProductType>.SqlToList("SELECT * FROM ProductType WHERE GroupTypeID = 3");
 
             return Json(new { Coffe, Tea, Different });
         }

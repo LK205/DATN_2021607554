@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using System.Configuration.Internal;
 using System.Data;
+using System.IO;
 
 namespace CafeShop.Areas.Admin.Controllers
 {
@@ -39,8 +40,14 @@ namespace CafeShop.Areas.Admin.Controllers
         }
         public async Task<JsonResult> CreateOrUpdate([FromBody] ProductDto data)
         {
-            bool isCheck = _pro.GetAll().Where(p => p.Id != data.Id && p.ProductCode == data.ProductCode).Any();
-            if (isCheck) return Json(new { status = 0, message = "Mã sản phẩm đã bị trùng!", result = 0 });
+            Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+            if (acc == null)
+            {
+                return Json(new { status = 1, statusText = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
+            }
+
+            bool isCheck = _pro.GetAll().Any(p => p.Id != data.Id && p.ProductCode == data.ProductCode);
+            if (isCheck) return Json(new { status = 1, message = "Mã sản phẩm đã bị trùng!", result = 0 });
 
             //Lưu sản phẩm
             Product newPro = _pro.GetByID(data.Id) ?? new Product();
@@ -51,13 +58,24 @@ namespace CafeShop.Areas.Admin.Controllers
             newPro.IsActive = data.IsActive;
             newPro.Description = data.Description;
             newPro.ProductTypeId = data.ProductTypeId;
+            newPro.IsDeleted = false;
 
-            if (newPro.Id > 0) _pro.Update(newPro);
-            else await _pro.CreateAsync(newPro);
+
+            if (newPro.Id > 0)
+            {
+                newPro.UpdatedDate = DateTime.Now;
+                newPro.UpdatedBy = acc.FullName;
+                _pro.Update(newPro);
+            }
+            else
+            {
+                newPro.CreatedDate = DateTime.Now;
+                newPro.CreatedBy = acc.FullName;
+                _pro.Create(newPro);
+            }
 
             //Lưu giá sản phẩm
-            List<ProductDetail> listDel = SQLHelper<ProductDetail>.SqlToList($"Select * from ProductDetails where ProductId = {newPro.Id}");
-            _detailRepo.Delete(listDel);
+            SQLHelper<ProductDetail>.SqlToList($"DELETE ProductDetails WHERE ProductId = {newPro.Id}");
 
             foreach (ProductDetail item in data.ListDetails)
             {
@@ -66,14 +84,23 @@ namespace CafeShop.Areas.Admin.Controllers
                     Id = item.Id,
                     ProductId = newPro.Id,
                     ProductSizeId = item.ProductSizeId,
-                    Price = item.Price
+                    Price = item.Price,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = acc.FullName
                 };
 
                 if (newDetail.Id > 0) _detailRepo.Update(newDetail);
                 else _detailRepo.Create(newDetail);
             }
 
-            return Json(new { status = 1, message = "Thành công!", result = newPro }); ;
+            if(data.ListFileIDs.Count > 0)
+            {
+                string lstFileIDs = string.Join(",", data.ListFileIDs);
+                SQLHelper<ProductDetail>.SqlToList($"DELETE ProductImage WHERE ID IN ({lstFileIDs})");
+            }
+
+
+            return Json(new { status = 0, message = "Thành công!", result = newPro }); ;
         }
 
 
@@ -81,9 +108,9 @@ namespace CafeShop.Areas.Admin.Controllers
         {
             Product data = _pro.GetByID(Id);
             List<ProductDetail> details = SQLHelper<ProductDetail>.SqlToList($"Select * from ProductDetails where ProductId = {Id}");
+            List<ProductImage> images = SQLHelper<ProductImage>.SqlToList($"Select * from ProductImage where ProductId = {Id}");
 
-
-            return Json(new { data, details });
+            return Json(new { data, details, images });
         }
 
         public bool Delete(int Id)
@@ -93,7 +120,6 @@ namespace CafeShop.Areas.Admin.Controllers
             foreach (var item in listDel)
             {
                 _detailRepo.Delete(item.Id);
-
             }
             return true;
         }
@@ -122,6 +148,22 @@ namespace CafeShop.Areas.Admin.Controllers
         }
         public async Task<JsonResult> CreateProductType([FromBody] ProductType data)
         {
+            Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+            if (acc == null)
+            {
+                return Json(new { status = 1, statusText = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
+            }
+
+
+            if (string.IsNullOrWhiteSpace(data.TypeCode))
+            {
+                return Json(new { status = 1, statusText = "Vui lòng nhập Tên size sản phẩm!" });
+            }
+
+            if (string.IsNullOrWhiteSpace(data.TypeName))
+            {
+                return Json(new { status = 1, statusText = "Vui lòng nhập Mã size sản phẩm!" });
+            }
 
             bool isCheck = _proType.GetAll().Any(x => x.Id != data.Id && x.TypeCode == data.TypeCode);
             if (isCheck) return Json(new { status = 0, message = "Mã loại sản phẩm đã bị trùng! Hãy kiểm tra lại!", result = 0 });
@@ -132,12 +174,24 @@ namespace CafeShop.Areas.Admin.Controllers
             model.TypeName = data.TypeName;
             model.GroupTypeId = data.GroupTypeId;
             model.Description = data.Description;
-
-            if (model.Id > 0) _proType.Update(model);
-            else await _proType.CreateAsync(model);
+            model.IsDelete = false;
 
 
-            return Json(new { status = 1, message = "", result = model });
+            if (model.Id > 0)
+            {
+                model.UpdatedDate = DateTime.Now;
+                model.UpdatedBy = acc.FullName;
+                _proType.Update(model);
+            }
+            else
+            {
+                model.CreatedDate = DateTime.Now;
+                model.CreatedBy = acc.FullName;
+                _proType.Create(model);
+            }
+
+
+            return Json(new { status = 0, message = "", result = model });
         }
 
         public async Task<JsonResult> DeleteProductType(int Id)
@@ -156,6 +210,12 @@ namespace CafeShop.Areas.Admin.Controllers
         {
             try
             {
+                Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+                if (acc == null)
+                {
+                    return Json(new { status = 0, statusText = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
+                }
+                product = _pro.GetByID(product.Id) ?? new Product();
                 ProductType productType = _proType.GetByID(product.ProductTypeId) ?? new ProductType();
                 string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
                 var files = Request.Form.Files;
@@ -165,11 +225,18 @@ namespace CafeShop.Areas.Admin.Controllers
                     if(file.Length <= 0) continue;
                     listFiles.Add(new ProductImage()
                     {
-                        ImageUrl = timestamp + "_" + file.FileName,
+                        ImageUrl = $"{productType.TypeCode}/{product.ProductCode}/{timestamp}_{file.FileName}",
                         ImageName = file.FileName,
                         ProductId = product.Id,
+                        CreatedDate = DateTime.Now,
+                        IsDelete = false,
+                        CreatedBy = acc.FullName
                     });
-                    string pathUpload = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Images\\Product\\{productType.TypeName}\\{product.ProductName}");
+                    string pathUpload = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Images\\Product\\{productType.TypeCode}\\{product.ProductCode}");
+                    if (!Directory.Exists(pathUpload) )
+                    {
+                        Directory.CreateDirectory(pathUpload);
+                    }
                     string imagePath = pathUpload + $"\\{timestamp+ "_" + file.FileName}";
                     if (System.IO.File.Exists(imagePath))
                     {

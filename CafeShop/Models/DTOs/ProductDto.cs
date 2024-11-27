@@ -7,6 +7,7 @@
         public decimal Price{ get; set; }
         public string? FormatPrice{ get; set; }
         public int TotalSales { get; set; }
-        public List<ProductDetail>? ListDetails { get; set; } 
+        public List<ProductDetail>? ListDetails { get; set; }
+        public List<int> ListFileIDs { get; set; }
     }
 }

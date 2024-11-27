@@ -103,7 +103,6 @@ function GetAll() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            console.log(data);
             var html = '';
             $.each(data.data, function (index, item) {
                 html += `<tr class="align-middle">
@@ -111,9 +110,9 @@ function GetAll() {
                                 <button class="btn btn-sm btn-primary" onclick="GetById(${item.id})" ><i class="bi bi-pencil-square"></i> Sửa</button>
                                 <button class="btn btn-sm btn-danger" onclick="DeleteById(${item.id})"><i class="bi bi-trash3"></i> Xóa</button>
                             </td>
-                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.id})">${item.code} </a></td>
-                            <td scope="col">${item.name}</td>
-                            <td scope="col">${item.groupType == 1 ? "Coffe" : (item.groupType == 2 ? "Trà" : "Khác")}</td>
+                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.id})">${item.typeCode} </a></td>
+                            <td scope="col">${item.typeName}</td>
+                            <td scope="col">${item.groupTypeId == 1 ? "Coffe" : (item.groupTypeId == 2 ? "Trà" : "Khác")}</td>
                             <td scope="col">${item.description ?? ""}</td>
                             
                         </tr>`;
@@ -147,9 +146,9 @@ function GetById(id) {
         },
         contentType: 'application/json',
         success: function (data) {
-            $('#formCode').val(data.code);
-            $('#formName').val(data.name);
-            $('#formGroupType').val(data.groupType);
+            $('#formCode').val(data.typeCode);
+            $('#formName').val(data.typeName);
+            $('#formGroupType').val(data.groupTypeId);
             $('#formNote').val(data.description);
             
         },
@@ -162,9 +161,9 @@ function GetById(id) {
 function CreateOrUpdate() {
     var obj = {
         Id: parseInt( productTypeId),
-        Code: $("#formCode").val(),
-        Name: $("#formName").val(),
-        GroupType: parseInt($("#formGroupType").val()),
+        TypeCode: $("#formCode").val(),
+        TypeName: $("#formName").val(),
+        GroupTypeId: parseInt($("#formGroupType").val()),
         Description: $("#formNote").val(),
     };
 
@@ -175,8 +174,8 @@ function CreateOrUpdate() {
         contentType: 'application/json;charset=utf-8',
         data: JSON.stringify(obj),
         success: function (result) {
-            if (result.status == 0) {
-                alert(result.message)
+            if (result.status == 1) {
+                alert(result.statusText)
             }
             else {
                 CloseModal();
@@ -184,7 +183,7 @@ function CreateOrUpdate() {
             }
         },
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 
@@ -209,7 +208,7 @@ function DeleteById(id) {
 
             },
             error: function (err) {
-                MessageError(err.responseText);
+                alert(err.responseText);
             }
         });
     }

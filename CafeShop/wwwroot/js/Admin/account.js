@@ -148,15 +148,12 @@ function GetById(id) {
         },
         contentType: 'application/json',
         success: function (data) {
-            console.log(data);
             $("#formName").val(data.fullName);
             $("#formGender").val(data.gender);
             $("#formRole").val(data.role);
             $("#formIsActive").val(data.isActive);
             $("#formPhoneNumber").val(data.phoneNumber);
             $("#formEmail").val(data.email);
-            $("#formPassword").val(data.passWord);
-            $("#formPasswordConfirm").val(data.passWord);
             $("#formAddress").val(data.address);
 
         },
@@ -168,8 +165,6 @@ function GetById(id) {
 }
 function CreateOrUpdate() {
 
-    let ps = $("#formPassword").val();
-    let pscf = $("#formPasswordConfirm").val();
     let fn = $("#formName").val();
     let em = $("#formEmail").val();
 
@@ -182,20 +177,7 @@ function CreateOrUpdate() {
         return
     }
 
-    if (ps == null || ps.length <= 0) {
-        alert("Hãy nhập mật khẩu!");
-        return
-    }
-
-    if (pscf == null || pscf.length <= 0) {
-        alert("Hãy nhập mật khẩu xác nhận!");
-        return
-    }
-
-    if (ps != pscf) {
-        alert("Mật khẩu xác nhận chưa chính xác!");
-        return
-    }
+  
 
     var obj = {
         Id: accountId,
@@ -205,7 +187,6 @@ function CreateOrUpdate() {
         IsActive: parseInt($("#formIsActive").val()),
         PhoneNumber: $("#formPhoneNumber").val(),
         Email: $("#formEmail").val(),
-        Password: $("#formPassword").val(),
         Address: $("#formAddress").val()
     };
 
