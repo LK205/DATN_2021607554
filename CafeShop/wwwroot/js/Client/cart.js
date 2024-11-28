@@ -61,7 +61,9 @@ function GetAll() {
                                     <div class="mt-3">
                                         <p class="text-muted mb-2">Số lượng</p>
                                         <div class="d-inline-flex">
-                                            <input type="number" min="1" class="form-control form-control-sm w-xl quantity" value="${item.quantity}" onchange="chageQuantity(event,${index})" />
+                                            <button class="btn btn-sm btn-success" onclick="decreaseValue(event,${index})"><i class="bi bi-dash-lg"></i></button>
+                                            <input type="number" class="form-control form-control-sm me-2 ms-2 p-0 text-center quantity product-number" style="width: 56px !important" readonly value="${item.quantity}" " />
+                                            <button class="btn btn-sm btn-success" onclick="increaseValue(event,${index})"><i class="bi bi-plus-lg"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -89,19 +91,18 @@ function GetAll() {
         },
 
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 }
 
-function chageQuantity(event, index) {
-    var el = $(event.target);
+function chageQuantity(el, index) {
     let quantity = $(el).val();
     let price = $(`#price_${index}`).val();
     $(`#totalMoneyText_${index}`).html(`${(price * quantity).toLocaleString('en-US')} VNĐ`);
     $(`#totalPrice_${index}`).val(price * quantity);
     TotalMoney();
-    
+
 }
 function TotalMoney() {
     let totalMoney = 0;
@@ -131,7 +132,7 @@ function DeleteProductCart(Id, Quantity, index) {
             },
 
             error: function (err) {
-                MessageError(err.responseText);
+                alert(err.responseText);
             }
         });
     }
@@ -142,7 +143,7 @@ function reset() {
     $("#customer_phone").val("");
 }
 function CreateOrder() {
-   
+
     let cusName = $("#customer_name").val();
     let cusAddress = $("#customer_address").val();
     let cusPhone = $("#customer_phone").val();
@@ -170,7 +171,7 @@ function CreateOrder() {
     let arrDetail = [];
     for (let i = 0; i < elQuantity.length; i++) {
         let objDetail = {
-            Quantity: parseInt( $(elQuantity[i]).val()),
+            Quantity: parseInt($(elQuantity[i]).val()),
             TotalMoney: parseFloat($(elTotalMoney[i]).val()),
             ProductDetailId: parseInt($(elProductDetailId[i]).val())
         }
@@ -192,15 +193,32 @@ function CreateOrder() {
             success: function (result) {
                 if (result.status == 1) {
                     reset();
-                } 
+                }
                 alert(result.message)
                 GetAll();
                 TotalMoney();
             },
             error: function (err) {
-                MessageError(err.responseText);
+                alert(err.responseText);
             }
         });
     }
 }
 
+function decreaseValue(event, index) {
+    var el = $(event.target);
+    let elInput = $(el).closest("div").find(".product-number");
+    let valueNumber = parseInt($(elInput[0]).val());
+    if (valueNumber > 1) {
+        $(elInput[0]).val(valueNumber - 1)
+        chageQuantity(elInput[0], index);
+    }
+}
+
+function increaseValue(event, index) {
+    var el = $(event.target);
+    let elInput = $(el).closest("div").find(".product-number");
+    let valueNumber = parseInt($(elInput[0]).val());
+    $(elInput[0]).val(valueNumber + 1)
+    chageQuantity(elInput[0], index);
+}

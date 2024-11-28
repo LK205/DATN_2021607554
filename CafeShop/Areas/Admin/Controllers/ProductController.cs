@@ -95,11 +95,10 @@ namespace CafeShop.Areas.Admin.Controllers
 
             if(data.ListFileIDs.Count > 0)
             {
+                bool isDeleted = await fileRepo.DeleteProductImages(data.ListFileIDs);
                 string lstFileIDs = string.Join(",", data.ListFileIDs);
                 SQLHelper<ProductDetail>.SqlToList($"DELETE ProductImage WHERE ID IN ({lstFileIDs})");
             }
-
-
             return Json(new { status = 0, message = "Thành công!", result = newPro }); ;
         }
 
@@ -109,7 +108,6 @@ namespace CafeShop.Areas.Admin.Controllers
             Product data = _pro.GetByID(Id);
             List<ProductDetail> details = SQLHelper<ProductDetail>.SqlToList($"Select * from ProductDetails where ProductId = {Id}");
             List<ProductImage> images = SQLHelper<ProductImage>.SqlToList($"Select * from ProductImage where ProductId = {Id}");
-
             return Json(new { data, details, images });
         }
 
@@ -225,7 +223,7 @@ namespace CafeShop.Areas.Admin.Controllers
                     if(file.Length <= 0) continue;
                     listFiles.Add(new ProductImage()
                     {
-                        ImageUrl = $"{productType.TypeCode}/{product.ProductCode}/{timestamp}_{file.FileName}",
+                        ImageUrl = $"{productType.TypeCode}/{product.ProductCode}/{file.FileName}",
                         ImageName = file.FileName,
                         ProductId = product.Id,
                         CreatedDate = DateTime.Now,
@@ -237,7 +235,7 @@ namespace CafeShop.Areas.Admin.Controllers
                     {
                         Directory.CreateDirectory(pathUpload);
                     }
-                    string imagePath = pathUpload + $"\\{timestamp+ "_" + file.FileName}";
+                    string imagePath = pathUpload + $"\\{file.FileName}";
                     if (System.IO.File.Exists(imagePath))
                     {
                         System.IO.File.Delete(imagePath);

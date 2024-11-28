@@ -53,12 +53,12 @@ namespace CafeShop.Controllers
             }
             List<OrderDto> lst = SQLHelper<OrderDto>.ProcedureToList("spGetHistoryCheckOut",
                                                                       new string[] { "@AccountId", "@Request" },
-                                                                      new object[] { acc.Id , request});
+                                                                      new object[] { acc.Id, request });
             foreach (OrderDto item in lst)
             {
                 item.DateFormat = item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss");
             }
-            return Json(new { status = 1, message = "", data = lst});
+            return Json(new { status = 1, message = "", data = lst });
         }
         [HttpPost]
         public async Task<JsonResult> CreateOrder([FromBody] OrderDto data)
@@ -79,9 +79,10 @@ namespace CafeShop.Controllers
                 newOrder.PhoneNumber = data.PhoneNumber;
                 newOrder.Address = data.Address;
                 newOrder.Status = 0;
-                newOrder.CreateDate = DateTime.Now;
-                newOrder.CreateBy = accout.FullName;
+                newOrder.CreateDate = newOrder.UpdatedDate = DateTime.Now;
+                newOrder.CreateBy =  accout.FullName;
                 newOrder.AccountId = data.AccountId;
+                newOrder.IsDeleted = false;
 
                 await _repo.CreateAsync(newOrder);
 
@@ -92,6 +93,9 @@ namespace CafeShop.Controllers
                     newOderDetails.TotalMoney = item.TotalMoney;
                     newOderDetails.ProductDetailId = item.ProductDetailId;
                     newOderDetails.OrderId = newOrder.Id;
+                    newOderDetails.CreatedDate = DateTime.Now;
+                    newOderDetails.CreatedBy = accout.FullName;
+                    newOderDetails.IsDelete = false;
                     _detailRepo.Create(newOderDetails);
                 }
 

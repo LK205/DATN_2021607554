@@ -49,7 +49,7 @@ namespace CafeShop.Controllers
             List<ProductImage> lstImg = SQLHelper<ProductImage>.SqlToList($"select * from ProductImage where ProductID = {prId}");
             foreach (ProductImage img in lstImg)
             {
-                img.ImageUrl = Config.ImageUrl() + img.ImageUrl;
+                img.ImageUrl = Config.ProductImageUrl() + img.ImageUrl;
             }
             ViewBag.Avatar = lstImg[0];
             ViewBag.Image = lstImg;

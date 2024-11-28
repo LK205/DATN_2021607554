@@ -1,4 +1,14 @@
 ﻿var ProductDetailsId = 0;
+$(document).ready(function (e) {
+    $("#lst-product-size li:first a").click();
+    alert($("#lst-product-size li:first a").attr("productdetailsid"));
+    console.log($("#lst-product-size li:first"))
+    console.log($("#lst-product-size li:first").text())
+    console.log($("#lst-product-size li:first")[0].innerHTML())
+
+
+});
+
 function ChangeSize(event) {
     let el = $(event.target);
     let price = $(el).attr("price");
@@ -7,7 +17,6 @@ function ChangeSize(event) {
     price = price.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     $("#Price").html(`${price} VNĐ`)
 }
-
 
 function AddCart(event) {
     let accountId = $("#account_id").val();

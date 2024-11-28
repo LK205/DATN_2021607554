@@ -5,5 +5,8 @@ namespace CafeShop.Reposiory
 {
     public class ProductRepository : GenericRepository<Product>
     {
+
+
+
     }
 }

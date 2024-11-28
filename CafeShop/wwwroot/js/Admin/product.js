@@ -78,6 +78,7 @@ function CloseModal() {
     lstFileDeleted = [];
     document.getElementById('form').reset();
     $('#tbodySteps').html('');
+    $('#AttachFiles').html('');
     productId = 0;
     document.getElementById('form').reset();
     $('#importedMaterial').val("");
@@ -178,13 +179,11 @@ function GetById(id) {
             var htmlImage = '';
             _attachFiles = data.images.map(x => ({ id: x.id, name: x.imageName }));
 
-            console.log(_attachFiles);
 
             $.each(_attachFiles, function (key, item) {
                 htmlImage += `
                 <p class="m-0 px-1 text-nowrap text-dark">${item.name} <span class="text-danger" onclick="return onRemoveFile(${key},${item.id})"><i class="bi bi-x"></i></span></p> `;
             })
-            console.log(htmlImage);
             $('#AttachFiles').html(htmlImage);
 
             showModal();

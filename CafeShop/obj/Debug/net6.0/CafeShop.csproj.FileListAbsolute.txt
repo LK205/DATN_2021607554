@@ -239,6 +239,7 @@ D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\staticwebassets\msbuild.bui
 D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.CafeShop.props
 D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.CafeShop.props
 D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\staticwebassets.pack.json
+D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\scopedcss\Areas\Admin\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\scopedcss\bundle\CafeShop.styles.css
 D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\scopedcss\projectbundle\CafeShop.bundle.scp.css
@@ -248,4 +249,3 @@ D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\refint\CafeShop.dll
 D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\CafeShop.pdb
 D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\CafeShop.genruntimeconfig.cache
 D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\ref\CafeShop.dll
-D:\DATN\Code\DATN\CafeShop\CafeShop\obj\Debug\net6.0\scopedcss\Areas\Admin\Views\Shared\_Layout.cshtml.rz.scp.css
