@@ -40,7 +40,7 @@ function GetAll() {
                             <div class="flex-shrink-0 ms-2">
                                 <ul class="list-inline mb-0 font-size-16">
                                     <li class="list-inline-item">
-                                        <a href="#" class="text-muted px-1" onclick="DeleteProductCart(${item.cartId}, ${item.quantity}, ${index})">
+                                        <a href="#" class="text-muted px-1" onclick="DeleteProductCart(${item.cartId}, ${index})">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </li>
@@ -113,7 +113,7 @@ function TotalMoney() {
     $("#total_money").html(`${(totalMoney + 25000).toLocaleString('en-US')} VNĐ`)
 }
 
-function DeleteProductCart(Id, Quantity, index) {
+function DeleteProductCart(Id, index) {
     if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này ra khỏi danh sách không?")) {
         $(`#cart_product_${index}`).remove();
         $.ajax({
@@ -122,8 +122,7 @@ function DeleteProductCart(Id, Quantity, index) {
             dataType: 'json',
             contentType: 'application/json',
             data: {
-                cartId: Id,
-                quantity: Quantity
+                cartId: Id
             },
             success: function (data) {
                 GetAll();

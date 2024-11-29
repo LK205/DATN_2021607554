@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\CafeShop.bundle.scp.css"
     },
     {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Avatar\\Account2\\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg",
+      "PackagePath": "staticwebassets\\Images\\Avatar\\Account2\\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg"
+    },
+    {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheMay\\SP1\\1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp",
       "PackagePath": "staticwebassets\\Images\\Product\\CaPheMay\\SP1\\1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp"
     },
@@ -1849,6 +1853,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\showCase.jpg"
     },
     {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\assets\\images\\user.png",
+      "PackagePath": "staticwebassets\\assets\\images\\user.png"
+    },
+    {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\css\\Client\\cart.css",
       "PackagePath": "staticwebassets\\css\\Client\\cart.css"
     },
@@ -1903,6 +1911,10 @@
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\productType.js",
       "PackagePath": "staticwebassets\\js\\Admin\\productType.js"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Client\\accountDetails.js",
+      "PackagePath": "staticwebassets\\js\\Client\\accountDetails.js"
     },
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Client\\cart.js",

@@ -69,7 +69,6 @@ function GetAll() {
         contentType: 'application/json',
         success: function (data) {
             var html = '';
-            console.log(data)
             $.each(data.result.data, function (index, item) {
                 html += `<div class="col-md-3" style="font-size: 10px; text-align: center;">
                         <div class="card mb-4 product-wap rounded-0">

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6lIp/Ds4niJsphtZO0+rhjimZo7SuMfFuHboJv6LcU4=",
+  "Hash": "am9qmwHqPEbzpVa3e8Oo4DjcvSpjlh/XNU3jqv+YKqc=",
   "Source": "CafeShop",
   "BasePath": "_content/CafeShop",
   "Mode": "Default",
@@ -8643,6 +8643,25 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\showCase.jpg"
     },
     {
+      "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\assets\\images\\user.png",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "assets/images/user.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\user.png"
+    },
+    {
       "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\css\\bootstrap.min.css",
       "SourceId": "CafeShop",
       "SourceType": "Discovered",
@@ -8793,6 +8812,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Avatar\\Account2\\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "Images/Avatar/Account2/1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\Avatar\\Account2\\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg"
     },
     {
       "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheMay\\SP1\\1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp",
@@ -9097,6 +9135,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Client\\accountDetails.js",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "js/Client/accountDetails.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Client\\accountDetails.js"
     },
     {
       "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Client\\cart.js",

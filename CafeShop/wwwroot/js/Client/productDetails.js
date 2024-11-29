@@ -1,12 +1,6 @@
 ﻿var ProductDetailsId = 0;
 $(document).ready(function (e) {
     $("#lst-product-size li:first a").click();
-    alert($("#lst-product-size li:first a").attr("productdetailsid"));
-    console.log($("#lst-product-size li:first"))
-    console.log($("#lst-product-size li:first").text())
-    console.log($("#lst-product-size li:first")[0].innerHTML())
-
-
 });
 
 function ChangeSize(event) {

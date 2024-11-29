@@ -39,7 +39,9 @@ namespace CafeShop.Controllers
         {
             try
             {
-                if(accountId <= 0) return Json(new { status = 0, message = "Hãy đăng nhập để sử dụng tính năng này!" });
+                Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0) ?? new Account();
+
+                if (accountId <= 0 || acc.Id <= 0) return Json(new { status = 0, message = "Hãy đăng nhập để sử dụng tính năng này!" });
                 if(productDetailId <= 0) return Json(new { status = 0, message = "Hãy chọn size sản phẩm!" });
 
 
@@ -48,6 +50,8 @@ namespace CafeShop.Controllers
                 if (model.Id > 0)
                 {
                     model.Quantity = model.Quantity + quantity;
+                    model.UpdatedBy = acc.FullName;
+                    model.UpdatedDate = DateTime.Now;
                     _repo.Update(model);
                 }
                 else
@@ -55,6 +59,8 @@ namespace CafeShop.Controllers
                     model.ProductDetailId = productDetailId;
                     model.AccountId = accountId;
                     model.Quantity = quantity;
+                    model.CreatedBy = acc.FullName;
+                    model.CreatedDate = DateTime.Now;
                     await _repo.CreateAsync(model);
                 }
 
@@ -69,22 +75,15 @@ namespace CafeShop.Controllers
         }
 
 
-        public async Task<JsonResult> RemoveToCart(int cartId, int quantity = 1)
+        public async Task<JsonResult> RemoveToCart(int cartId)
         {
             try
             {
                 Cart model = _repo.GetByID(cartId) ?? new Cart();
                 if (model.Id > 0)
                 {
-                    if(model.Quantity > quantity)
-                    {
-                        model.Quantity = model.Quantity - quantity;
-                        _repo.Update(model);
-                    }
-                    else
-                    {
+                     
                         _repo.Delete(model.Id);
-                    }
                 }
                 else
                 {
