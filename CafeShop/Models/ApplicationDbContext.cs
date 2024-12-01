@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CafeShop.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -23,21 +22,25 @@ namespace CafeShop.Models
         public virtual DbSet<GoodsIssueDetail> GoodsIssueDetails { get; set; } = null!;
         public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; } = null!;
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; } = null!;
+        public virtual DbSet<LinkUrl> LinkUrls { get; set; } = null!;
         public virtual DbSet<Material> Materials { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
+        public virtual DbSet<OrderDetailsTopping> OrderDetailsToppings { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<ProductDetail> ProductDetails { get; set; } = null!;
         public virtual DbSet<ProductImage> ProductImages { get; set; } = null!;
         public virtual DbSet<ProductSize> ProductSizes { get; set; } = null!;
+        public virtual DbSet<ProductTopping> ProductToppings { get; set; } = null!;
         public virtual DbSet<ProductType> ProductTypes { get; set; } = null!;
+        public virtual DbSet<Topping> Toppings { get; set; } = null!;
         public virtual DbSet<Unit> Units { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(Config.Connection());
+                optionsBuilder.UseSqlServer(Config.Config.Connection());
             }
         }
 
@@ -175,6 +178,17 @@ namespace CafeShop.Models
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<LinkUrl>(entity =>
+            {
+                entity.ToTable("LinkUrl");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.LinkUrl1).HasColumnName("LinkUrl");
+
+                entity.Property(e => e.TypeUrl).HasMaxLength(250);
+            });
+
             modelBuilder.Entity<Material>(entity =>
             {
                 entity.ToTable("Material");
@@ -248,19 +262,46 @@ namespace CafeShop.Models
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<OrderDetailsTopping>(entity =>
+            {
+                entity.ToTable("OrderDetailsTopping");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.OrderDetailsId).HasColumnName("OrderDetailsID");
+
+                entity.Property(e => e.ToppingId).HasColumnName("ToppingID");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.ToTable("Product");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.ProductCode).HasMaxLength(250);
+                entity.Property(e => e.CreatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Description).HasMaxLength(250);
+
+                entity.Property(e => e.ProductCode).HasMaxLength(250);
 
                 entity.Property(e => e.ProductName).HasMaxLength(250);
 
                 entity.Property(e => e.ProductTypeId).HasColumnName("ProductTypeID");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<ProductDetail>(entity =>
@@ -320,6 +361,25 @@ namespace CafeShop.Models
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<ProductTopping>(entity =>
+            {
+                entity.ToTable("ProductTopping");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.ToppingId).HasColumnName("ToppingID");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<ProductType>(entity =>
             {
                 entity.ToTable("ProductType");
@@ -337,6 +397,27 @@ namespace CafeShop.Models
                 entity.Property(e => e.TypeCode).HasMaxLength(250);
 
                 entity.Property(e => e.TypeName).HasMaxLength(250);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Topping>(entity =>
+            {
+                entity.ToTable("Topping");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ToppingCode).HasMaxLength(150);
+
+                entity.Property(e => e.ToppingName).HasMaxLength(250);
+
+                entity.Property(e => e.ToppingPrice).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(150);
 

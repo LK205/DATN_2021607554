@@ -9,6 +9,7 @@ var totalPage = 0;
 var productId = 0;
 var htmlSize = "";
 var _attachFiles = [];
+var _imageUrls = [];
 var lstFileDeleted = []
 $('#request').keydown(function (e) {
     if (e.keyCode == 13) {
@@ -69,6 +70,7 @@ $('#btn_search').click(function () {
     GetAll();
 })
 function showModal() {
+    $("#btninformation").click();
     $('#staticBackdrop').modal('show');
     if (productId == 0) {
         $('#btn_deleteModal').hide();
@@ -76,6 +78,8 @@ function showModal() {
 }
 function CloseModal() {
     lstFileDeleted = [];
+   _imageUrls = [];
+
     document.getElementById('form').reset();
     $('#tbodySteps').html('');
     $('#AttachFiles').html('');
@@ -83,6 +87,7 @@ function CloseModal() {
     document.getElementById('form').reset();
     $('#importedMaterial').val("");
     $('#staticBackdrop').modal('hide');
+    $(".topping-check").prop('checked', false);
 }
 $('#add_new').click(function () {
     $('#staticBackdropLabel').text("Thêm mới loại sản phẩm");
@@ -121,7 +126,7 @@ function GetAll() {
                             
                         </tr>`;
             })
-            let total = Math.ceil(data.totalCount.totalCount / 10);
+            let total = Math.ceil(data.totalCount[0].totalCount / 10);
             totalPage = total > 0 ? total : 1;
             $('#tbody').html(html);
             $('#page_details').text(`Trang ${pageNumber} / ${totalPage}`);
@@ -174,17 +179,25 @@ function GetById(id) {
             $(".productSizeId").each(function (index, el) {
                 $(el).val(data.details[index].productSizeId);
             });
-            console.log(data.images);
-
             var htmlImage = '';
             _attachFiles = data.images.map(x => ({ id: x.id, name: x.imageName }));
 
-
-            $.each(_attachFiles, function (key, item) {
+            _imageUrls = data.images.map(x => ({ id: x.id, name: x.imageName, imgUrl: x.imageUrl }))
+            $.each(_imageUrls, function (key, item) {
                 htmlImage += `
-                <p class="m-0 px-1 text-nowrap text-dark">${item.name} <span class="text-danger" onclick="return onRemoveFile(${key},${item.id})"><i class="bi bi-x"></i></span></p> `;
+                <span class="m-0 px-1 text-nowrap text-dark a-product-details" ><img class="image-product-details p-1" src="${item.imgUrl}" alt="${item.name}" /> <span class="text-danger icon-x-span" onclick="return onRemoveFile(${key},${item.id})"><i class="bi bi-x"></i></span></span>`;
             })
             $('#AttachFiles').html(htmlImage);
+
+
+            $.each(data.toppings, function (key, item) {
+                $('.topping-check').each(function () {
+                    if (parseInt($(this).attr("topping-id")) == item.toppingId) { 
+                        $(this).prop('checked', true);
+                    }
+                });
+            });
+
 
             showModal();
         },
@@ -246,6 +259,16 @@ function CreateOrUpdate() {
                 arrDetails.push(objDetails);
             });
         }
+
+        let arrToppingIDs = [];
+        $('.topping-check').each(function () {
+            if ($(this).prop('checked')) { // Kiểm tra trạng thái checked
+                let toppingID = parseInt($(this).attr("topping-id"));
+                arrToppingIDs.push(toppingID);
+            }
+        });
+
+
         let code = $("#formCode").val();
         let name = $("#formName").val();
         let status = $("#formIsActive").val();
@@ -259,7 +282,8 @@ function CreateOrUpdate() {
             Description: note,
             ProductTypeId: productTypeId,
             ListDetails: arrDetails,
-            ListFileIDs: lstFileDeleted
+            ListFileIDs: lstFileDeleted,
+            ListTopping: arrToppingIDs
         };
         let _url = "/Admin/Product/CreateOrUpdate";
         $.ajax({
@@ -274,7 +298,7 @@ function CreateOrUpdate() {
                     UploadFile(result.result.id);
                     CloseModal();
                     GetAll();
-
+                    _imageUrls = [];
                 }
             },
             error: function (err) {
@@ -399,7 +423,14 @@ function UploadFile(productId) {
     }
 }
 //Sự kiện chọn file đính kèm
-function onSelectedFile() {
+function readFileAsync(file) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onloadend = ({ target: { result } }) => resolve(result);
+        reader.readAsDataURL(file);
+    });
+}
+async function onSelectedFile(event) {
 
     var html = '';
     var fileSelecteds = $('input[name="AttachFiles"]').get(0).files;
@@ -407,23 +438,33 @@ function onSelectedFile() {
         _attachFiles.push(file);
     })
 
-    $.each(_attachFiles, function (key, item) {
-        html += `<p class="m-0 px-1 text-nowrap text-dark">${item.name} <span class="text-danger" onclick="return onRemoveFile(${key},0)"><i class="bi bi-x"></i></span></p>`;
-    })
+    for (const file of event.target.files) {
+        const imageUrl = await readFileAsync(file);
+        _imageUrls.push({ id: 0, name: file.name, imgUrl: imageUrl });
+    }
+    $.each(_imageUrls, function (key, item) {
+        html += `<span class="m-0 px-1 text-nowrap text-dark a-product-details"><img class="image-product-details p-1" src="${item.imgUrl}" alt="${item.name}" /> <span class="text-danger icon-x-span" onclick="return onRemoveFile(${key},0)"><i class="bi bi-x"></i></span></span>`;
 
+    })
     $('#AttachFiles').html(html);
 }
 //Sự kiện remove file đính kèm
 function onRemoveFile(index, fileID) {
     if (confirm("Bạn có chắc muốn xóa ảnh này không?")) {
         _attachFiles.splice(index, 1);
+        _imageUrls.splice(index, 1);
         var html = '';
-        $.each(_attachFiles, function (key, item) {
-            html += `<p class="m-0 px-1 text-nowrap">${item.name} <span class="text-danger" onclick="return onRemoveFile(${key},${item.id})"><i class="bi bi-x"></i></span></p>`;
+        $.each(_imageUrls, function (key, item) {
+            html += `<span class="m-0 px-1 text-nowrap text-dark a-product-details"><img class="image-product-details p-1" src="${item.imgUrl}" alt="${item.name}" /> <span class="text-danger icon-x-span" onclick="return onRemoveFile(${key},${item.id})"><i class="bi bi-x"></i></span></span>`;
         });
         $('#AttachFiles').html(html);
     }
     let idFile = parseInt(fileID);
     if (idFile > 0) lstFileDeleted.push(idFile);
 
+}
+
+function CheckedChange() {
+    let isCheck = $("#check-box-product-topping").is(':checked');
+    $(".topping-check").prop('checked', isCheck);
 }

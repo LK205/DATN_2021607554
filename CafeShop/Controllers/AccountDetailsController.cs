@@ -2,7 +2,7 @@
 using CafeShop.Models.DTOs;
 using CafeShop.Reposiory;
 using Microsoft.AspNetCore.Mvc;
-using RTCWeb.Common;
+using CafeShop.Config;
 using System.Security.Cryptography;
 
 namespace CafeShop.Controllers

@@ -2,7 +2,7 @@
 using CafeShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using CafeShop.Reposiory;
-using RTCWeb.Common;
+using CafeShop.Config;
 
 namespace CafeShop.Controllers
 {
@@ -48,7 +48,7 @@ namespace CafeShop.Controllers
             };
             await _accRepo.CreateAsync(newAcc);
             HttpContext.Session.SetInt32("AccountId", newAcc.Id);
-            HttpContext.Session.SetInt32("AccountRole", newAcc.Role ?? 1);
+            HttpContext.Session.SetInt32("AccountRole", newAcc.Role);
             HttpContext.Session.SetString("FullName", newAcc.FullName ?? "");
             if (newAcc.Id > 0) return RedirectToAction("Index", "Home");
 

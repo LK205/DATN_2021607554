@@ -1,9 +1,9 @@
 ﻿using CafeShop.Models;
 using CafeShop.Models.DTOs;
 using CafeShop.Reposiory;
-using ManagementCourse.Common;
+using CafeShop.Config;
 using Microsoft.AspNetCore.Mvc;
-using RTCWeb.Common;
+using CafeShop.Config;
 using System.Diagnostics;
 
 namespace CafeShop.Controllers
@@ -63,7 +63,7 @@ namespace CafeShop.Controllers
                 return View();
             }
             HttpContext.Session.SetInt32("AccountId", acc.Id);
-            HttpContext.Session.SetInt32("AccountRole", acc.Role ?? 1);
+            HttpContext.Session.SetInt32("AccountRole", acc.Role);
             HttpContext.Session.SetString("FullName", acc.FullName ?? "");
             if(acc.Role > 1)
             {

@@ -6,7 +6,7 @@ namespace CafeShop.Models
     public partial class Order
     {
         public int Id { get; set; }
-        public int AccountId { get; set; }
+        public int? AccountId { get; set; }
         public string? OrderCode { get; set; }
         public string? CustomerName { get; set; }
         public string? PhoneNumber { get; set; }
@@ -15,9 +15,9 @@ namespace CafeShop.Models
         /// 0: Chờ xác nhận; 1: Đang giao; 2: Thành công; 3: Hủy hàng
         /// </summary>
         public int? Status { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         public string? CreateBy { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
         public string? UpdatedBy { get; set; }
         public bool? IsDeleted { get; set; }
     }

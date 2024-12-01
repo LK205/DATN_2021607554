@@ -7,9 +7,9 @@ using System.Data.Common;
 using System.Reflection;
 using System.Data;
 using Microsoft.Data.SqlClient;
-using CafeShop.Common;
+using CafeShop.Config;
 
-namespace ManagementCourse.Common
+namespace CafeShop.Config
 {
 	public static class SQLHelper<T> where T : class, new()
     {

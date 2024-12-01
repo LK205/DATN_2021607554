@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Reflection;
 
-namespace CafeShop.Common
+namespace CafeShop.Config
 {
     public static class Mapper
     {

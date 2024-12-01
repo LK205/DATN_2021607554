@@ -1,9 +1,8 @@
-﻿using CafeShop.Models;
+﻿using CafeShop.Config;
+using CafeShop.Models;
 using CafeShop.Models.DTOs;
 using CafeShop.Reposiory;
-using ManagementCourse.Common;
 using Microsoft.AspNetCore.Mvc;
-using RTCWeb.Common;
 
 namespace CafeShop.Areas.Admin.Controllers
 {

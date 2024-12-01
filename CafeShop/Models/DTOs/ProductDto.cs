@@ -9,5 +9,6 @@
         public int TotalSales { get; set; }
         public List<ProductDetail>? ListDetails { get; set; }
         public List<int> ListFileIDs { get; set; }
+        public List<int> ListTopping { get; set; }
     }
 }

@@ -1,3 +1,5 @@
 .vs
-CafeShop/bin.gitignore
+CafeShop/bin
+CafeShop/obj/Debug
+CafeShop/
 CafeShop/UpdateDB.txt

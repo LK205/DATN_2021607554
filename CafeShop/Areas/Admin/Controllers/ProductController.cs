@@ -1,7 +1,8 @@
-﻿using CafeShop.Models;
+﻿using CafeShop.Config;
+using CafeShop.Models;
 using CafeShop.Models.DTOs;
 using CafeShop.Reposiory;
-using ManagementCourse.Common;
+using CafeShop.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using System.Configuration.Internal;
@@ -18,6 +19,8 @@ namespace CafeShop.Areas.Admin.Controllers
         ProductDetailsRepository _detailRepo = new ProductDetailsRepository();
         ProductImageRepository fileRepo = new ProductImageRepository();
         AccountRepository _accRepo = new AccountRepository();
+        ToppingRepository _toppingRepo = new ToppingRepository();
+        ProductToppingRepository _proTopping = new ProductToppingRepository();
         public IActionResult Index()
         {
             Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
@@ -25,6 +28,22 @@ namespace CafeShop.Areas.Admin.Controllers
             {
                 return Redirect("/Home/Index");
             }
+            List<Topping> lstTopping = _toppingRepo.GetAll().ToList();
+            List<object> lstDataToping = new List<object>();
+            foreach (Topping item in lstTopping)
+            {
+                lstDataToping.Add(new
+                {
+                    Id = item.Id,
+                    ToppingCode = item.ToppingCode ,
+                    ToppingName = item.ToppingName ,
+                    ToppingPrice = item.ToppingPrice ,
+                    ToppingPriceStr = TextUtils.ToDecimal(item.ToppingPrice).ToString("N0")
+
+            });
+            }
+            ViewBag.Topping = lstDataToping;
+
             return View();
         }
 
@@ -33,8 +52,9 @@ namespace CafeShop.Areas.Admin.Controllers
 
         public JsonResult GetAll(string request = "", int pageNumber = 1)
         {
-            List<ProductDto> data = SQLHelper<ProductDto>.ProcedureToList("spGetAllProduct", new string[] { "@PageNumber", "@Request" }, new object[] { pageNumber, request });
-            PaginationDto totalCount = SQLHelper<PaginationDto>.ProcedureToModel("spGetAllTotalProduct", new string[] { "@Request" }, new object[] { request });
+            DataSet ds = LoadDataFromSP.GetDataSetSP("spGetAllProduct", new string[] { "@PageNumber", "@Request" }, new object[] { pageNumber, request });
+            List <ProductDto> data = TextUtils.ConvertDataTable<ProductDto>(ds.Tables[0]);
+            var totalCount = TextUtils.ConvertDataTable<PaginationDto>(ds.Tables[1]);
 
             return Json(new { data, totalCount });
         }
@@ -86,14 +106,31 @@ namespace CafeShop.Areas.Admin.Controllers
                     ProductSizeId = item.ProductSizeId,
                     Price = item.Price,
                     CreatedDate = DateTime.Now,
-                    CreatedBy = acc.FullName
+                    CreatedBy = acc.FullName,
+                    IsDelete = false
                 };
 
                 if (newDetail.Id > 0) _detailRepo.Update(newDetail);
                 else _detailRepo.Create(newDetail);
             }
 
-            if(data.ListFileIDs.Count > 0)
+            //Lưu topping
+            SQLHelper<ProductDetail>.SqlToList($"DELETE ProductTopping WHERE ProductId = {newPro.Id}");
+
+            foreach (int toppingID in data.ListTopping)
+            {
+                ProductTopping newDetail = new ProductTopping()
+                {
+                    Id = 0,
+                    ProductId = newPro.Id,
+                    ToppingId = toppingID,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = acc.FullName
+                };
+                _proTopping.Create(newDetail);
+            }
+
+            if (data.ListFileIDs.Count > 0)
             {
                 bool isDeleted = await fileRepo.DeleteProductImages(data.ListFileIDs);
                 string lstFileIDs = string.Join(",", data.ListFileIDs);
@@ -108,17 +145,22 @@ namespace CafeShop.Areas.Admin.Controllers
             Product data = _pro.GetByID(Id);
             List<ProductDetail> details = SQLHelper<ProductDetail>.SqlToList($"Select * from ProductDetails where ProductId = {Id}");
             List<ProductImage> images = SQLHelper<ProductImage>.SqlToList($"Select * from ProductImage where ProductId = {Id}");
-            return Json(new { data, details, images });
+            List<ProductTopping> toppings = SQLHelper<ProductTopping>.SqlToList($"Select * from ProductTopping where ProductId = {Id}");
+            foreach (ProductImage item in images)
+            {
+                item.ImageUrl = Config.Config.ProductImageUrl() + item.ImageUrl;
+            }
+            return Json(new { data, details, images, toppings });
         }
 
         public bool Delete(int Id)
         {
-            _pro.Delete(Id);
-            List<ProductDetail> listDel = SQLHelper<ProductDetail>.SqlToList($"Select * from ProductDetails where ProductId = {Id}");
-            foreach (var item in listDel)
-            {
-                _detailRepo.Delete(item.Id);
-            }
+            Product data = _pro.GetByID(Id) ?? new Product();
+            if (data.Id <= 0) return false;
+
+            data.IsDeleted = true;
+            _pro.Update(data);
+
             return true;
         }
 
@@ -214,13 +256,13 @@ namespace CafeShop.Areas.Admin.Controllers
                     return Json(new { status = 0, statusText = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
                 }
                 product = _pro.GetByID(product.Id) ?? new Product();
-                ProductType productType = _proType.GetByID(product.ProductTypeId) ?? new ProductType();
+                ProductType productType = _proType.GetByID(TextUtils.ToInt(product.ProductTypeId)) ?? new ProductType();
                 string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss_fff");
                 var files = Request.Form.Files;
                 List<ProductImage> listFiles = new List<ProductImage>();
                 foreach (var file in files)
                 {
-                    if(file.Length <= 0) continue;
+                    if (file.Length <= 0) continue;
                     listFiles.Add(new ProductImage()
                     {
                         ImageUrl = $"{productType.TypeCode}/{product.ProductCode}/{file.FileName}",
@@ -231,7 +273,7 @@ namespace CafeShop.Areas.Admin.Controllers
                         CreatedBy = acc.FullName
                     });
                     string pathUpload = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Images\\Product\\{productType.TypeCode}\\{product.ProductCode}");
-                    if (!Directory.Exists(pathUpload) )
+                    if (!Directory.Exists(pathUpload))
                     {
                         Directory.CreateDirectory(pathUpload);
                     }

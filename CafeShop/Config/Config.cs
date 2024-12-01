@@ -1,4 +1,4 @@
-﻿namespace CafeShop.Common
+﻿namespace CafeShop.Config
 {
     public static class Config
     {

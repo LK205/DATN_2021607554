@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\Images\\Avatar\\Account2\\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg"
     },
     {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheMay\\SP11\\cfdenda-espressoda_185438_1515261ef60b482eb58e1c545e7410a3.webp",
+      "PackagePath": "staticwebassets\\Images\\Product\\CaPheMay\\SP11\\cfdenda-espressoda_185438_1515261ef60b482eb58e1c545e7410a3.webp"
+    },
+    {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheMay\\SP1\\1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp",
       "PackagePath": "staticwebassets\\Images\\Product\\CaPheMay\\SP1\\1633143905_ameriacano-tet_8893d4894f8c4693879f37b7f82639aa.webp"
     },
@@ -27,6 +31,26 @@
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheMay\\SP6\\capu-da_487470_e06d3835cbc84e51bd635b04d541494e.webp",
       "PackagePath": "staticwebassets\\Images\\Product\\CaPheMay\\SP6\\capu-da_487470_e06d3835cbc84e51bd635b04d541494e.webp"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheMay\\SP7\\cappuccino_621532_f42ec557eda145b5958374ca67e65ff2.webp",
+      "PackagePath": "staticwebassets\\Images\\Product\\CaPheMay\\SP7\\cappuccino_621532_f42ec557eda145b5958374ca67e65ff2.webp"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheMay\\SP8\\1645971206_53476442-2294790520794961-6801279449942720512-n_b1176e22e0854cb98756db41bfbee1da.webp",
+      "PackagePath": "staticwebassets\\Images\\Product\\CaPheMay\\SP8\\1645971206_53476442-2294790520794961-6801279449942720512-n_b1176e22e0854cb98756db41bfbee1da.webp"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheMay\\SP8\\caramel-macchiato_143623_0e070a39d0e54e808db4d91049430b51.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product\\CaPheMay\\SP8\\caramel-macchiato_143623_0e070a39d0e54e808db4d91049430b51.jpg"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheMay\\SP9\\1686716537_dd-latte_785591205184481597a2a79b9331e03b.jpg",
+      "PackagePath": "staticwebassets\\Images\\Product\\CaPheMay\\SP9\\1686716537_dd-latte_785591205184481597a2a79b9331e03b.jpg"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheViet\\SP10\\1686716532_dd-suada_c180c6187e644babbac7019a2070231e.webp",
+      "PackagePath": "staticwebassets\\Images\\Product\\CaPheViet\\SP10\\1686716532_dd-suada_c180c6187e644babbac7019a2070231e.webp"
     },
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\Images\\Product\\CaPheViet\\SP3\\1639377904_bac-siu_525b9fa5055b41f183088c8e479a9472.jpg",
@@ -1857,6 +1881,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\user.png"
     },
     {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\css\\Admin\\product.css",
+      "PackagePath": "staticwebassets\\css\\Admin\\product.css"
+    },
+    {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\css\\Client\\cart.css",
       "PackagePath": "staticwebassets\\css\\Client\\cart.css"
     },
@@ -1897,6 +1925,10 @@
       "PackagePath": "staticwebassets\\js\\Admin\\home.js"
     },
     {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\material.js",
+      "PackagePath": "staticwebassets\\js\\Admin\\material.js"
+    },
+    {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\order.js",
       "PackagePath": "staticwebassets\\js\\Admin\\order.js"
     },
@@ -1911,6 +1943,14 @@
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\productType.js",
       "PackagePath": "staticwebassets\\js\\Admin\\productType.js"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\topping.js",
+      "PackagePath": "staticwebassets\\js\\Admin\\topping.js"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\unit.js",
+      "PackagePath": "staticwebassets\\js\\Admin\\unit.js"
     },
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Client\\accountDetails.js",

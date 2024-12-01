@@ -21,11 +21,17 @@
 
 @{
     var FullName = Context.Session.GetString("FullName");
+
     var Id = Context.Session.GetInt32("AccountId");
+
     var Role = Context.Session.GetInt32("AccountRole");
+
     if (Id <= 0)
+
     {
+
         Context.Response.Redirect("/Home/Privacy");
+
     }
 }
 
@@ -263,19 +269,48 @@
                     <i class="bi bi-menu-button-wide"></i><span>Quản lý</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="product-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                    <li>
+                        <a asp-controller="Product" asp-action="Index">
+                            <i class="bi bi-cup-hot-fill fs-6"></i> Sản phẩm
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Topping" asp-action="Index">
+                            <i class="bi bi-collection fs-6"></i> Topping
+                        </a>
+                    </li>
+
                     <li>
                         <a asp-controller="Product" asp-action="ProductType">
                             <i class="bi bi-collection fs-6"></i> Loại sản phẩm
                         </a>
                     </li>
+
                     <li>
                         <a asp-controller="ProductSize" asp-action="Index">
                             <i class="bi bi-asterisk fs-6"></i> Size sản phẩm
                         </a>
                     </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#warehouse-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-collection fs-6"></i><span>Kho</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="warehouse-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
                     <li>
-                        <a asp-controller="Product" asp-action="Index">
-                            <i class="bi bi-cup-hot-fill fs-6"></i> Sản phẩm
+                        <a asp-controller="Material" asp-action="Index">
+                            <i class="bi bi-person-lines-fill fs-6"></i> Nguyên vật liệu
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Unit" asp-action="Index">
+                            <i class="bi bi-person-lines-fill fs-6"></i> Đơn vị
                         </a>
                     </li>
 
@@ -287,7 +322,7 @@
                     <i class="bi bi-person-vcard "></i><span>Tài khoản</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="account-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                  
+
                     <li>
                         <a asp-controller="Account" asp-action="Index">
                             <i class="bi bi-person-lines-fill fs-6"></i> Tài khoản

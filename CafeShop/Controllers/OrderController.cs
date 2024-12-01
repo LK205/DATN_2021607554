@@ -1,7 +1,7 @@
 ﻿using CafeShop.Models;
 using CafeShop.Models.DTOs;
 using CafeShop.Reposiory;
-using ManagementCourse.Common;
+using CafeShop.Config;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CafeShop.Controllers
@@ -56,7 +56,7 @@ namespace CafeShop.Controllers
                                                                       new object[] { acc.Id, request });
             foreach (OrderDto item in lst)
             {
-                item.DateFormat = item.CreateDate.ToString("dd/MM/yyyy HH:mm:ss");
+                item.DateFormat =  item.CreateDate.Value.ToString("dd/MM/yyyy HH:mm:ss");
             }
             return Json(new { status = 1, message = "", data = lst });
         }
@@ -65,7 +65,7 @@ namespace CafeShop.Controllers
         {
             try
             {
-                Account accout = _accRepo.GetByID(data.AccountId) ?? new Account();
+                Account accout = _accRepo.GetByID(TextUtils.ToInt(data.AccountId)) ?? new Account();
                 if (accout.Id <= 0) return Json(new { status = 0, message = "Đăng nhập để sử dụng tính năng này!" });
                 if (data.Details == null || data.Details.Count <= 0) return Json(new { status = 0, message = "Hãy chọn ít nhất 1 sản phẩm để tạo đơn hàng!" });
 

@@ -1,8 +1,7 @@
-﻿using CafeShop.Common;
-using CafeShop.Models;
+﻿using CafeShop.Models;
 using CafeShop.Models.DTOs;
 using CafeShop.Reposiory;
-using ManagementCourse.Common;
+using CafeShop.Config;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using System.Diagnostics.CodeAnalysis;
@@ -49,7 +48,7 @@ namespace CafeShop.Controllers
             List<ProductImage> lstImg = SQLHelper<ProductImage>.SqlToList($"select * from ProductImage where ProductID = {prId}");
             foreach (ProductImage img in lstImg)
             {
-                img.ImageUrl = Config.ProductImageUrl() + img.ImageUrl;
+                img.ImageUrl = Config.Config.ProductImageUrl() + img.ImageUrl;
             }
             ViewBag.Avatar = lstImg[0];
             ViewBag.Image = lstImg;
