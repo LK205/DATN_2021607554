@@ -33,6 +33,7 @@ namespace CafeShop.Models
         public virtual DbSet<ProductSize> ProductSizes { get; set; } = null!;
         public virtual DbSet<ProductTopping> ProductToppings { get; set; } = null!;
         public virtual DbSet<ProductType> ProductTypes { get; set; } = null!;
+        public virtual DbSet<Supplier> Suppliers { get; set; } = null!;
         public virtual DbSet<Topping> Toppings { get; set; } = null!;
         public virtual DbSet<Unit> Units { get; set; } = null!;
 
@@ -148,10 +149,6 @@ namespace CafeShop.Models
 
                 entity.Property(e => e.ReceiptedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.SupplierCode).HasMaxLength(250);
-
-                entity.Property(e => e.SupplierName).HasMaxLength(250);
-
                 entity.Property(e => e.UpdatedBy).HasMaxLength(150);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
@@ -170,6 +167,8 @@ namespace CafeShop.Models
                 entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
 
                 entity.Property(e => e.Quantity).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
 
                 entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 2)");
 
@@ -199,15 +198,11 @@ namespace CafeShop.Models
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Decription).HasMaxLength(550);
-
                 entity.Property(e => e.MaterialCode).HasMaxLength(250);
 
                 entity.Property(e => e.MaterialName).HasMaxLength(250);
 
                 entity.Property(e => e.MinQuantity).HasColumnType("decimal(18, 2)");
-
-                entity.Property(e => e.Quantity).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.UnitId).HasColumnName("UnitID");
 
@@ -397,6 +392,27 @@ namespace CafeShop.Models
                 entity.Property(e => e.TypeCode).HasMaxLength(250);
 
                 entity.Property(e => e.TypeName).HasMaxLength(250);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<Supplier>(entity =>
+            {
+                entity.ToTable("Supplier");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PhoneNumber).HasMaxLength(250);
+
+                entity.Property(e => e.SupplierCode).HasMaxLength(150);
+
+                entity.Property(e => e.SupplierName).HasMaxLength(250);
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(150);
 

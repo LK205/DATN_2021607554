@@ -1,8 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Material";
+    ViewData["Title"] = "Supplier";
 }
-
-
 
 <div class="card card-custom gutter-b mt-1 ">
     <div class="card-body">
@@ -10,7 +8,7 @@
         <div class="row mt-2 pe-0 me-0">
             <div class="col-12 mb-2 row pe-0 m-0">
                 <div class="pagetitle col-sm-8 col-12 m-0">
-                    <h1 class="fs-2">Nguyên vật liệu</h1>
+                    <h1 class="fs-2">Nhà cung cấp</h1>
                 </div>
             </div>
 
@@ -30,15 +28,13 @@
         <table class="table table-bordered border-primary font-custom">
             <thead>
                 <tr class="text-center align-middle">
-                    <th class="table-color" scope="col" style="width: 7%;"><button id="add_new" class="btn btn-success" title="Tạo mới"><i class="bi bi-plus-lg"></i></button></th>
-                    <th class="table-color" scope="col">Mã nguyên liệu</th>
-                    <th class="table-color" scope="col">Tên nguyên liệu</th>
-                    <th class="table-color" scope="col">Tồn kho</th>
-                    <th class="table-color" scope="col">Đơn vị</th>
-                    <th class="table-color" scope="col">Số lượng tối thiểu</th>
-                    <th class="table-color" scope="col">Nhà cung cấp</th>
-                    <th class="table-color" scope="col">Đơn giá</th>
-                    <th class="table-color" scope="col">Ghi chú</th>
+                    <th class="table-color" style="width: 7%;"><button id="add_new" class="btn btn-success" title="Tạo mới"><i class="bi bi-plus-lg"></i></button></th>
+                    <th class="table-color" >Mã NCC</th>
+                    <th class="table-color" >Tên NCC</th>
+                    <th class="table-color" >SĐT</th>
+                    <th class="table-color" >Ghi chú</th>
+                    <th class="table-color" >Ngày tạo</th>
+                    <th class="table-color" >Người tạo</th>
                 </tr>
             </thead>
             <tbody id="tbody">
@@ -74,39 +70,26 @@
             </div>
             <div class="modal-body">
                 <form class="row g-3" id="form">
-                    <div class="col-sm-8 col-12">
-
+                    <div class="col-sm-6 col-12">
                         <div>
-                            <label for="formCode" class="form-label">Mã nguyên liệu<span style="color: red">*</span></label>
+                            <label for="formCode" class="form-label">Mã nhà cung cấp<span style="color: red">*</span></label>
                             <input type="text" class="form-control form-control-sm" id="formCode">
                         </div>
                     </div>
 
-                    <div class="col-sm-4 col-12">
+                    <div class="col-sm-6 col-12">
                         <div>
-                            <label for="formMinQuantity" class="form-label">Số lượng tối thiểu<span style="color: red">*</span></label>
-                            <input type="text" class="form-control form-control-sm" id="formMinQuantity">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-8 col-12">
-                        <div>
-                            <label for="formName" class="form-label">Tên nguyên liệu<span style="color: red">*</span></label>
+                            <label for="formName" class="form-label">Tên nhà cung cấp<span style="color: red">*</span></label>
                             <input type="text" class="form-control form-control-sm" id="formName">
                         </div>
                     </div>
 
-
-                    <div class="col-sm-4 col-12">
+                    <div class="col-12">
                         <div>
-                            <label for="formUnit" class="form-label">Đơn vị<span style="color: red">*</span></label>
-                            <select class="form-control form-control-sm" id="formUnit" asp-items="@ViewBag.ListUnit">
-                                <option value="0" selected>--Chọn đơn vị--</option>
-                            </select>
+                            <label for="formPhoneNumber" class="form-label">Số điện thoại</label>
+                            <input type="text" class="form-control form-control-sm" id="formPhoneNumber">
                         </div>
                     </div>
-
-
 
                     <div class="col-12">
                         <div>
@@ -139,8 +122,4 @@
 
 
 
-
-
-
-
-<script src="~/js/admin/material.js"></script>
+<script src="~/js/admin/supplier.js"></script>

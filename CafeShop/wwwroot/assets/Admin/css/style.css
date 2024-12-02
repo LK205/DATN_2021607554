@@ -9,8 +9,11 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+#main{
+    width: 100% !important;
+}
 :root {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {

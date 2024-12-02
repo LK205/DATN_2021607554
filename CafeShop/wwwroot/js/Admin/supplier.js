@@ -82,7 +82,7 @@ function CloseModal() {
 }
 
 $('#add_new').click(function () {
-    $('#staticBackdropLabel').text("Thêm mới đơn vị");
+    $('#staticBackdropLabel').text("Thêm mới Nhà cung cấp");
     showModal();
 })
 $('#btn_deleteModal').click(function () {
@@ -90,7 +90,7 @@ $('#btn_deleteModal').click(function () {
 });
 
 function GetAll() {
-    let _url = "/Admin/Unit/GetAll?";
+    let _url = "/Admin/Supplier/GetAll?";
     var request = $('#request').val();
     if (request.length > 0) {
         _url += "request=" + request;
@@ -110,15 +110,15 @@ function GetAll() {
                                 <button class="btn btn-sm btn-primary" onclick="GetById(${item.Id})" ><i class="bi bi-pencil-square"></i> Sửa</button>
                                 <button class="btn btn-sm btn-danger" onclick="DeleteById(${item.Id})"><i class="bi bi-trash3"></i> Xóa</button>
                             </td>
-                            <td class="" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.Id})">${item.UnitCode} </a></td>
-                            <td class="">${item.UnitName}</td>
-                            <td class="">${item.Note}</td>
+                            <td class="" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.Id})">${item.SupplierCode} </a></td>
+                            <td class="">${item.SupplierName}</td>
+                            <td class="">${item.PhoneNumber}</td>
+                            <td class="">${item.Decription}</td>
                             <td class="text-center">${moment(item.CreatedDate).format("DD/MM/YYYY")}</td>
                             <td class="">${item.CreatedBy}</td>
                         </tr>`;
             })
             let total = Math.ceil(data.totalCount[0].TotalCount / 10);
-
             totalPage = total > 0 ? total : 1;
             $('#tbody').html(html);
             $('#page_details').text(`Trang ${pageNumber} / ${totalPage}`);
@@ -135,9 +135,9 @@ function GetAll() {
 
 function GetById(id) {
     $('#btn_deleteModal').show();
-    $('#staticBackdropLabel').text("Cập nhật đơn vị");
+    $('#staticBackdropLabel').text("Cập nhật Nhà cung cấp");
     modelID = id;
-    let _url = "/Admin/Unit/GetById";
+    let _url = "/Admin/Supplier/GetById";
     $.ajax({
         url: _url,
         type: 'GET',
@@ -147,10 +147,10 @@ function GetById(id) {
         },
         contentType: 'application/json',
         success: function (data) {
-            $('#formCode').val(data.unitCode);
-            $('#formName').val(data.unitName);
-            $("#formNote").val(data.note);
-
+            $('#formCode').val(data.supplierCode);
+            $('#formName').val(data.supplierName);
+            $("#formPhoneNumber").val(data.phoneNumber);
+            $("#formDecription").val(data.decription);
         },
         error: function (err) {
             MessageError(err.responseText);
@@ -162,22 +162,23 @@ function CreateOrUpdate() {
     let isValid = true;
     var obj = {
         Id: parseInt(modelID),
-        UnitCode: $("#formCode").val(),
-        UnitName: $("#formName").val(),
-        Note: $("#formNote").val()
+        SupplierCode: $("#formCode").val(),
+        SupplierName: $("#formName").val(),
+        PhoneNumber: $("#formPhoneNumber").val(),
+        Decription: $("#formDecription").val()
     };
 
-    if (obj.UnitCode == "") {
-        alert("Vui lòng nhập Mã đơn vị!");
+    if (obj.SupplierCode == "") {
+        alert("Vui lòng nhập Mã nhà cung cấp!");
         isValid = false;
     }
-    else if (obj.UnitName == "") {
-        alert("Vui lòng nhập Tên đơn vị!");
+    else if (obj.SupplierName == "") {
+        alert("Vui lòng nhập Tên nhà cung cấp!");
         isValid = false;
     }
 
     if (isValid) {
-        let _url = "/Admin/Unit/CreateOrUpdate";
+        let _url = "/Admin/Supplier/CreateOrUpdate";
         $.ajax({
             type: 'POST',
             url: _url,
@@ -200,7 +201,7 @@ function CreateOrUpdate() {
 }
 function DeleteById(id) {
     if (confirm("Bạn có chắc chắn muốn thực hiện thao tác này?") == true) {
-        let _url = "/Admin/Unit/Delete";
+        let _url = "/Admin/Supplier/Delete";
         $.ajax({
             type: 'GET',
             url: _url,

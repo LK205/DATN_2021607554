@@ -8,8 +8,6 @@ namespace CafeShop.Models
         public int Id { get; set; }
         public int? AccoutId { get; set; }
         public string? GoodsReceiptCode { get; set; }
-        public string? SupplierCode { get; set; }
-        public string? SupplierName { get; set; }
         public string? Decription { get; set; }
         public DateTime? ReceiptedDate { get; set; }
         public DateTime? CreatedDate { get; set; }

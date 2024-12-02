@@ -15,8 +15,7 @@
     <link href="~/assets/admin/vendor/simple-datatables/style.css" rel="stylesheet">
     <link href="~/assets/admin/css/style.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
+    <script src="~/assets/admin/js/jquery.js"></script>
 </head>
 
 @{
@@ -305,6 +304,12 @@
                     <li>
                         <a asp-controller="Material" asp-action="Index">
                             <i class="bi bi-person-lines-fill fs-6"></i> Nguyên vật liệu
+                        </a>
+                    </li>
+
+                     <li>
+                        <a asp-controller="Supplier" asp-action="Index">
+                            <i class="bi bi-person-lines-fill fs-6"></i> Nhà cung cấp
                         </a>
                     </li>
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JteUou0c820zAU/pxszedBai0U1iAVDiQNf0v8yincE=",
+  "Hash": "J4EUN/05eY8jFGPelWlrWkt8ACMUyJDZV09TB9X6bHY=",
   "Source": "CafeShop",
   "BasePath": "_content/CafeShop",
   "Mode": "Default",
@@ -9268,6 +9268,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Admin\\productType.js"
+    },
+    {
+      "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\supplier.js",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "js/Admin/supplier.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Admin\\supplier.js"
     },
     {
       "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\topping.js",

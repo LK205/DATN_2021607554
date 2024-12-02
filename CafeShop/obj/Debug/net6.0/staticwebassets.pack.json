@@ -1945,6 +1945,10 @@
       "PackagePath": "staticwebassets\\js\\Admin\\productType.js"
     },
     {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\supplier.js",
+      "PackagePath": "staticwebassets\\js\\Admin\\supplier.js"
+    },
+    {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\topping.js",
       "PackagePath": "staticwebassets\\js\\Admin\\topping.js"
     },

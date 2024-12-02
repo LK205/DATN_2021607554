@@ -7,6 +7,7 @@ namespace CafeShop.Models
     {
         public int Id { get; set; }
         public int? GoodsReceiptId { get; set; }
+        public int? SupplierId { get; set; }
         public int? MaterialId { get; set; }
         public decimal? Quantity { get; set; }
         public decimal? UnitPrice { get; set; }
