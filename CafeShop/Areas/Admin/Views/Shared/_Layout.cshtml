@@ -14,8 +14,14 @@
     <link href="~/assets/admin/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="~/assets/admin/vendor/simple-datatables/style.css" rel="stylesheet">
     <link href="~/assets/admin/css/style.css" rel="stylesheet" />
+    <link href="~/css/select2.min.css" rel="stylesheet" />
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="~/assets/admin/js/jquery.js"></script>
+    <script src="~/js/select2.full.min.js"></script>
+
 </head>
 
 @{
@@ -300,6 +306,18 @@
                     <i class="bi bi-collection fs-6"></i><span>Kho</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="warehouse-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                    <li>
+                        <a asp-controller="GoodsReceipt" asp-action="Index">
+                            <i class="bi bi-person-lines-fill fs-6"></i> Phiếu nhập
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="GoodsIssue" asp-action="Index">
+                            <i class="bi bi-person-lines-fill fs-6"></i> Phiếu xuất
+                        </a>
+                    </li>
 
                     <li>
                         <a asp-controller="Material" asp-action="Index">

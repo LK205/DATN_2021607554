@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "J4EUN/05eY8jFGPelWlrWkt8ACMUyJDZV09TB9X6bHY=",
+  "Hash": "JKjYHy+MGXrsrvMJmi+uEpfZJiWReAN0Bb2Ezu5unFQ=",
   "Source": "CafeShop",
   "BasePath": "_content/CafeShop",
   "Mode": "Default",
@@ -8738,6 +8738,25 @@
       "OriginalItemSpec": "wwwroot\\css\\fontawesome.min.css"
     },
     {
+      "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\css\\select2.min.css",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "css/select2.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\select2.min.css"
+    },
+    {
       "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\css\\site.css",
       "SourceId": "CafeShop",
       "SourceType": "Discovered",
@@ -9156,6 +9175,25 @@
       "OriginalItemSpec": "wwwroot\\js\\Admin\\account.js"
     },
     {
+      "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\goods_receipt.js",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "js/Admin/goods_receipt.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Admin\\goods_receipt.js"
+    },
+    {
       "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\home.js",
       "SourceId": "CafeShop",
       "SourceType": "Discovered",
@@ -9477,6 +9515,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\jquery-migrate-1.2.1.min.js"
+    },
+    {
+      "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\select2.full.min.js",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "js/select2.full.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\select2.full.min.js"
     },
     {
       "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\site.js",

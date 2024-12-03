@@ -21,7 +21,6 @@ namespace CafeShop.Areas.Admin.Controllers
                 return Redirect("/Home/Index");
             }
 
-
             ViewBag.ListUnit = new SelectList(_unitRepo.GetAll().Where(x => x.IsDelete != true).ToList(), "Id", "UnitName");
             return View();
         }

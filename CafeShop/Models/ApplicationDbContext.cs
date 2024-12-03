@@ -22,6 +22,7 @@ namespace CafeShop.Models
         public virtual DbSet<GoodsIssueDetail> GoodsIssueDetails { get; set; } = null!;
         public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; } = null!;
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; } = null!;
+        public virtual DbSet<GoodsReceiptFile> GoodsReceiptFiles { get; set; } = null!;
         public virtual DbSet<LinkUrl> LinkUrls { get; set; } = null!;
         public virtual DbSet<Material> Materials { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
@@ -149,6 +150,8 @@ namespace CafeShop.Models
 
                 entity.Property(e => e.ReceiptedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
+
                 entity.Property(e => e.UpdatedBy).HasMaxLength(150);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
@@ -168,9 +171,24 @@ namespace CafeShop.Models
 
                 entity.Property(e => e.Quantity).HasColumnType("decimal(18, 2)");
 
-                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
-
                 entity.Property(e => e.UnitPrice).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<GoodsReceiptFile>(entity =>
+            {
+                entity.ToTable("GoodsReceiptFile");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.GoodsReceiptId).HasColumnName("GoodsReceiptID");
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(150);
 

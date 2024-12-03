@@ -9,8 +9,8 @@ var totalPage = 0;
 var productId = 0;
 var htmlSize = "";
 var _attachFiles = [];
+var lstFileDeleted = [];
 var _imageUrls = [];
-var lstFileDeleted = []
 $('#request').keydown(function (e) {
     if (e.keyCode == 13) {
         pageNumber = 1;

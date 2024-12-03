@@ -1897,6 +1897,10 @@
       "PackagePath": "staticwebassets\\css\\fontawesome.min.css"
     },
     {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\css\\select2.min.css",
+      "PackagePath": "staticwebassets\\css\\select2.min.css"
+    },
+    {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -1919,6 +1923,10 @@
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\account.js",
       "PackagePath": "staticwebassets\\js\\Admin\\account.js"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\goods_receipt.js",
+      "PackagePath": "staticwebassets\\js\\Admin\\goods_receipt.js"
     },
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\home.js",
@@ -1987,6 +1995,10 @@
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\jquery-migrate-1.2.1.min.js",
       "PackagePath": "staticwebassets\\js\\jquery-migrate-1.2.1.min.js"
+    },
+    {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\select2.full.min.js",
+      "PackagePath": "staticwebassets\\js\\select2.full.min.js"
     },
     {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\site.js",
