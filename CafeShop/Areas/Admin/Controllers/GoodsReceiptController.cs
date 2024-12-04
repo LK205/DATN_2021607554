@@ -19,6 +19,7 @@ namespace CafeShop.Areas.Admin.Controllers
         GoodsReceiptRepository _receipttRepo = new GoodsReceiptRepository();
         GoodsReceiptDetailRepository _receiptDetail = new GoodsReceiptDetailRepository();
         SupplierRepository _supplierRepo = new SupplierRepository();
+        GoodsReceiptFileRepository _fileRepo = new GoodsReceiptFileRepository();
 
         public IActionResult Index()
         {
@@ -65,62 +66,168 @@ namespace CafeShop.Areas.Admin.Controllers
         }
         public JsonResult GetById(int Id)
         {
-            return Json(_receipttRepo.GetByID(Id));
+            DataSet ds = LoadDataFromSP.GetDataSetSP("spGetGoodsReceiptByID", new string[] { "@GoodsReceiptID" }
+                                                                          , new object[] { Id });
+
+            var data = TextUtils.ConvertDataTable<GoodReceiptResponeDTO>(ds.Tables[0]);
+            var details = TextUtils.ConvertDataTable<GoodsReceiptDetailsDTO>(ds.Tables[1]);
+            var files = TextUtils.ConvertDataTable<GoodsReceiptFile>(ds.Tables[2]);
+            foreach (var item in files)
+            {
+                item.FileUrl = $"{Config.Config.GoodReceiptUrl()}{item.FileUrl}/{item.FileName}";
+            }
+
+            return Json(new { data, details, files }, new System.Text.Json.JsonSerializerOptions());
         }
 
-        public async Task<JsonResult> CreateOrUpdate([FromBody] Unit data)
+        public async Task<JsonResult> CreateOrUpdate([FromBody] GoodsReceiptDTO data)
         {
-            //Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
-            //if (acc == null)
-            //{
-            //    return Json(new { status = 0, statusText = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
-            //}
+            Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+            if (acc == null)
+            {
+                return Json(new { status = 0, statusText = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
+            }
+
+            for (int i = 0; i < data.LstDetails.Count; i++)
+            {
+                List<GoodsReceiptDetail> lstCheck = data.LstDetails.Where(p=> p.MaterialId == data.LstDetails[i].MaterialId).ToList();
+                if(lstCheck.Count > 1) return Json(new { status = 0, statusText = "Nguyên vật liệu chỉ được chọn 1 lần! Vui lòng kiểm tra lại!" });
+            }
 
 
-            //if (string.IsNullOrWhiteSpace(data.UnitCode))
-            //{
-            //    return Json(new { status = 0, statusText = "Vui lòng nhập Mã topping!" });
-            //}
-            //else if (string.IsNullOrWhiteSpace(data.UnitName))
-            //{
-            //    return Json(new { status = 0, statusText = "Vui lòng nhập Tên topping!" });
-            //}
+            GoodsReceipt model = _receipttRepo.GetByID(data.Id) ?? new GoodsReceipt();
+
+            model.AccoutId = acc.Id;
+            model.SupplierId = data.SupplierId;
+            model.ReceiptedDate = data.ReceiptedDate;
+            model.Decription = data.Decription;
+            model.IsDelete = false;
 
 
-            //bool isCheck = _unitRepo.GetAll().Any(x => x.Id != data.Id && x.UnitCode == data.UnitCode && x.IsDelete != true);
-            //if (isCheck) return Json(new { status = 0, statusText = "Mã đơn vị đã được sử dụng! Hãy kiểm tra lại!", result = 0 });
+            if (model.Id > 0)
+            {
+                model.GoodsReceiptCode = data.GoodsReceiptCode;
+                model.UpdatedDate = DateTime.Now;
+                model.UpdatedBy = acc.FullName;
+                _receipttRepo.Update(model);
+            }
+            else
+            {
+                model.GoodsReceiptCode = LoadGoodsReceiptCode();
+                model.CreatedDate = DateTime.Now;
+                model.CreatedBy = acc.FullName;
+                await _receipttRepo.CreateAsync(model);
+            }
 
-            //Unit model = _unitRepo.GetByID(data.Id) ?? new Unit();
-
-            //model.UnitCode = TextUtils.ToString(data.UnitCode);
-            //model.UnitName = TextUtils.ToString(data.UnitName);
-            //model.Note = TextUtils.ToString(data.Note);
-            //model.IsDelete = false;
 
 
-            //if (model.Id > 0)
-            //{
-            //    model.UpdatedDate = DateTime.Now;
-            //    model.UpdatedBy = acc.FullName;
-            //    _unitRepo.Update(model);
-            //}
-            //else
-            //{
-            //    model.CreatedDate = DateTime.Now;
-            //    model.CreatedBy = acc.FullName;
-            //    await _unitRepo.CreateAsync(model);
-            //}
-            return Json(new { status = 1, statusText = "", /*result = model */});
+            SQLHelper<GoodsReceiptDetail>.SqlToModel($"DELETE FROM dbo.GoodsIssueDetails WHERE GoodIssueID = {model.Id}");
+            List<GoodsReceiptDetail> lstDetails = new List<GoodsReceiptDetail>();
+            foreach (GoodsReceiptDetail item in data.LstDetails)
+            {
+                if (item.MaterialId <= 0) continue;
+                GoodsReceiptDetail newDetails = new GoodsReceiptDetail()
+                {
+                    GoodsReceiptId = model.Id,
+                    MaterialId = item.MaterialId,
+                    Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = acc.FullName,
+                    UpdatedDate = DateTime.Now,
+                    UpdatedBy = acc.FullName,
+                    IsDelete = false,
+                };
+                lstDetails.Add(newDetails);
+            }
+            if (lstDetails.Count > 0) 
+            {
+                _receiptDetail.CreateRange(lstDetails);
+            }
+
+
+            return Json(new { status = 1, statusText = "", result = model });
         }
 
         public async Task<JsonResult> Delete(int Id)
         {
             GoodsReceipt model = _receipttRepo.GetByID(Id) ?? new GoodsReceipt();
-            if (model.Id <= 0) return Json(new { status = 0, message = "Không tìm thấy Đơn vị!" });
+            if (model.Id <= 0) return Json(new { status = 0, message = "Không tìm thấy Phiếu nhập!" });
 
             model.IsDelete = true;
             _receipttRepo.Update(model);
             return Json(new { status = 1, message = "" });
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> UploadFile(GoodsReceipt goodsReceipt)
+        {
+            try
+            {
+                Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+                if (acc == null)
+                {
+                    return Json(new { status = 0, statusText = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
+                }
+                goodsReceipt = _receipttRepo.GetByID(goodsReceipt.Id) ?? new GoodsReceipt();
+                var files = Request.Form.Files;
+
+                DateTime currentDate = DateTime.Now;
+                List<GoodsReceiptFile> listFiles = new List<GoodsReceiptFile>();
+                foreach (var file in files)
+                {
+                    if (file.Length <= 0) continue;
+                    listFiles.Add(new GoodsReceiptFile()
+                    {
+                        FileUrl = $"{goodsReceipt.ReceiptedDate.Year}/{goodsReceipt.ReceiptedDate.Month}/{goodsReceipt.GoodsReceiptCode}_{goodsReceipt.ReceiptedDate.ToString("ddMMYYYY")}",
+                        FileName = file.FileName,
+                        GoodsReceiptId = goodsReceipt.Id,
+                        CreatedDate = DateTime.Now,
+                        IsDelete = false,
+                        CreatedBy = acc.FullName
+                    });
+                    string pathUpload = Path.Combine(Directory.GetCurrentDirectory(), 
+                                                    $"wwwroot\\GoodsReceipt\\{goodsReceipt.ReceiptedDate.Year}\\{goodsReceipt.ReceiptedDate.Month}\\{goodsReceipt.GoodsReceiptCode}_{goodsReceipt.ReceiptedDate.ToString("ddMMYYYY")}");
+                    if (!Directory.Exists(pathUpload))
+                    {
+                        Directory.CreateDirectory(pathUpload);
+                    }
+                    string filePath = pathUpload + $"\\{file.FileName}";
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        System.IO.File.Delete(filePath);
+                    }
+                    using (FileStream stream = System.IO.File.Create(filePath))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                }
+                _fileRepo.CreateRange(listFiles);
+                return Ok(new { status = 1, message = "Upload file thành công" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { status = 1, message = ex.Message });
+            }
+        }
+
+        public JsonResult LoadCode()
+        {
+            string code = LoadGoodsReceiptCode();
+            return Json(new { code });
+        }
+        public string LoadGoodsReceiptCode()
+        {
+            DateTime curentDate = DateTime.Now;
+            List<GoodsReceipt> lstdata = _receipttRepo.GetAll().Where(p => p.IsDelete == false && p.ReceiptedDate.Year == curentDate.Year).ToList();
+            string totalcount = (lstdata.Count + 1).ToString();
+            while(totalcount.Length < 6)
+            {
+                totalcount = "0" + totalcount;
+            }
+            string goodsRecriptCode = $"PNH{curentDate.ToString("yyyyMMdd")}T{totalcount}";
+            return goodsRecriptCode;
         }
     }
 }

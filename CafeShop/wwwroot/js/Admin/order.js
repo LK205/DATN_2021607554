@@ -155,8 +155,6 @@ function GetDetails(id, event) {
             },
             contentType: 'application/json',
             success: function (result) {
-                console.log(result)
-
                 var htmlBody = '';
                 let totalMoney = 0;
                 //Hiển thị danh sách chi tiết

@@ -98,5 +98,10 @@ namespace CafeShop.Areas.Admin.Controllers
             _unitRepo.Update(model);
             return Json(new { status = 1, message = "" });
         }
+
+        public JsonResult GetAllForView()
+        {
+            return Json(_unitRepo.GetAll(), new System.Text.Json.JsonSerializerOptions());
+        }
     }
 }

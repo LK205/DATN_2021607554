@@ -21,5 +21,10 @@
             return imageUrl;
         }
 
+        public static string GoodReceiptUrl()
+        {
+            string imageUrl = $"{strUrlServer}GoodsReceipt/";
+            return imageUrl;
+        }
     }
 }

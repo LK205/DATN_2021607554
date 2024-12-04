@@ -7424,6 +7424,54 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241205T000002_0512YYYY\4-2022-phu-luc-quy-dinh-lam-da-kltn.doc))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>GoodsReceipt/2024/12/PNH20241205T000002_0512YYYY/4-2022-phu-luc-quy-dinh-lam-da-kltn.doc</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241205T000002_0512YYYY\4-2022-phu-luc-quy-dinh-lam-da-kltn.doc))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241205T000002_0512YYYY\BC_CNTT_2020602995_LeThiHuyen.docx))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>GoodsReceipt/2024/12/PNH20241205T000002_0512YYYY/BC_CNTT_2020602995_LeThiHuyen.docx</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241205T000002_0512YYYY\BC_CNTT_2020602995_LeThiHuyen.docx))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241205T000002_0512YYYY\BTL-Nhom8-Final.docx))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>GoodsReceipt/2024/12/PNH20241205T000002_0512YYYY/BTL-Nhom8-Final.docx</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241205T000002_0512YYYY\BTL-Nhom8-Final.docx))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Avatar\Account2\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CafeShop</SourceId>

@@ -73,5 +73,10 @@ namespace CafeShop.Areas.Admin.Controllers
         }
 
 
+
+        public JsonResult GetAllForView()
+        {
+            return Json(_materialRepo.GetAll(),new System.Text.Json.JsonSerializerOptions());
+        }
     }
 }

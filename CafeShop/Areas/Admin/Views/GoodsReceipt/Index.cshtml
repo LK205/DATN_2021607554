@@ -56,6 +56,7 @@
                     <th class="table-color" scope="col">Mã phiếu nhập</th>
                     <th class="table-color" scope="col">Người nhập</th>
                     <th class="table-color" scope="col">Ngày nhập</th>
+                    <th class="table-color" scope="col">Tổng tiền</th>
                     <th class="table-color" scope="col">Ghi chú</th>
                     <th class="table-color" scope="col">Người tạo</th>
                     <th class="table-color" scope="col">Ngày tạo</th>
@@ -119,8 +120,8 @@
 
                                 <div class="col-sm-6 col-12">
                                     <div>
-                                        <label for="formCode" class="form-label">Người nhập<span style="color: red">*</span></label>
-                                        <input type="text" class="form-control form-control-sm" id="formCode" value="@ViewBag.Account.FullName" disabled readonly>
+                                        <label for="formFullName" class="form-label">Người nhập<span style="color: red">*</span></label>
+                                        <input type="text" class="form-control form-control-sm" id="formFullName" value="@ViewBag.Account.FullName" disabled readonly>
                                     </div>
                                 </div>
 
@@ -133,7 +134,7 @@
 
                                 <div class="col-12">
                                     <div>
-                                        <label for="formSupplier" class="form-label">Nhà cung cấp<span style="color: red">*</span></label>
+                                        <label for="formSupplier" class="form-label">Nhà cung cấp</label>
                                         <select class="form-control form-control-sm select2" id="formSupplier" asp-items="@ViewBag.ListSupplier">
                                             <option value="0" selected>--Chọn nhà cung cấp--</option>
                                         </select>
@@ -146,7 +147,7 @@
                             <div class="col-sm-6 col-12 row m-0 p-1">
                                 <div class="col-12">
                                     <label for="formDecription" class="form-label">Ghi chú</label>
-                                    <textarea class="form-control form-control-sm" style="height: 84% !important" id="formDecription"></textarea>
+                                    <textarea class="form-control form-control-sm" style="height: 84% !important" id="formDecription" ></textarea>
                                 </div>
                             </div>
 
@@ -165,11 +166,12 @@
                         <table class="table table-bordered border-primary">
                             <thead>
                                 <tr class="text-center align-middle">
-                                    <th class="table-color" style="width: 30%;" scope="col">Nguyên vật liệu<span style="color: red;">*</span></th>
-                                    <th class="table-color" style="width: 25%;" scope="col">Đơn giá<span style="color: red;">*</span></th>
-                                    <th class="table-color" style="width: 15%;" scope="col">Số lượng<span style="color: red;">*</span></th>
-                                    <th class="table-color" style="width: 25%;" scope="col">Tổng tiền</th>
-                                    <th class="table-color" style="width: 5%;" scope="col"><button onclick="addRow()" class="btn btn-primary">+</button></th>
+                                    <th class="table-color" style="width: 30%;">Nguyên vật liệu<span style="color: red;">*</span></th>
+                                    <th class="table-color" style="width: 20%;">Đơn giá<span style="color: red;">*</span></th>
+                                    <th class="table-color" style="width: 15%;">Số lượng<span style="color: red;">*</span></th>
+                                    <th class="table-color" style="width: 5%;">Đơn vị</th>
+                                    <th class="table-color" style="width: 25%;">Tổng tiền</th>
+                                    <th class="table-color" style="width: 5%;"><button onclick="addRow()" class="btn btn-primary">+</button></th>
                                 </tr>
                             </thead>
                             <tbody id="tbodySteps">
