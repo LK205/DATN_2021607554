@@ -1,5 +1,10 @@
 ﻿$(document).ready(function (e) {
+
     GetAll();
+    $(".select2").select2();
+    $("#formUnit").select2({
+        dropdownParent: $("#staticBackdrop")
+    });
 });
 
 var pageNumber = 1;
@@ -90,7 +95,7 @@ $('#btn_deleteModal').click(function () {
 });
 
 function GetAll() {
-    let _url = "/Admin/Supplier/GetAll?";
+    let _url = "/Admin/Material/GetAll?";
     var request = $('#request').val();
     if (request.length > 0) {
         _url += "request=" + request;
@@ -105,17 +110,19 @@ function GetAll() {
         success: function (data) {
             var html = '';
             $.each(data.data, function (index, item) {
-                html += `<tr class="align-middle">
-                            <td scope="col" class="align-center text-center" style="white-space: nowrap">
+                let style = item.MinQuantity >= item.ToltalQuantity ? "bg-warning" : ""
+                html += `<tr class="  align-middle ">
+                            <td scope="col" class="${style} align-center text-center" style="white-space: nowrap">
                                 <button class="btn btn-sm btn-primary" onclick="GetById(${item.Id})" ><i class="bi bi-pencil-square"></i> Sửa</button>
                                 <button class="btn btn-sm btn-danger" onclick="DeleteById(${item.Id})"><i class="bi bi-trash3"></i> Xóa</button>
                             </td>
-                            <td class="" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.Id})">${item.SupplierCode} </a></td>
-                            <td class="">${item.SupplierName}</td>
-                            <td class="">${item.PhoneNumber}</td>
-                            <td class="">${item.Decription}</td>
-                            <td class="text-center">${moment(item.CreatedDate).format("DD/MM/YYYY")}</td>
-                            <td class="">${item.CreatedBy}</td>
+                            <td class="${style} text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.Id})">${item.MaterialCode} </a></td>
+                            <td class="${style} ">${item.MaterialName}</td>
+                            <td class="${style} text-end">${item.ToltalQuantity}</td>
+                            <td class="${style} text-center">${item.UnitName}</td>
+                            <td class="${style} text-end">${item.MinQuantity}</td>
+                            <td class="${style} text-end">${new Intl.NumberFormat('vi-VN').format(item.UnitPrice)} VNĐ</td>
+                            <td class="${style} " style="white-space: pre;">${item.SupplierName}</td>
                         </tr>`;
             })
             let total = Math.ceil(data.totalCount[0].TotalCount / 10);
@@ -137,7 +144,7 @@ function GetById(id) {
     $('#btn_deleteModal').show();
     $('#staticBackdropLabel').text("Cập nhật Nguyên liệu");
     modelID = id;
-    let _url = "/Admin/Supplier/GetById";
+    let _url = "/Admin/Material/GetByID";
     $.ajax({
         url: _url,
         type: 'GET',
@@ -147,10 +154,11 @@ function GetById(id) {
         },
         contentType: 'application/json',
         success: function (data) {
-            $('#formCode').val(data.supplierCode);
-            $('#formName').val(data.supplierName);
-            $("#formPhoneNumber").val(data.phoneNumber);
+            $('#formCode').val(data.materialCode);
+            $('#formName').val(data.materialName);
+            $("#formMinQuantity").val(data.minQuantity);
             $("#formDecription").val(data.decription);
+            $("#formUnit").val(data.unitId).trigger("change");
         },
         error: function (err) {
             MessageError(err.responseText);

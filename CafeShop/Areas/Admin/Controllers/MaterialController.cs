@@ -1,9 +1,12 @@
 ﻿using CafeShop.Config;
 using CafeShop.Models;
+using CafeShop.Models.DTOs;
 using CafeShop.Reposiory;
 using CafeShop.Repository;
+using Humanizer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
 
 namespace CafeShop.Areas.Admin.Controllers
 {
@@ -13,6 +16,7 @@ namespace CafeShop.Areas.Admin.Controllers
         MaterialRepository _materialRepo = new MaterialRepository();
         AccountRepository _accRepo = new AccountRepository();
         UnitRepository _unitRepo  = new UnitRepository();
+        SupplierRepository _supplier = new SupplierRepository();
         public IActionResult Index()
         {
             Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
@@ -22,9 +26,26 @@ namespace CafeShop.Areas.Admin.Controllers
             }
 
             ViewBag.ListUnit = new SelectList(_unitRepo.GetAll().Where(x => x.IsDelete != true).ToList(), "Id", "UnitName");
+            ViewBag.ListSupplier = new SelectList(_supplier.GetAll().Where(x => x.IsDelete != true).ToList(), "Id", "SupplierName");
             return View();
         }
 
+        public async Task<JsonResult> GetAll(string request ="", int pageNumber = 1)
+        {
+            DataSet ds = LoadDataFromSP.GetDataSetSP("spGetAllMaterial", new string[] { "@PageNumber", "@Request"}
+                                                                       , new object[] { pageNumber, request });
+            var data = TextUtils.ConvertDataTable<MaterialDTO>(ds.Tables[0]);
+            var totalCount = TextUtils.ConvertDataTable<PaginationDto>(ds.Tables[1]);
+            return Json(new { data, totalCount }, new System.Text.Json.JsonSerializerOptions());
+        }
+
+        public async Task<JsonResult> GetByID(int Id)
+        {
+            return Json(_materialRepo.GetByID(Id));
+        }
+
+
+        
         public async Task<JsonResult> CreateOrUpdate([FromBody] Material data)
         {
             Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
@@ -71,8 +92,15 @@ namespace CafeShop.Areas.Admin.Controllers
             }
             return Json(new { status = 1, statusText = "", result = model });
         }
+        public async Task<JsonResult> Delete(int Id)
+        {
+            Material model = _materialRepo.GetByID(Id) ?? new Material();
+            if (model.Id <= 0) return Json(new { status = 0, message = "Không tìm thấy Phiếu nhập!" });
 
-
+            model.IsDelete = true;
+            _materialRepo.Update(model);
+            return Json(new { status = 1, message = "" });
+        }
 
         public JsonResult GetAllForView()
         {

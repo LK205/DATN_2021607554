@@ -20,6 +20,7 @@ namespace CafeShop.Models
         public virtual DbSet<Cart> Carts { get; set; } = null!;
         public virtual DbSet<GoodsIssue> GoodsIssues { get; set; } = null!;
         public virtual DbSet<GoodsIssueDetail> GoodsIssueDetails { get; set; } = null!;
+        public virtual DbSet<GoodsIssueFile> GoodsIssueFiles { get; set; } = null!;
         public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; } = null!;
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; } = null!;
         public virtual DbSet<GoodsReceiptFile> GoodsReceiptFiles { get; set; } = null!;
@@ -64,9 +65,13 @@ namespace CafeShop.Models
 
                 entity.Property(e => e.FullName).HasMaxLength(250);
 
+                entity.Property(e => e.Gender).HasComment("0: Nam, 1: Nữ");
+
                 entity.Property(e => e.Password).HasMaxLength(250);
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(250);
+
+                entity.Property(e => e.Role).HasComment("1: Khách hàng, 2: admin, 3: nhân viên, 4: chủ cửa hàng");
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(150);
 
@@ -123,9 +128,26 @@ namespace CafeShop.Models
 
                 entity.Property(e => e.GoodIssueId).HasColumnName("GoodIssueID");
 
-                entity.Property(e => e.MeterialId).HasColumnName("MeterialID");
+                entity.Property(e => e.MaterialId).HasColumnName("MaterialID");
 
                 entity.Property(e => e.Quantity).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<GoodsIssueFile>(entity =>
+            {
+                entity.ToTable("GoodsIssueFile");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.GoodsIssueId).HasColumnName("GoodsIssueID");
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(150);
 

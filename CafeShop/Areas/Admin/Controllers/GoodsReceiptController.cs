@@ -74,7 +74,7 @@ namespace CafeShop.Areas.Admin.Controllers
             var files = TextUtils.ConvertDataTable<GoodsReceiptFile>(ds.Tables[2]);
             foreach (var item in files)
             {
-                item.FileUrl = $"{Config.Config.GoodReceiptUrl()}{item.FileUrl}/{item.FileName}";
+                item.FileUrl = $"{Config.Config.GoodsReceiptUrl()}{item.FileUrl}/{item.FileName}";
             }
 
             return Json(new { data, details, files }, new System.Text.Json.JsonSerializerOptions());
@@ -121,7 +121,7 @@ namespace CafeShop.Areas.Admin.Controllers
 
 
 
-            SQLHelper<GoodsReceiptDetail>.SqlToModel($"DELETE FROM dbo.GoodsIssueDetails WHERE GoodIssueID = {model.Id}");
+            SQLHelper<GoodsReceiptDetail>.SqlToModel($"DELETE FROM dbo.GoodsReceiptDetails WHERE GoodsReceiptID = {model.Id}");
             List<GoodsReceiptDetail> lstDetails = new List<GoodsReceiptDetail>();
             foreach (GoodsReceiptDetail item in data.LstDetails)
             {
@@ -180,7 +180,7 @@ namespace CafeShop.Areas.Admin.Controllers
                     if (file.Length <= 0) continue;
                     listFiles.Add(new GoodsReceiptFile()
                     {
-                        FileUrl = $"{goodsReceipt.ReceiptedDate.Year}/{goodsReceipt.ReceiptedDate.Month}/{goodsReceipt.GoodsReceiptCode}_{goodsReceipt.ReceiptedDate.ToString("ddMMYYYY")}",
+                        FileUrl = $"{goodsReceipt.ReceiptedDate.Year}/{goodsReceipt.ReceiptedDate.Month}/{goodsReceipt.GoodsReceiptCode}_{goodsReceipt.ReceiptedDate.ToString("ddMMyyyy")}",
                         FileName = file.FileName,
                         GoodsReceiptId = goodsReceipt.Id,
                         CreatedDate = DateTime.Now,
@@ -188,7 +188,7 @@ namespace CafeShop.Areas.Admin.Controllers
                         CreatedBy = acc.FullName
                     });
                     string pathUpload = Path.Combine(Directory.GetCurrentDirectory(), 
-                                                    $"wwwroot\\GoodsReceipt\\{goodsReceipt.ReceiptedDate.Year}\\{goodsReceipt.ReceiptedDate.Month}\\{goodsReceipt.GoodsReceiptCode}_{goodsReceipt.ReceiptedDate.ToString("ddMMYYYY")}");
+                                                    $"wwwroot\\GoodsReceipt\\{goodsReceipt.ReceiptedDate.Year}\\{goodsReceipt.ReceiptedDate.Month}\\{goodsReceipt.GoodsReceiptCode}_{goodsReceipt.ReceiptedDate.ToString("ddMMyyyy")}");
                     if (!Directory.Exists(pathUpload))
                     {
                         Directory.CreateDirectory(pathUpload);

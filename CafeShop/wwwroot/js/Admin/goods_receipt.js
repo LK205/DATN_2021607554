@@ -89,6 +89,7 @@ function CloseModal() {
     $("#formUnit").val(0);
     modelID = 0;
     document.getElementById('form').reset();
+    $("#formSupplier").val(0).trigger("change");
     $('#staticBackdrop').modal('hide');
     $('#tbodySteps').html('');
     $('#AttachFiles').html('');
@@ -130,8 +131,8 @@ function GetAll() {
                             </td>
                             <td class="" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetDetails(${item.Id}, event)">${item.GoodsReceiptCode} </a></td>
                             <td class="">${item.FullName}</td>
-                            <td class="">${moment(item.ReceiptedDate).format("DD/MM/YYYY HH:mm")}</td>
-                            <td class="">${item.TotalMoney}</td>
+                            <td class="text-center">${moment(item.ReceiptedDate).format("DD/MM/YYYY")}</td>
+                            <td class="text-end">${new Intl.NumberFormat('vi-VN').format(item.TotalMoney)} VNĐ</td>
                             <td class="text-center">${item.Decription}</td>
                             <td class="">${item.CreatedBy}</td>
                             <td class="">${moment(item.CreatedDate).format("DD/MM/YYYY")}</td>
@@ -170,9 +171,9 @@ function GetDetails(id, event) {
                                             <table class="table table-sm m-0 table-bordered border-primary">
                                                 <thead>
                                                     <tr class="text-center align-middle">
-                                                        <th class="table-color" style="width: 30%;">Nguyên vật liệu<span style="color: red;">*</span></th>
-                                                        <th class="table-color" style="width: 20%;">Đơn giá<span style="color: red;">*</span></th>
-                                                        <th class="table-color" style="width: 10%;">Số lượng<span style="color: red;">*</span></th>
+                                                        <th class="table-color" style="width: 30%;">Nguyên vật liệu</th>
+                                                        <th class="table-color" style="width: 20%;">Đơn giá</th>
+                                                        <th class="table-color" style="width: 10%;">Số lượng</th>
                                                         <th class="table-color" style="width: 15%;">Đơn vị</th>
                                                         <th class="table-color" style="width: 25%;">Tổng tiền</th>
                                                     </tr>
@@ -216,13 +217,12 @@ function GetDetails(id, event) {
                 //Hiển thị danh sách chi tiết
                 $.each(result.details, function (index, item) {
                     totalMoney += (item.price * item.quantity)
-                    var styleText = item.sizeName;
                     htmlBody += `<tr class="sortable goodsReceipt_details_item">
                                     <td scope="col">${item.MaterialName}</td>
-                                    <td scope="col">${new Intl.NumberFormat('vi-VN').format(item.UnitPrice)} VNĐ</td>
-                                    <td scope="col">${item.Quantity}</td>
-                                    <td scope="col">${item.UnitName}</td>
-                                    <td scope="col">${new Intl.NumberFormat('vi-VN').format(item.TotalMoney)} VNĐ</td>
+                                    <td scope="col" class="text-end">${new Intl.NumberFormat('vi-VN').format(item.UnitPrice)} VNĐ</td>
+                                    <td scope="col" class="text-center">${item.Quantity}</td>
+                                    <td scope="col" class="text-center">${item.UnitName}</td>
+                                    <td scope="col"  class="text-end">${new Intl.NumberFormat('vi-VN').format(item.TotalMoney)} VNĐ</td>
                                 </tr>`;
                 });
 
@@ -264,7 +264,6 @@ function GetById(id) {
         },
         contentType: 'application/json',
         success: function (data) {
-            console.log(data)
             $('#formCode').val(data.data[0].GoodsReceiptCode);
             $('#formReceiptedDate').val(moment(data.data[0].ReceiptedDate).format("YYYY-MM-DD"));
             $('#formSupplier').val(data.data[0].SupplierId).trigger("change");
@@ -587,7 +586,7 @@ async function onSelectedFile(event) {
     $('#AttachFiles').html(html);
 }
 function onRemoveFile(index, fileID) {
-    if (confirm("Bạn có chắc muốn xóa ảnh này không?")) {
+    if (confirm("Bạn có chắc muốn xóa file này không?")) {
         _attachFiles.splice(index, 1);
         var html = '';
         $.each(_attachFiles, function (key, item) {

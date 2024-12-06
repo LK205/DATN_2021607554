@@ -7,7 +7,7 @@ namespace CafeShop.Models
     {
         public int Id { get; set; }
         public int? GoodIssueId { get; set; }
-        public int? MeterialId { get; set; }
+        public int? MaterialId { get; set; }
         public decimal? Quantity { get; set; }
         public string? Decription { get; set; }
         public DateTime? CreatedDate { get; set; }
