@@ -57,6 +57,9 @@ namespace CafeShop.Controllers
             ViewBag.ProductSize = lstSize;
             ViewBag.PriceDefault = Convert.ToInt32(lstSize[0].Price).ToString("N0");
 
+            List<Topping> lstTopping = SQLHelper<Topping>.SqlToList($"SELECT t.* FROM dbo.ProductTopping AS pt LEFT JOIN dbo.Topping AS t ON pt.ToppingID = t.ID WHERE ProductID = {prId}");
+            ViewBag.Topping = lstTopping;
+
             List<ProductDto> lst = SQLHelper<ProductDto>.ProcedureToList("spGetAllProductClient", new string[] { "@typeId", "@Request", "@PageNumber" }, new object[] { ViewBag.Product.ProductTypeId, "", 1 });
             ViewBag.ProductRelated = lst.Where(p => p.Id != ViewBag.Product.Id);
             return View();

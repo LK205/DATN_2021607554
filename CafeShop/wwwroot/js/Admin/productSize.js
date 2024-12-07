@@ -103,7 +103,6 @@ function GetAll() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            console.log(data);
             var html = '';
             $.each(data.data, function (index, item) {
                 html += `<tr class="align-middle">
@@ -164,7 +163,6 @@ function CreateOrUpdate() {
         SizeName: $("#formName").val(),
         Description: $("#formNote").val(),
     };
-    console.log(obj);
     let _url = "/Admin/ProductSize/CreateOrUpdate";
     $.ajax({
         type: 'POST',

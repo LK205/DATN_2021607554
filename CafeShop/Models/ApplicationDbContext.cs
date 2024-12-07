@@ -18,6 +18,7 @@ namespace CafeShop.Models
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
         public virtual DbSet<Cart> Carts { get; set; } = null!;
+        public virtual DbSet<CartTopping> CartToppings { get; set; } = null!;
         public virtual DbSet<GoodsIssue> GoodsIssues { get; set; } = null!;
         public virtual DbSet<GoodsIssueDetail> GoodsIssueDetails { get; set; } = null!;
         public virtual DbSet<GoodsIssueFile> GoodsIssueFiles { get; set; } = null!;
@@ -87,6 +88,25 @@ namespace CafeShop.Models
                 entity.Property(e => e.CreatedBy).HasMaxLength(150);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<CartTopping>(entity =>
+            {
+                entity.ToTable("CartTopping");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.CartId).HasColumnName("CartID");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(150);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.ToppingId).HasColumnName("ToppingID");
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(150);
 

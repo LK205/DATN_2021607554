@@ -23,15 +23,28 @@ function AddCart(event) {
         return;
     }
     let quantity = $("#product-quanity").val();
+    let toppingIDs = [];
+    $(".input-topping").each(function (index, el) {
+        let isChecked = $(el).is(':checked');
+        if (isChecked) {
+            let toppingID = parseInt($(el).attr("topping-id"));
+            toppingIDs.push(toppingID);
+        }
+     });
+
+
+    let object = {
+        ProductDetailID: ProductDetailsId,
+        AccountID: accountId,
+        Quantity: quantity,
+        ToppingIDs: toppingIDs
+    };
     $.ajax({
         url: '/Cart/AddToCart',
-        type: 'GET',
+        type: 'POST',
         dataType: 'json',
-        data: {
-            productDetailId: ProductDetailsId ,
-            accountId: accountId,
-            quantity: quantity
-        },
+        contentType: 'application/json',
+        data: JSON.stringify(object),
         success: function (result) {
             if (parseInt(result.status) == 1) {
                 alert(result.message);
@@ -40,7 +53,7 @@ function AddCart(event) {
             }
         },
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 }

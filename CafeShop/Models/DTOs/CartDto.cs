@@ -10,5 +10,6 @@
         public string? ProductName { get; set; }
         public string? SizeName { get; set; }
         public string? ImageUrl { get; set; }
+        public List<Topping> lstToppings { get; set; }
     }
 }

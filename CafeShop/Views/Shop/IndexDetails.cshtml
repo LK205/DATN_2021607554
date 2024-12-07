@@ -79,16 +79,16 @@
                         <form>
                             <input type="hidden" name="product-title" value="Activewear">
                             <div class="row">
-                                <div class="col-auto">
-                                    <ul class="list-inline pb-3" id="lst-product-size">
+                                <div class="col-auto pb-1">
+                                    <ul class="list-inline pb-0 mb-0" id="lst-product-size">
                                         @foreach (var item in ViewBag.ProductSize)
                                         {
                                             <li class="list-inline-item"><a class="btn btn-success btn-size" productdetailsid="@item.ProductDetailsId" price="@item.Price" onclick="ChangeSize(event)">@item.SizeName</a></li>
                                         }
                                     </ul>
                                 </div>
-                                <div class="col-auto">
-                                    <ul class="list-inline pb-3">
+                                <div class="col-auto pb-1">
+                                    <ul class="list-inline pb-0 mb-0">
                                         <li class="list-inline-item text-right">
                                             Số lượng
                                             <input type="hidden" name="product-quanity" id="product-quanity" value="1">
@@ -97,6 +97,20 @@
                                         <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
                                         <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
                                     </ul>
+                                </div>
+
+
+                                <!---------------------------Edit topping ------------------->
+                                <div class="col-12 row m-2">
+                                    @foreach (var item in ViewBag.Topping)
+                                    {
+                                        <div class="col-sm-4 col-6 form-check pe-1">
+                                            <input class="form-check-input form-check-input-sm input-topping" type="checkbox" topping-id="@item.Id" value="" id="topping-@item.ToppingCode-@item.Id">
+                                            <label class="form-check-label" for="topping-@item.ToppingCode-@item.Id" style="font-size: 15px !important;">
+                                                @item.ToppingName <span style="opacity: .6;">(@item.ToppingPrice.ToString("N0") VNĐ)</span>
+                                            </label>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <div class="row pb-3">

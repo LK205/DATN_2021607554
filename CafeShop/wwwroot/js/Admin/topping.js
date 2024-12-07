@@ -103,7 +103,6 @@ function GetAll() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            console.log(data);
             var html = '';
             $.each(data.data, function (index, item) {
                 html += `<tr class="align-middle">
@@ -118,7 +117,6 @@ function GetAll() {
                         </tr>`;
             })
             let total = Math.ceil(data.totalCount[0].TotalCount / 10);
-            console.log((data.totalCount[0]));
 
             totalPage = total > 0 ? total : 1;
             $('#tbody').html(html);

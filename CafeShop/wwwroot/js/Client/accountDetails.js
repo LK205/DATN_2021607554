@@ -127,7 +127,6 @@ function ChangePassword() {
             NewPassword: newPassword,
             ConfirmPassword: confirmPassword,
         };
-        console.log(obj);
         $.ajax({
             url: '/AccountDetails/UpdatePassword',
             type: 'POST',
