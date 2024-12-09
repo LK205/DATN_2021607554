@@ -1,8 +1,8 @@
 ﻿using CafeShop.Models;
 using CafeShop.Models.DTOs;
-using CafeShop.Reposiory;
 using CafeShop.Config;
 using Microsoft.AspNetCore.Mvc;
+using CafeShop.Repository;
 
 namespace CafeShop.Areas.Admin.Controllers
 {
@@ -26,8 +26,8 @@ namespace CafeShop.Areas.Admin.Controllers
         public JsonResult GetAll( [FromBody] InputDto input)
         {
             input.dateStart = new DateTime(input.dateStart.Value.Year, input.dateStart.Value.Month, input.dateStart.Value.Day, 0, 0, 0);
-            input.dateEnd = new DateTime(input.dateEnd.Value.Year, input.dateEnd.Value.Month, input.dateEnd.Value.Day, 23, 59, 59);
-            List<Order> data = SQLHelper<Order>.ProcedureToList("spGetAllOrder", new string[] { "@Request", "@PageNumber", "@Status", "@DateStart", "@DateEnd" },
+            input.dateEnd =   new DateTime(input.dateEnd.Value.Year, input.dateEnd.Value.Month, input.dateEnd.Value.Day, 23, 59, 59);
+            List<OrderDto> data = SQLHelper<OrderDto>.ProcedureToList("spGetAllOrder", new string[] { "@Request", "@PageNumber", "@Status", "@DateStart", "@DateEnd" },
                                                                     new object[] { input.request, input.pageNumber, input.status, input.dateStart, input.dateEnd });
 
             PaginationDto totalCount = SQLHelper<PaginationDto>.ProcedureToModel("spGetAllTotalOrder", new string[] { "@Request", "@Status", "@DateStart", "@DateEnd" },
@@ -41,6 +41,10 @@ namespace CafeShop.Areas.Admin.Controllers
             List<OrderDetailsDto> lst = SQLHelper<OrderDetailsDto>.ProcedureToList("spGetOrderDetails",
                                                                                     new string[] { "@OrderId" },
                                                                                     new object[] { OrderId });
+            foreach (var item in lst)
+            {
+                item.lstTopping = SQLHelper<OrderDetailsToppingDTO>.SqlToList($"SELECT odt.*, t.ToppingCode, t.ToppingName FROM dbo.OrderDetailsTopping AS odt LEFT JOIN dbo.Topping AS t ON odt.ToppingID = t.ID WHERE odt.OrderDetailsID = {item.OrderDetailID}");
+            }
             return Json(lst);
         }
         public JsonResult ChangeStatusOrder(int orderId, int status)

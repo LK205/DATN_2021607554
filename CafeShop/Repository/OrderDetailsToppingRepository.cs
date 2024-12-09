@@ -3,7 +3,7 @@ using ManagementCourse.Reposiory;
 
 namespace CafeShop.Repository
 {
-    public class ProductSizeRepository : GenericRepository<ProductSize>
+    public class OrderDetailsToppingRepository : GenericRepository<OrderDetailsTopping>
     {
     }
 }

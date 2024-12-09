@@ -331,6 +331,8 @@ namespace CafeShop.Models
 
                 entity.Property(e => e.ToppingId).HasColumnName("ToppingID");
 
+                entity.Property(e => e.ToppingPrice).HasColumnType("decimal(18, 2)");
+
                 entity.Property(e => e.UpdatedBy).HasMaxLength(150);
 
                 entity.Property(e => e.UpdatedDate).HasColumnType("datetime");

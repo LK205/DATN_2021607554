@@ -1,10 +1,10 @@
 ﻿using CafeShop.Models;
 using CafeShop.Models.DTOs;
-using CafeShop.Reposiory;
 using CafeShop.Config;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using System.Diagnostics.CodeAnalysis;
+using CafeShop.Repository;
 
 namespace CafeShop.Controllers
 {

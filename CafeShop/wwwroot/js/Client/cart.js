@@ -16,6 +16,12 @@ function GetAll() {
             }
             else if (data.status == 1) {
                 $.each(data.data, function (index, item) {
+                    let htmlTopping = '';
+                    let toppingPrice = 0;
+                    $.each(item.lstToppings, function (toppingIndex, toppingItem) {
+                        htmlTopping += `<p class="mb-0 mt-1 topping_price_${index}" style="font-size: 14px !important; opacity: .8;" toppingPrice="${toppingItem.toppingPrice}" toppingId="${toppingItem.id}">${toppingItem.toppingName} (${toppingItem.toppingPrice.toLocaleString('en-US')} VNĐ)</p>`;
+                        toppingPrice += toppingItem.toppingPrice;
+                    });
                     html += `<div class="card border shadow-none" id="cart_product_${index}">
                     <div class="card-body">
                         <input type="number" class="productDetailId" value="${item.productDetailsId}"  hidden />
@@ -23,7 +29,7 @@ function GetAll() {
                             <div class="me-4">
                                 <img src="${item.imageUrl}" alt="" class="avatar-lg rounded">
                             </div>
-                            <div class="flex-grow-1 align-self-center overflow-hidden">
+                            <div class="flex-grow-1 overflow-hidden">
                                 <div>
                                     <h5 class="text-truncate font-size-18"><a href="#" class="text-dark">${item.productName}</a></h5>
                                     <p class="text-muted mb-0">
@@ -37,6 +43,13 @@ function GetAll() {
                                     <p class="mb-0 mt-1">Size: <span class="fw-medium">${item.sizeName}</span></p>
                                 </div>
                             </div>
+
+                            <div class="flex-grow-1 overflow-hidden">
+                                ${item.lstToppings.length > 0 ? `<h5 class="text - truncate font - size - 18">Topping</h5>` : ``}
+                                ${htmlTopping}
+                            </div>
+
+
                             <div class="flex-shrink-0 ms-2">
                                 <ul class="list-inline mb-0 font-size-16">
                                     <li class="list-inline-item">
@@ -70,8 +83,8 @@ function GetAll() {
                                 <div class="col-md-3">
                                     <div class="mt-3">
                                         <p class="text-muted mb-2">Tổng tiền</p>
-                                        <h5 id="totalMoneyText_${index}">${(item.price * item.quantity).toLocaleString('en-US')} VNĐ</h5>
-                                        <input class="totalPrice" type="number" value="${item.price * item.quantity}" id="totalPrice_${index}" hidden />
+                                        <h5 id="totalMoneyText_${index}">${(item.price * item.quantity + toppingPrice).toLocaleString('en-US')} VNĐ</h5>
+                                        <input class="totalPrice" type="number" value="${item.price * item.quantity + toppingPrice}" id="totalPrice_${index}" hidden />
 
                                     </div>
                                 </div>
@@ -97,10 +110,14 @@ function GetAll() {
 }
 
 function chageQuantity(el, index) {
+    let totalPriceTopping = 0;
+    $.each($(`.topping_price_${index}`), function (index, item) {
+        totalPriceTopping += parseInt($(item).attr("toppingPrice"));
+    });
     let quantity = $(el).val();
     let price = $(`#price_${index}`).val();
-    $(`#totalMoneyText_${index}`).html(`${(price * quantity).toLocaleString('en-US')} VNĐ`);
-    $(`#totalPrice_${index}`).val(price * quantity);
+    $(`#totalMoneyText_${index}`).html(`${(price * quantity + totalPriceTopping).toLocaleString('en-US')} VNĐ`);
+    $(`#totalPrice_${index}`).val(price * quantity + totalPriceTopping);
     TotalMoney();
 
 }
@@ -169,10 +186,22 @@ function CreateOrder() {
     let elTotalMoney = $(".totalPrice");
     let arrDetail = [];
     for (let i = 0; i < elQuantity.length; i++) {
+        let arrTopping = [];
+        $.each($(`.topping_price_${i}`), function (index, item) {
+            let objTopping = {
+                ToppingId: parseInt($(item).attr("toppingId")),
+                ToppingPrice: parseInt($(item).attr("toppingPrice")),
+            }
+            arrTopping.push(objTopping);
+        });
+
+
+
         let objDetail = {
             Quantity: parseInt($(elQuantity[i]).val()),
             TotalMoney: parseFloat($(elTotalMoney[i]).val()),
-            ProductDetailId: parseInt($(elProductDetailId[i]).val())
+            ProductDetailId: parseInt($(elProductDetailId[i]).val()),
+            LstTopping: arrTopping
         }
         arrDetail.push(objDetail);
     }

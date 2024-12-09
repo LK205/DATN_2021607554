@@ -1,8 +1,8 @@
 ﻿using CafeShop.Models.DTOs;
 using CafeShop.Models;
 using Microsoft.AspNetCore.Mvc;
-using CafeShop.Reposiory;
 using CafeShop.Config;
+using CafeShop.Repository;
 
 namespace CafeShop.Controllers
 {

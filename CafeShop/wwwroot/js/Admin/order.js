@@ -1,4 +1,5 @@
 ﻿$(document).ready(function (e) {
+    $(".select2").select2();
     GetAll();
 });
 var pageNumber = 1;
@@ -91,8 +92,9 @@ function GetAll() {
                                 <btn class="btn btn-sm btn-success" title="Giao hàng" ${item.status >= 1 ? "hidden" : ""} onclick="StatusApproved(${item.id}, 1, 'Giao đơn hàng')"><i class="bi bi-truck"></i></btn>
                                 <btn class="btn btn-sm btn-primary" title="Thành công" ${item.status >= 2 ? "hidden" : ""}  onclick="StatusApproved(${item.id}, 2, 'Hoàn thành đơn hàng')"><i class="bi bi-check-lg"></i></btn>
                             </td>
-                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetDetails(${item.id}, event)">${item.orderCode} </a></td>
-                            <td scope="col">${moment(item.createDate).format('DD/MM/YYYY HH:mm:ss')}</td>
+                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetDetails(${item.id}, event)" created-date="${moment(item.createDate).format('DD/MM/YYYY HH:mm:ss')}">${item.orderCode}</a></td>
+                            <td scope="col" class="text-end"> ${item.totalMoney.toLocaleString('en-US') } VNĐ</td>
+                            <td scope="col" class="text-center">${moment(item.createDate).format('DD/MM/YYYY HH:mm:ss')}</td>
                             <td class="text-center" scope="col">${item.status === 0 ? "Chờ xác nhận" : (item.status === 1 ? "Đang giao" : (item.status === 2 ? "Hoàn thành" : "Đã hủy"))}</td>
                             <td scope="col">${item.customerName ?? ""}</td>
                             <td scope="col">${item.phoneNumber ?? ""}</td>
@@ -113,79 +115,100 @@ function GetAll() {
     });
 }
 function GetDetails(id, event) {
-    var htmlDetails = `<tr class="order-details" id="order_details_${id}" style="border-left: 2px solid red; border-right: 2px solid red; border-bottom: 2px solid red;">
-                    <td colspan="7" class="p-4">
-                        <div class="card-body p-0">
-                            <table class="table table-sm m-0 table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th class="text-nowrap text-center text-dark py-1" style="height:auto !important;">STT</th>
-                                        <th class="text-nowrap text-center text-dark py-1" style="height:auto !important; width:15%;">Sản phẩm</th>
-                                        <th class="text-nowrap text-center text-dark py-1" style="height:auto !important; width:15%;">Size</th>
-                                        <th class="text-nowrap text-center text-dark py-1" style="height:auto !important;">Đơn giá</th>
-                                        <th class="text-nowrap text-center text-dark py-1" style="height:auto !important;">Số lượng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @tbody
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                          <label for="totalMoney" class="col-sm-2 col-form-label">Tổng tiền:</label>
-                          <div class="col-sm-10">
-                            <input type="text" class="form-control text-center" id="totalMoney" value="@totalMoney" disabled readonly>
-                          </div>
-                        </div>
-                    </td>
-                </tr>`;
+    let el = $(event.target);
 
-    var isShowDetail = $(`#order_details_${id}`).length;
-    var el = $(event.target).parent();
-    if (isShowDetail > 0) {
-        $(`#order_details_${id}`).remove();
-    } else {
-        $('.order-details').remove();
-        $.ajax({
-            url: '/Admin/Order/GetDetail',
-            type: 'GET',
-            dataType: 'json',
-            data: {
-                OrderId: id
-            },
-            contentType: 'application/json',
-            success: function (result) {
-                var htmlBody = '';
-                let totalMoney = 0;
-                //Hiển thị danh sách chi tiết
-                $.each(result, function (index, item) {
-                    totalMoney += (item.price * item.quantity) 
-                    var styleText = item.sizeName;
-                    htmlBody += `<tr>
-                                    <td style="height:auto !important;padding:10px !important;" class="text-center align-middle">${index + 1}</td>
-                                    <td style="height:auto !important;padding:10px !important;" class="text-left">
-                                              <img src="${item.imageUrl}" alt="" class="img-fluid d-block mx-auto mb-3">
-                                              <h5 class="text-dark">${item.productName}</h5>
-                                              
-                                    </td>
-                                    <td style="height:auto !important;padding:10px !important;" class="text-center align-middle">${item.sizeName}</td>
-                                    <td style="height:auto !important;padding:10px !important;" class="text-center align-middle">${item.price.toLocaleString('en-US') } VNĐ</td>
-                                    <td style="height:auto !important;padding:10px !important;" class="text-center align-middle">${item.quantity}</td>
-                                </tr>`;
+
+    $.ajax({
+        url: '/Admin/Order/GetDetail',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            OrderId: id
+        },
+        contentType: 'application/json',
+        success: function (result) {
+            var htmlBody = '';
+            let totalMoney = 0;
+            //Hiển thị danh sách chi tiết
+            $.each(result, function (index, item) {
+                var styleText = item.sizeName;
+                let htmlTopping = '`<h5 class="text - truncate font - size - 18">Topping</h5>`';
+                let toppingPrice = 0;
+                $.each(item.lstTopping, function (toppingIndex, toppingItem) {
+                    htmlTopping += `<p class="mb-0 mt-1 topping_price_${index}" style="font-size: 14px !important; opacity: .8;" toppingPrice="${toppingItem.toppingPrice}" toppingId="${toppingItem.id}">${toppingItem.toppingName} (${toppingItem.toppingPrice.toLocaleString('en-US')} VNĐ)</p>`;
+                    toppingPrice += toppingItem.toppingPrice;
                 });
-                // <p class="small text-muted font-italic">${item.sizeName}</p>
-                htmlDetails = htmlDetails.replace('@tbody', htmlBody);
-                htmlDetails = htmlDetails.replace('@totalMoney', `${totalMoney.toLocaleString('en-US')} VNĐ`);
+                totalMoney += (item.price * item.quantity) + toppingPrice;
 
-                $(htmlDetails).insertAfter($(el).parent());
-               
-            },
+                htmlBody += `<div class="card border shadow-none mb-0" id="cart_product_${index}" style="scale: .9;">
+             <div class="card-body">
+                 <div class="d-flex align-items-start border-bottom pb-3 pt-1">
+                     <div class="me-4">
+                         <img src="${item.imageUrl}" alt="" class="avatar-lg rounded" style="width: 150px !important;">
+                     </div>
+                     <div class="flex-grow-1 overflow-hidden">
+                         <div>
+                             <h5 class="text-truncate font-size-18"><a href="#" class="text-dark">${item.productName}</a></h5>
+                             <p class="text-muted mb-0">
+                                 <i class="text-warning bi bi-star-fill"></i>
+                                 <i class="text-warning bi bi-star-fill"></i>
+                                 <i class="text-warning bi bi-star-fill"></i>
+                                 <i class="text-warning bi bi-star-fill"></i>
+                                 <i class="text-warning bi bi-star-fill"></i>
+                             </p>
+                             <p class="mb-0 mt-1">Size: <span class="fw-medium">${item.sizeName}</span></p>
+                         </div>
+                     </div>
 
-            error: function (err) {
-                MessageError(err.responseText);
-            }
-        });
-    }
+                     <div class="flex-grow-1 overflow-hidden">
+                         ${item.lstTopping.length > 0 ? htmlTopping : ``}
+                        
+                     </div>
+
+                 </div>
+
+                 <div>
+                     <div class="row">
+                         <div class="col-md-4">
+                             <div class="mt-3">
+                                 <p class="text-muted mb-2">Giá</p>
+                                 <h5 class="mb-0 mt-2" >${item.price.toLocaleString('en-US')} VNĐ</h5>
+                                 <input type="number" value="${item.price}" id="price_${index}" hidden />
+                             </div>
+                         </div>
+                         <div class="col-md-5">
+                             <div class="mt-3">
+                                 <p class="text-muted mb-2">Số lượng</p>
+                                 <input type="number" class="form-control form-control-sm me-2 ms-2 p-0 text-center quantity product-number" style="width: 56px !important" readonly value="${item.quantity}" " />
+                             </div>
+                         </div>
+                         <div class="col-md-3">
+                             <div class="mt-3">
+                                 <p class="text-muted mb-2">Tổng tiền</p>
+                                 <h5 id="totalMoneyText_${index}">${(item.price * item.quantity + toppingPrice).toLocaleString('en-US')} VNĐ</h5>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+             </div>
+         </div>`;
+            });
+
+            htmlBody += `<div class="row">
+                            <div class="col-sm-2 text-center fw-bold align-middle p-1"> Tổng tiền </div>
+                            <div class="col-sm-10 text-center"> <input type="text" class="form-control text-center" id="totalMoney" value="${totalMoney.toLocaleString('en-US')} VNĐ" disabled readonly> </div>
+                         </div>`
+            $("#modal-content").html(htmlBody);
+            let modalHeader = `${$(el).html()} - ${$(el).attr('created-date')}`
+            $("#modal-mahoadon").html(modalHeader);
+            $("#exampleModal").modal('show');
+        },
+
+        error: function (err) {
+            MessageError(err.responseText);
+        }
+    });
 }
 function StatusApproved(orderId, status, text) {
     if (confirm(`Ban có chắc muốn xác nhận ${text} không?`)) {

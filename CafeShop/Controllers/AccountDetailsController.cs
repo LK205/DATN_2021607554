@@ -1,9 +1,9 @@
 ﻿using CafeShop.Models;
 using CafeShop.Models.DTOs;
-using CafeShop.Reposiory;
 using Microsoft.AspNetCore.Mvc;
 using CafeShop.Config;
 using System.Security.Cryptography;
+using CafeShop.Repository;
 
 namespace CafeShop.Controllers
 {

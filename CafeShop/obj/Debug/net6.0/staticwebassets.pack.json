@@ -1973,6 +1973,10 @@
       "PackagePath": "staticwebassets\\js\\Admin\\home.js"
     },
     {
+      "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\layout.js",
+      "PackagePath": "staticwebassets\\js\\Admin\\layout.js"
+    },
+    {
       "Id": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\material.js",
       "PackagePath": "staticwebassets\\js\\Admin\\material.js"
     },

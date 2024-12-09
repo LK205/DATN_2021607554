@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YdUkfOj05dI91dShEyWsOV6t9GES1Esmq4n/lq66utU=",
+  "Hash": "b4F8GY4U6PWDiW2t/Tdx/LxzUliYd1qtFBGoG5TFrbI=",
   "Source": "CafeShop",
   "BasePath": "_content/CafeShop",
   "Mode": "Default",
@@ -9401,6 +9401,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Admin\\home.js"
+    },
+    {
+      "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\layout.js",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "js/Admin/layout.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Admin\\layout.js"
     },
     {
       "Identity": "D:\\DATN\\Code\\DATN\\CafeShop\\CafeShop\\wwwroot\\js\\Admin\\material.js",

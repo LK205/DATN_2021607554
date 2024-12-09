@@ -8,6 +8,7 @@ namespace CafeShop.Models
         public int Id { get; set; }
         public int OrderDetailsId { get; set; }
         public int ToppingId { get; set; }
+        public decimal? ToppingPrice { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

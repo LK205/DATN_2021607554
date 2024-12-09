@@ -54,12 +54,6 @@
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
 
-                <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
-                        <i class="bi bi-search"></i>
-                    </a>
-                </li><!-- End Search Icon-->
-
                 <li class="nav-item dropdown">
 
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -135,68 +129,6 @@
 
                 </li><!-- End Notification Nav -->
 
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-chat-left-text"></i>
-                        <span class="badge bg-success badge-number">3</span>
-                    </a><!-- End Messages Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                        <li class="dropdown-header">
-                            You have 3 new messages
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <div>
-                                    <h4>Maria Hudson</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>4 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <div>
-                                    <h4>Anna Nelson</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>6 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <div>
-                                    <h4>David Muldon</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>8 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="dropdown-footer">
-                            <a href="#">Show all messages</a>
-                        </li>
-
-                    </ul><!-- End Messages Dropdown Items -->
-
-                </li><!-- End Messages Nav -->
 
                 <li class="nav-item dropdown pe-3">
 
@@ -207,36 +139,15 @@
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6>@FullName</h6>
-                            <span>Web Designer</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
+                            <a class="dropdown-item d-flex align-items-center" asp-area="Views" asp-controller="AccountDetails" asp-action="Index">
                                 <i class="bi bi-person"></i>
                                 <span>Hồ sơ của tôi</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <i class="bi bi-gear"></i>
-                                <span>Cài đặt</span>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <i class="bi bi-question-circle"></i>
-                                <span>Trợ giúp?</span>
                             </a>
                         </li>
                         <li>
@@ -283,7 +194,7 @@
 
                     <li>
                         <a asp-controller="Topping" asp-action="Index">
-                            <i class="bi bi-collection fs-6"></i> Topping
+                            <i class="bi bi-droplet-fill fs-6"></i> Topping
                         </a>
                     </li>
 
@@ -308,32 +219,32 @@
                 <ul id="warehouse-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
                     <li>
+                        <a asp-controller="Material" asp-action="Index">
+                            <i class="bi bi-kanban-fill fs-6"></i> Nguyên vật liệu
+                        </a>
+                    </li>
+
+                    <li>
                         <a asp-controller="GoodsReceipt" asp-action="Index">
-                            <i class="bi bi-person-lines-fill fs-6"></i> Phiếu nhập
+                            <i class="bi bi-folder-plus fs-6"></i> Phiếu nhập
                         </a>
                     </li>
 
                     <li>
                         <a asp-controller="GoodsIssue" asp-action="Index">
-                            <i class="bi bi-person-lines-fill fs-6"></i> Phiếu xuất
-                        </a>
-                    </li>
-
-                    <li>
-                        <a asp-controller="Material" asp-action="Index">
-                            <i class="bi bi-person-lines-fill fs-6"></i> Nguyên vật liệu
+                            <i class="bi bi-folder-symlink fs-6"></i> Phiếu xuất
                         </a>
                     </li>
 
                      <li>
                         <a asp-controller="Supplier" asp-action="Index">
-                            <i class="bi bi-person-lines-fill fs-6"></i> Nhà cung cấp
+                            <i class="bi bi-suitcase-lg-fill fs-6"></i> Nhà cung cấp
                         </a>
                     </li>
 
                     <li>
                         <a asp-controller="Unit" asp-action="Index">
-                            <i class="bi bi-person-lines-fill fs-6"></i> Đơn vị
+                            <i class="bi bi-inbox-fill fs-6"></i> Đơn vị
                         </a>
                     </li>
 
@@ -407,6 +318,8 @@
     <script src="~/assets/admin/vendor/tinymce/tinymce.min.js"></script>
     <script src="~/assets/admin/vendor/php-email-form/validate.js"></script>
     <script src="~/assets/admin/js/main.js"></script>
+
+    <script src="~/js/admin/layout.js"></script>
 </body>
 
 

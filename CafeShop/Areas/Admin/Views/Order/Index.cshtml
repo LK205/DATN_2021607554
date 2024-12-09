@@ -28,7 +28,7 @@
                 <div class="col-md-2 col-12 p-1">
                     <div>
                         <label for="formDateStart" class="form-label form-label-sm mb-0">Trạng thái</label>
-                        <select class="form-control form-control-sm" id="order_status">
+                        <select class="form-control form-control-sm select2" id="order_status">
                             <option value="-1" selected>==== Tất cả ====</option>
                             <option value="0">Chờ xác nhận</option>
                             <option value="1">Đang giao</option>
@@ -40,7 +40,8 @@
                 <div class="col-md-2 col-12 p-1">
                 </div>
                 <div class="col-md-4 col-12 p-1">
-                    <div class="input-group me-1 mt-3">
+                    <label for="request" class="form-label form-label-sm mb-0">Từ khóa</label>
+                    <div class="input-group me-1">
                         <input id="request" type="text" class="form-control form-control-sm" placeholder="Tìm kiếm">
                         <button class="btn btn-primary btn-sm" type="button" id="btn_search"><i class="bi bi-search"></i></button>
                     </div>
@@ -54,6 +55,7 @@
                 <tr class="text-center align-middle">
                     <th class="table-color" scope="col" style="width: 10%"></th>
                     <th class="table-color" scope="col">Mã đơn</th>
+                    <th class="table-color" scope="col">Tổng tiền</th>
                     <th class="table-color" scope="col">Ngày tạo</th>
                     <th class="table-color" scope="col">Trạng thái</th>
                     <th class="table-color" scope="col">Tên khách hàng</th>
@@ -82,7 +84,22 @@
 </div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chi tiết hóa đơn: <span id="modal-mahoadon">MHĐ607554</span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-content">
+                
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="~/js/admin/order.js"></script>

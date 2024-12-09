@@ -1,7 +1,7 @@
 ﻿using CafeShop.Config;
 using CafeShop.Models;
 using CafeShop.Models.DTOs;
-using CafeShop.Reposiory;
+using CafeShop.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CafeShop.Areas.Admin.Controllers

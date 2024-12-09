@@ -1,8 +1,8 @@
 ﻿using CafeShop.Models;
 using CafeShop.Models.DTOs;
-using CafeShop.Reposiory;
 using CafeShop.Config;
 using Microsoft.AspNetCore.Mvc;
+using CafeShop.Repository;
 
 namespace CafeShop.Areas.Admin.Controllers
 {
@@ -12,11 +12,11 @@ namespace CafeShop.Areas.Admin.Controllers
         AccountRepository _accRepo = new AccountRepository();
         public IActionResult Index()
         {
-            /*Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+            Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
             if (acc == null || acc.Role != 2)
             {
                 return Redirect("/Home/Index");
-            }*/
+            }
             ViewBag.Month = DateTime.Now.ToString("yyyy-MM");
             ViewBag.Year = DateTime.Now.ToString("yyyy");
             ViewBag.Month1 = DateTime.Now.ToString("MM");
