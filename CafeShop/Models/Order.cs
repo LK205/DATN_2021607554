@@ -15,6 +15,7 @@ namespace CafeShop.Models
         /// 0: Chờ xác nhận; 1: Đang giao; 2: Thành công; 3: Hủy hàng
         /// </summary>
         public int? Status { get; set; }
+        public string? ReasonCancel { get; set; }
         public DateTime? CreateDate { get; set; }
         public string? CreateBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

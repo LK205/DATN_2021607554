@@ -3,6 +3,7 @@ using CafeShop.Models;
 using CafeShop.Models.DTOs;
 using CafeShop.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace CafeShop.Areas.Admin.Controllers
 {
@@ -13,10 +14,11 @@ namespace CafeShop.Areas.Admin.Controllers
         public IActionResult Index()
         {
             Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0) ?? new Account();
-            if (acc.Id <= 0)
+            if (acc == null || acc.Role < 2)
             {
                 return Redirect("/Shop/Index");
             }
+            ViewBag.Account = acc;
             return View();
         }
 
@@ -33,10 +35,31 @@ namespace CafeShop.Areas.Admin.Controllers
         [HttpGet]
         public JsonResult GetAll(string request = "", int pageNumber = 1)
         {
-            List<AccountDto> data = SQLHelper<AccountDto>.ProcedureToList("spGetAllAccount", new string[] { "@PageNumber", "@Request" }, new object[] { pageNumber, request});
-            PaginationDto totalCount = SQLHelper<PaginationDto>.ProcedureToModel("spGetAllTotalAccount", new string[] { "@Request" }, new object[] { request });
+            DataSet dsCus = LoadDataFromSP.GetDataSetSP("spGetAllAccount", new string[] { "@PageNumber", "@Request", "@RoleID" }
+                                                                      , new object[] { pageNumber, request, 1 });
+            DataSet dsEmp = LoadDataFromSP.GetDataSetSP("spGetAllAccount", new string[] { "@PageNumber", "@Request", "@RoleID", "@PageSize" }
+                                                                      , new object[] { pageNumber, request, 3, 9999999 });
+            DataSet dsManager = LoadDataFromSP.GetDataSetSP("spGetAllAccount", new string[] { "@PageNumber", "@Request", "@RoleID", "@PageSize" }
+                                                                      , new object[] { pageNumber, request, 4, 9999999 });
+            object customer = new
+            {
+                data = TextUtils.ConvertDataTable<AccountDto>(dsCus.Tables[0]),
+                totalCount = TextUtils.ConvertDataTable<PaginationDto>(dsCus.Tables[1])
+            };
 
-            return Json(new { data, totalCount });
+            object employee = new
+            {
+                data = TextUtils.ConvertDataTable<AccountDto>(dsEmp.Tables[0]),
+                totalCount = TextUtils.ConvertDataTable<PaginationDto>(dsEmp.Tables[1])
+            };
+
+            object manager = new
+            {
+                data = TextUtils.ConvertDataTable<AccountDto>(dsManager.Tables[0]),
+                totalCount = TextUtils.ConvertDataTable<PaginationDto>(dsManager.Tables[1])
+            };
+
+            return Json(new { customer, employee, manager });
         }
         public JsonResult GetById(int Id)
         {
@@ -50,9 +73,13 @@ namespace CafeShop.Areas.Admin.Controllers
             {
                 return Json(new { status = 0, message = "Bạn đã hết phiên đăng nhập! Vui lòng đăng nhập lại!" });
             }
-
+            bool isAdmin = acc.Role == 2 || acc.Role == 4;// 2: admin 4: quản lý
+            if (!isAdmin)
+            {
+                return Json(new { status = 0, message = "Bạn KHÔNG được phép sử dụng tính năng này!" });
+            }
             bool isCheck = _accRepo.GetAll().Any(p => p.Id != data.Id && p.Email.ToLower().Equals(data.Email.ToLower()));
-            if(isCheck)
+            if (isCheck)
             {
                 return Json(new { status = 0, message = "Email đã bị trùng! Hãy tạo lại email!" });
             }
@@ -60,7 +87,6 @@ namespace CafeShop.Areas.Admin.Controllers
             Account model = _accRepo.GetByID(data.Id) ?? new Account();
 
             model.Email = data.Email;
-            //model.Password = MaHoaMD5.EncryptPassword(data.Password);
             model.Role = data.Role;
             model.FullName = data.FullName;
             model.Gender = data.Gender;
@@ -71,27 +97,19 @@ namespace CafeShop.Areas.Admin.Controllers
 
             if (model.Id > 0)
             {
-                model.Password = MaHoaMD5.EncryptPassword("1");
-                model.UpdatedDate = DateTime.Now;
-                model.UpdatedBy = acc.FullName;
+                model.CreatedDate = DateTime.Now;
+                model.CreatedBy = acc.FullName;
                 _accRepo.Update(model);
             }
             else
             {
-                model.CreatedDate = DateTime.Now;
-                model.CreatedBy = acc.FullName;
+                model.Password = MaHoaMD5.EncryptPassword("123456");
+                model.UpdatedDate = DateTime.Now;
+                model.UpdatedBy = acc.FullName;
                 _accRepo.Create(model);
             }
 
             return Json(new { status = 1, message = "Thành công!" });
-        }
-
-        public bool IsActive(int Id, int status)
-        {
-            Account acc = _accRepo.GetByID(Id);
-            acc.IsActive = status;
-            _accRepo.Update(acc);
-            return true;
         }
 
         public bool ResetPassword(int Id)

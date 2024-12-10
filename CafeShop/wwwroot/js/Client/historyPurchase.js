@@ -40,6 +40,9 @@ function GetAll() {
                 //            </td>
                 //        </tr>`;
 
+                let htmlReasonCancel = `<li class="text-danger">
+                                            <i class="bi bi-x-circle"></i>  <span class="fw-bold">Lý do hủy:</span> ${item.reasonCancel}
+                                        </li>`
                 let styleButton = (item.status == 0 || item.status == 1) ? "warning" : ((item.status == 2) ? "success" : "danger")
                 htmlCard += `<div class="card p-0">
                                 <div class="card-body p-1">
@@ -53,8 +56,7 @@ function GetAll() {
                                                          <li class="">
                                                             <i class="bi bi-calendar"></i>  <span class="fw-bold">Thời gian đặt:</span> ${moment(item.createDate).format('DD/MM/YYYY HH:mm:ss')}
                                                         </li>
-                                                        <li class="fw-bold"><i class="bi bi-bell"></i>  Trạng thái: <span class="btn btn-sm btn-${styleButton} fw-bold">${item.statusText}</span></li>
-
+                                                        <li class="fw-bold"><i class="bi bi-bell"></i>  Trạng thái: <span class="btn btn-sm btn-${styleButton} fw-bold" onclick="ShowReasonCancel(${item.status},'${item.reasonCancel}')">${item.statusText}</span></li>
                                                     </ul>
                                                 </div>
                                                 <div class="col-xl-5">
@@ -68,6 +70,7 @@ function GetAll() {
                                                         <li class="">
                                                            <i class="bi bi-telephone"></i>  <span class="fw-bold">Điện thoại:</span> ${item.phoneNumber}
                                                         </li>
+                                                        
                                                     </ul>
                                                 </div>
                                             </div>
@@ -148,4 +151,13 @@ function StatusApproved(orderId, status) {
             }
         });
     }
+}
+
+function ShowReasonCancel(status,reasonCancel) {
+    if (status != 3) return;
+
+
+
+    $("#reason_cancel_order").val(reasonCancel);
+    $("#modal_reason_cancel").modal('show');
 }

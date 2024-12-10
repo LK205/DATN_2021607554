@@ -1,5 +1,6 @@
 ﻿$(document).ready(function (e) {
     GetAll();
+    $(".select2").select2();
 });
 
 var pageNumber = 1;
@@ -65,8 +66,6 @@ $('#btn_search').click(function () {
     GetAll();
 })
 
-
-
 function showModal() {
     $('#staticBackdrop').modal('show');
     if (accountId == 0) {
@@ -81,7 +80,7 @@ function CloseModal() {
     $('#staticBackdrop').modal('hide');
 }
 
-$('#add_new').click(function () {
+$('.add_new').click(function () {
     $('#staticBackdropLabel').text("Thêm mới loại sản phẩm");
     showModal();
 })
@@ -103,32 +102,67 @@ function GetAll() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
+            console.log(data);
             var html = '';
-            $.each(data.data, function (index, item) {
+            $.each(data.customer.data, function (index, item) {
                 html += `<tr class="align-middle">
                             <td scope="col" class="align-center text-center" style="white-space: nowrap">
                                 <button class="btn btn-sm btn-primary" onclick="GetById(${item.id})" ><i class="bi bi-pencil-square"></i> Sửa</button>
-                                 <button class="btn btn-sm btn-danger" onclick="DeleteById(${item.id})"><i class="bi bi-trash3"></i> Xóa</button>
                             </td>
                             <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.id})">${item.email} </a></td>
-                            <td scope="col">${item.fullName ?? ""}</td>
-                            <td scope="col">${item.genderText ?? ""}</td>
-                            <td scope="col">${item.roleText ?? ""}</td>
-                            <td scope="col">${item.phoneNumber ?? ""}</td>
-                            <td scope="col">${item.address ?? ""}</td>
+                            <td scope="col">${item.fullName}</td>
+                            <td scope="col">${item.genderText}</td>
+                            <td scope="col">${item.roleText}</td>
+                            <td scope="col">${item.phoneNumber}</td>
+                            <td scope="col">${item.address}</td>
                             
                         </tr>`;
             })
-            let total = Math.ceil(data.totalCount.totalCount / 10);
+            let total = Math.ceil(data.customer.totalCount[0].totalCount / 10);
             totalPage = total > 0 ? total : 1;
-            $('#tbody').html(html);
+            $('#tbodyCus').html(html);
             $('#page_details').text(`Trang ${pageNumber} / ${totalPage}`);
             $('#pageNumber').val(pageNumber);
             Pagination();
+
+            let htmlEmp = '';
+            $.each(data.employee.data, function (index, item) {
+                htmlEmp += `<tr class="align-middle">
+                            <td scope="col" class="align-center text-center" style="white-space: nowrap">
+                                <button class="btn btn-sm btn-primary" onclick="GetById(${item.id})" ><i class="bi bi-pencil-square"></i> Sửa</button>
+                            </td>
+                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.id})">${item.email} </a></td>
+                            <td scope="col">${item.fullName}</td>
+                            <td scope="col">${item.genderText}</td>
+                            <td scope="col">${item.roleText}</td>
+                            <td scope="col">${item.phoneNumber}</td>
+                            <td scope="col">${item.address}</td>
+                            
+                        </tr>`;
+            })
+            $('#tbodyEmp').html(htmlEmp);
+
+            let htmlManage = '';
+
+            $.each(data.manager.data, function (index, item) {
+                htmlManage += `<tr class="align-middle">
+                            <td scope="col" class="align-center text-center" style="white-space: nowrap">
+                                <button class="btn btn-sm btn-primary" onclick="GetById(${item.id})" ><i class="bi bi-pencil-square"></i> Sửa</button>
+                            </td>
+                            <td scope="col" class="text-center"> <a style="color: blue;  cursor: pointer;" onclick="GetById(${item.id})">${item.email} </a></td>
+                            <td scope="col">${item.fullName}</td>
+                            <td scope="col">${item.genderText}</td>
+                            <td scope="col">${item.roleText}</td>
+                            <td scope="col">${item.phoneNumber}</td>
+                            <td scope="col">${item.address}</td>
+                            
+                        </tr>`;
+            })
+            $('#tbodyManager').html(htmlManage);
         },
 
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 }
@@ -158,7 +192,7 @@ function GetById(id) {
 
         },
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
     showModal();
@@ -197,34 +231,16 @@ function CreateOrUpdate() {
         contentType: 'application/json;charset=utf-8',
         data: JSON.stringify(obj),
         success: function (result) {
-            CloseModal();
-            GetAll();
+            if (result.status == 0) {
+                alert(result.message)
+            } else {
+                CloseModal();
+                GetAll();
+            }
         },
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 
-}
-function DeleteById(id) {
-    if (confirm("Bạn có chắc chắn muốn thực hiện thao tác này?") == true) {
-        let _url = "/Admin/ProductSize/Delete";
-        $.ajax({
-            type: 'GET',
-            url: _url,
-            contentType: 'application/json;charset=utf-8',
-            data: {
-                Id: id,
-            },
-            success: function (result) {
-                CloseModal();
-                pageNumber = 1;
-                GetAll();
-
-            },
-            error: function (err) {
-                MessageError(err.responseText);
-            }
-        });
-    }
 }

@@ -88,7 +88,7 @@ function GetAll() {
             $.each(data.data, function (index, item) {
                 html += `<tr class="align-middle">
                             <td scope="col" class="align-center text-center" style="white-space: nowrap">
-                                <btn class="btn btn-sm btn-danger" title="Hủy đơn hàng" ${item.status >= 2 ? "hidden" : ""} onclick="StatusApproved(${item.id}, 3, 'Hủy đơn hàng')"><i class="bi bi-x-circle-fill"></i></btn>
+                                <btn class="btn btn-sm btn-danger" title="Hủy đơn hàng" ${item.status >= 2 ? "hidden" : ""} onclick="CancelOrder(${item.id})"><i class="bi bi-x-circle-fill"></i></btn>
                                 <btn class="btn btn-sm btn-success" title="Giao hàng" ${item.status >= 1 ? "hidden" : ""} onclick="StatusApproved(${item.id}, 1, 'Giao đơn hàng')"><i class="bi bi-truck"></i></btn>
                                 <btn class="btn btn-sm btn-primary" title="Thành công" ${item.status >= 2 ? "hidden" : ""}  onclick="StatusApproved(${item.id}, 2, 'Hoàn thành đơn hàng')"><i class="bi bi-check-lg"></i></btn>
                             </td>
@@ -101,6 +101,7 @@ function GetAll() {
                             <td scope="col">${item.address ?? ""}</td>
                         </tr>`;
             })
+
             let total = Math.ceil(data.totalCount.totalCount / 10);
             totalPage = total > 0 ? total : 1;
             $('#tbody').html(html);
@@ -127,12 +128,18 @@ function GetDetails(id, event) {
         },
         contentType: 'application/json',
         success: function (result) {
-            var htmlBody = '';
+            let htmlReasonCancel = `<div class="col-sm-12 align-middle p-1"><h6><span class="fw-bold">Lý do hủy:</span> ${result.data.reasonCancel}</h6></div>`;
+            let htmlBody = `<div class="row ps-5 pe-5">
+                                <div class="col-sm-6 align-middle p-1"><h6><span class="fw-bold">Người đặt:</span> ${result.data.customerName}</h6></div>
+                                <div class="col-sm-6 align-middle p-1"><h6><span class="fw-bold">Số điện thoại:</span> ${result.data.phoneNumber}</h6></div>
+                                <div class="col-sm-12 align-middle p-1"><h6><span class="fw-bold">Địa chỉ:</span> ${result.data.address}</h6></div>
+                                ${result.data.status == 3 ? htmlReasonCancel : ''}
+                            </div>`
             let totalMoney = 0;
             //Hiển thị danh sách chi tiết
-            $.each(result, function (index, item) {
+            $.each(result.lst, function (index, item) {
                 var styleText = item.sizeName;
-                let htmlTopping = '`<h5 class="text - truncate font - size - 18">Topping</h5>`';
+                let htmlTopping = '`<h5 class="text-truncate font-size-18">Topping</h5>`';
                 let toppingPrice = 0;
                 $.each(item.lstTopping, function (toppingIndex, toppingItem) {
                     htmlTopping += `<p class="mb-0 mt-1 topping_price_${index}" style="font-size: 14px !important; opacity: .8;" toppingPrice="${toppingItem.toppingPrice}" toppingId="${toppingItem.id}">${toppingItem.toppingName} (${toppingItem.toppingPrice.toLocaleString('en-US')} VNĐ)</p>`;
@@ -199,6 +206,8 @@ function GetDetails(id, event) {
                             <div class="col-sm-2 text-center fw-bold align-middle p-1"> Tổng tiền </div>
                             <div class="col-sm-10 text-center"> <input type="text" class="form-control text-center" id="totalMoney" value="${totalMoney.toLocaleString('en-US')} VNĐ" disabled readonly> </div>
                          </div>`
+
+            
             $("#modal-content").html(htmlBody);
             let modalHeader = `${$(el).html()} - ${$(el).attr('created-date')}`
             $("#modal-mahoadon").html(modalHeader);
@@ -228,5 +237,32 @@ function StatusApproved(orderId, status, text) {
             }
         });
     }
+}
+
+function CancelOrder(orderid) {
+    $("#reason_cancel_order_id").val(orderid)
+    $("#modal_reason_cancel").modal('show');
+}
+function CallAPICancelOrder() {
+
+    let orderId = parseInt($("#reason_cancel_order_id").val());
+    let status = 3;
+    let reasonCancel = $("#reason_cancel_order").val();
+    $.ajax({
+        type: 'GET',
+        url: "/Admin/Order/ChangeStatusOrder",
+        contentType: 'application/json;charset=utf-8',
+        data: { orderId, status, reasonCancel },
+        success: function (result) {
+            if (result.status != 1) {
+                alert(result.message)
+            }
+            $("#modal_reason_cancel").modal('hide');
+            GetAll();
+        },
+        error: function (err) {
+            MessageError(err.responseText);
+        }
+    });
 }
 

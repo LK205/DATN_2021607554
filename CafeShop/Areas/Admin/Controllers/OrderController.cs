@@ -14,7 +14,7 @@ namespace CafeShop.Areas.Admin.Controllers
         public IActionResult Index()
         {
             Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0) ?? new Account();
-            if (acc.Id <= 0)
+            if (acc == null || acc.Role < 2)
             {
                 return Redirect("/Shop/Index");
             }
@@ -41,13 +41,14 @@ namespace CafeShop.Areas.Admin.Controllers
             List<OrderDetailsDto> lst = SQLHelper<OrderDetailsDto>.ProcedureToList("spGetOrderDetails",
                                                                                     new string[] { "@OrderId" },
                                                                                     new object[] { OrderId });
+            Order data = _repo.GetByID(OrderId);
             foreach (var item in lst)
             {
                 item.lstTopping = SQLHelper<OrderDetailsToppingDTO>.SqlToList($"SELECT odt.*, t.ToppingCode, t.ToppingName FROM dbo.OrderDetailsTopping AS odt LEFT JOIN dbo.Topping AS t ON odt.ToppingID = t.ID WHERE odt.OrderDetailsID = {item.OrderDetailID}");
             }
-            return Json(lst);
+            return Json(new { lst, data });
         }
-        public JsonResult ChangeStatusOrder(int orderId, int status)
+        public JsonResult ChangeStatusOrder(int orderId, int status, string reasonCancel = "")
         {
             Order model = _repo.GetByID(orderId) ?? new Order();
             string statusText = status == 1 ? "giao" : (status == 2 ? "xác nhận" : "hủy");
@@ -55,6 +56,7 @@ namespace CafeShop.Areas.Admin.Controllers
 
             if (model.Status == status) return Json(new { status = 0, message = $"Đơn hàng đã được {statusText}!" });
             model.Status = status;
+            model.ReasonCancel = TextUtils.ToString(reasonCancel);
             _repo.Update(model);
             return Json(new { status = 1, message = $"Thành công!" });
         }

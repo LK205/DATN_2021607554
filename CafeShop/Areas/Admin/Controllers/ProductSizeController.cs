@@ -14,7 +14,7 @@ namespace CafeShop.Areas.Admin.Controllers
         public IActionResult Index()
         {
             Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
-            if (acc == null || acc.Role != 2)
+            if (acc == null || acc.Role < 2)
             {
                 return Redirect("/Home/Index");
             }
