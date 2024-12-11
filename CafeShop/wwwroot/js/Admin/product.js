@@ -2,7 +2,7 @@
     GetAll();
     GetAllSize();
     GetAllProductType();
-
+    $(".select2").select2();
 });
 var pageNumber = 1;
 var totalPage = 0;
@@ -97,19 +97,20 @@ $('#btn_deleteModal').click(function () {
     DeleteById(productId);
 });
 function GetAll() {
-    let _url = "/Admin/Product/GetAll?";
-    var request = $('#request').val();
     var groupId = $('#groupId option:selected').val();
-    if (request.length > 0) {
-        _url += "request=" + request;
-    }
-    _url += "&pageNumber=" + pageNumber;
 
+    let obj = {
+        request: $('#request').val(),
+        pageNumber: pageNumber,
+        productTypeId: parseInt($("#group_product").val())
+    };
+    console.log(obj);
     $.ajax({
-        url: _url,
+        url: "/Admin/Product/GetAll",
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json',
+        data: obj,
         success: function (data) {
             var html = '';
             $.each(data.data, function (index, item) {
@@ -135,7 +136,7 @@ function GetAll() {
         },
 
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 }
@@ -202,7 +203,7 @@ function GetById(id) {
             showModal();
         },
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 }
@@ -322,7 +323,7 @@ function DeleteById(id) {
                 pageNumber = 1;
                 GetAll();
             }, error: function (err) {
-                MessageError(err.responseText);
+                alert(err.responseText);
             }
         });
     }
@@ -339,7 +340,7 @@ function GetAllSize() {
                 htmlSize += `<option value="${e.id}">${e.sizeName}</option>`;
             })
         }, error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 }
@@ -357,7 +358,7 @@ function GetAllProductType() {
             $("#formProductTypeId").html(html);
         },
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
         }
     });
 }

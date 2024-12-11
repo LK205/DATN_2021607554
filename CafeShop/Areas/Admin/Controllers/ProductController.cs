@@ -4,6 +4,7 @@ using CafeShop.Models.DTOs;
 using CafeShop.Reposiory;
 using CafeShop.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 using System.Configuration.Internal;
 using System.Data;
@@ -28,6 +29,9 @@ namespace CafeShop.Areas.Admin.Controllers
             {
                 return Redirect("/Home/Index");
             }
+            List<ProductType> lstType = _proType.GetAll().Where(p=> p.IsDelete == false).ToList();
+            ViewBag.ListType = new SelectList(lstType, "Id", "TypeName");
+
             List<Topping> lstTopping = _toppingRepo.GetAll().ToList();
             List<object> lstDataToping = new List<object>();
             foreach (Topping item in lstTopping)
@@ -50,9 +54,9 @@ namespace CafeShop.Areas.Admin.Controllers
 
         // ======================= Product=========================================================================
 
-        public JsonResult GetAll(string request = "", int pageNumber = 1)
+        public JsonResult GetAll(string request = "", int pageNumber = 1, int productTypeId = 0)
         {
-            DataSet ds = LoadDataFromSP.GetDataSetSP("spGetAllProduct", new string[] { "@PageNumber", "@Request" }, new object[] { pageNumber, request });
+            DataSet ds = LoadDataFromSP.GetDataSetSP("spGetAllProduct", new string[] { "@PageNumber", "@Request", "@ProductTypeID" }, new object[] { pageNumber, TextUtils.ToString(request), productTypeId });
             List <ProductDto> data = TextUtils.ConvertDataTable<ProductDto>(ds.Tables[0]);
             var totalCount = TextUtils.ConvertDataTable<PaginationDto>(ds.Tables[1]);
 

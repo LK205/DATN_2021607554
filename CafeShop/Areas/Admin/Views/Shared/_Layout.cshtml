@@ -27,15 +27,27 @@
 @{
     var FullName = Context.Session.GetString("FullName");
 
+
+
     var Id = Context.Session.GetInt32("AccountId");
+
+
 
     var Role = Context.Session.GetInt32("AccountRole");
 
+
+
     if (Id <= 0)
+
+
 
     {
 
+
+
         Context.Response.Redirect("/Home/Privacy");
+
+
 
     }
 }
@@ -174,10 +186,21 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Home" asp-action="Index">
-                    <i class="bi bi-grid"></i>
-                    <span>Thống kê</span>
+                <a class="nav-link collapsed" data-bs-target="#dashboard-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-grid"></i></i><span>DASHBOARD</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
+                <ul id="dashboard-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">
+                        <i class="bi bi-grid"></i>
+                        <span>Thống kê MANAGE</span>
+                    </a>
+
+                    <a class="nav-link" asp-controller="Home" asp-action="EmpDashboard">
+                        <i class="bi bi-grid"></i>
+                        <span>Thống kê EMP</span>
+                    </a>
+                </ul>
+
             </li>
 
             <li class="nav-item">
@@ -236,7 +259,7 @@
                         </a>
                     </li>
 
-                     <li>
+                    <li>
                         <a asp-controller="Supplier" asp-action="Index">
                             <i class="bi bi-suitcase-lg-fill fs-6"></i> Nhà cung cấp
                         </a>

@@ -10,7 +10,7 @@
         <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
         <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
     </ol>
-    <div class="carousel-inner">
+    <div class="carousel-inner  mb-5 mt-3">
         <div class="carousel-item active">
             <div class="container">
                 <div class="row p-5">
@@ -81,20 +81,58 @@
 
 
 <!-- Start Top Seller of Coffe Shop-->
-<section class="container">
+<section class="container mb-5" style="background: beige;">
     <div class="row text-center">
         <div class="col-lg-6 m-auto">
-            <h1 class="h1">--- Bán chạy nhất ---</h1>          
+            <h1 class="h1">Sản phẩm bán chạy</h1>
+            <p>
+                Trọn vị tuyệt vời trong từng tách cà phê
+            </p>
         </div>
     </div>
     <div class="row">
         @foreach (ProductDto item in ViewBag.TopSeller)
         {
-            <div class="col-12 col-md-3 p-2">
-                <a asp-controller="Shop" asp-action="IndexDetails" asp-route-prId ="@item.Id"><img src="@item.ImageUrl" class="rounded-square img-fluid rounded-3 pb-2"></a>
-                <h5 class="text-center mb-2">@item.ProductName</h5>
-                <p class="text-center"><a class="btn btn-success" asp-controller="Shop" asp-action="Index">Cửa hàng</a></p>
+            <div class="col-12 col-md-3 mb-4 position-relative">
+                <div class="badge bg-danger position-absolute" style="top: 0.5rem; right: 1.5rem; z-index: 99999 !important;">HOT</div>
+                <div class="card h-100">
+                    <a asp-controller="Shop" asp-action="IndexDetails" asp-route-prId="@item.Id">
+                        <img src="@item.ImageUrl" class="card-img-top">
+                    </a>
+                    <div class="card-body">
+                        <ul class="list-unstyled d-flex justify-content-between mb-0">
+                            <li>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                            </li>
+                            <li class="text-muted text-right">@item.Price.ToString("N0") VNĐ</li>
+                        </ul>
+                        <a class="h3 text-decoration-none text-dark">@item.ProductName</a>
+                        <p class="text-center mb-0"><a class="btn btn-success" asp-controller="Shop" asp-action="Index">Xem thêm</a></p>
+                    </div>
+                </div>
             </div>
+            @* <div class="col-12 col-md-3 p-2 position-relative">
+               
+                <a asp-controller="Shop" asp-action="IndexDetails" asp-route-prId ="@item.Id"><img src="@item.ImageUrl" class="rounded-square img-fluid rounded-3 pb-2"></a>
+                <div class="card-body">
+                    <ul class="list-unstyled d-flex justify-content-between">
+                        <li>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                        </li>
+                        <li class="text-muted text-right">@item.Price.ToString("N0") VNĐ</li>
+                    </ul>
+                    <a class="h3 text-decoration-none text-dark">@item.ProductName</a>
+                    <p class="text-center"><a class="btn btn-success" asp-controller="Shop" asp-action="Index">Xem thêm</a></p>
+                </div>
+            </div> *@
         }
     </div>
 </section>
@@ -104,7 +142,7 @@
 <!-- Start Top New Product of Coffe Shop -->
 
 <section class="bg-light">
-    <div class="container py-5">
+    <div class="container pb-5">
         <div class="row text-center py-3">
             <div class="col-lg-6 m-auto">
                 <h1 class="h1">Sản phẩm mới</h1>
@@ -116,7 +154,8 @@
         <div class="row">
             @foreach (ProductDto item in ViewBag.TopNew)
             {
-                <div class="col-12 col-md-3 mb-4">
+                <div class="col-12 col-md-3 mb-4 position-relative">
+                    <div class="badge bg-danger position-absolute" style="top: 0.5rem; right: 1.5rem; z-index: 99999 !important;">Mới</div>
                     <div class="card h-100">
                         <a asp-controller="Shop" asp-action="IndexDetails" asp-route-prId="@item.Id">
                             <img src="@item.ImageUrl" class="card-img-top">

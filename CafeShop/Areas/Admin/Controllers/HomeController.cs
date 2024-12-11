@@ -22,6 +22,34 @@ namespace CafeShop.Areas.Admin.Controllers
             ViewBag.Month1 = DateTime.Now.ToString("MM");
             return View();
         }
+
+        public IActionResult EmpDashboard()
+        {
+            Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+            if (acc == null || acc.Role < 2)
+            {
+                return Redirect("/Home/Index");
+            }
+            ViewBag.Month = DateTime.Now.ToString("yyyy-MM");
+            ViewBag.Year = DateTime.Now.ToString("yyyy");
+            ViewBag.Month1 = DateTime.Now.ToString("MM");
+            return View();
+        }
+
+
+        public IActionResult ManageDashboard()
+        {
+            Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
+            if (acc == null || (acc.Role != 2 && acc.Role != 4))
+            {
+                return Redirect("/Home/Index");
+            }
+            ViewBag.Month = DateTime.Now.ToString("yyyy-MM");
+            ViewBag.Year = DateTime.Now.ToString("yyyy");
+            ViewBag.Month1 = DateTime.Now.ToString("MM");
+            return View();
+        }
+
         public JsonResult GetTopSale(int topSale)
         {
             List<ProductDto> data = SQLHelper<ProductDto>.ProcedureToList("spGetTop4BestSale", new string[] { "@topSale" }, new object[] { topSale });
