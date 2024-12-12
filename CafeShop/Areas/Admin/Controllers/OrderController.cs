@@ -60,5 +60,12 @@ namespace CafeShop.Areas.Admin.Controllers
             _repo.Update(model);
             return Json(new { status = 1, message = $"Thành công!" });
         }
+
+
+        public JsonResult GetAllOrderUnprocessed()
+        {
+            List<Order> lst = _repo.GetAll().Where(p => p.Status == 0 && p.IsDeleted == false).ToList();
+            return Json(lst.Count);
+        }
     }
 }

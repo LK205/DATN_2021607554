@@ -2,14 +2,23 @@
     ChartTopSale();
     ChartHardestToSell();
     ChartPuchase();
+
+
+    GetFiveTopSale();
+    GetDataForMessage();
+    setInterval(function () {
+        GetDataForMessage();
+    }, 6000);
 })
 
 function getTopSale() {
-    const topSale = $('#selected_top_sale').val()
+    const topSale = $('#selected_top_sale').val();
+    const dateStart = $('#dateStart_top_sale').val();
+    const dateEnd = $('#dateEnd_top_sale').val();
     return new Promise(resolve => {
         $.get({
             url: `/Admin/Home/GetTopSale`,
-            data: { topSale },
+            data: { topSale, dateStart, dateEnd },
             success: data => resolve(data),
             error: error => resolve(null)
         })
@@ -23,7 +32,7 @@ async function ChartTopSale() {
     if (result) {
         result.forEach(res => {
             data.push(parseInt(res.totalSales));
-            categories.push(res.name);
+            categories.push(res.productName);
         })
     }
 
@@ -104,11 +113,13 @@ async function ChartTopSale() {
 
 
 function getHardestToSell() {
-    const topSale = $('#selected_hardest_to_sell').val()
+    const topSale = $('#selected_hardest_to_sell').val();
+    const dateStart = $('#dateStart_hardest_to_sell').val();
+    const dateEnd = $('#dateEnd_hardest_to_sell').val();
     return new Promise(resolve => {
         $.get({
             url: `/Admin/Home/GetHardestToSell`,
-            data: { topSale },
+            data: { topSale, dateStart, dateEnd },
             success: data => resolve(data),
             error: error => resolve(null)
         })
@@ -123,7 +134,7 @@ async function ChartHardestToSell() {
     if (result) {
         result.forEach(res => {
             data.push(parseInt(res.totalSales));
-            categories.push(res.name);
+            categories.push(res.productName);
         })
     }
 
@@ -328,4 +339,71 @@ function reloadChartPuchase() {
 
     $("#title_puchase").text(text);
     ChartPuchase();
+}
+
+
+//===============================================================================================================================================================
+
+function GetDataForMessage() {
+    $.ajax({
+        url: "/Admin/Home/GetAllInformationOrder",
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            let totalInCreaseSale = (data.totalCurrentWeek - (data.totalLastWeek == 1 ? 0 : data.totalLastWeek) ) / data.totalLastWeek
+            let htmlSale = `
+                            <h6 >${data.totalCurrentWeek.toLocaleString('en-US') }</h6>
+                            <span class="${totalInCreaseSale > 0 ? 'text-success' : 'text-danger'} small pt-1 fw-bold">${(Math.abs(totalInCreaseSale)).toFixed(2)}%</span> <span class="text-muted small pt-2 ps-1">${totalInCreaseSale > 0 ? 'tăng' : 'giảm'}</span>`
+            $("#total_sales").html(htmlSale);
+
+            let totalInCreaseRevenue = (data.moneyCurrentWeek - (data.moneyLastWeek == 1 ? 0 : data.moneyLastWeek)) / data.totalLastWeek
+            let htmlRevenue = `
+                            <h6 >${data.moneyCurrentWeek.toLocaleString('en-US') }</h6>
+                            <span class="${totalInCreaseRevenue >= 0.00 ? 'text-success' : 'text-danger'} small pt-1 fw-bold">${(Math.abs(totalInCreaseRevenue)).toFixed(2)}%</span> <span class="text-muted small pt-2 ps-1">${totalInCreaseRevenue >= 0.00 ? 'tăng' : 'giảm'}</span>`
+            $("#total_revenue").html(htmlRevenue);
+
+            $("#total_order_unprocess").text(data.totalUnProcess);
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    });
+}
+
+function GetFiveTopSale() {
+    let today = new Date();
+    let sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(today.getDate() - 7);
+    console.log(today.toISOString().split('T')[0])
+    $.ajax({
+        url: "/Admin/Home/GetTopSale",
+        type: 'GET',
+        data: {
+            topSale: 5,
+            dateStart: sevenDaysAgo.toISOString().split('T')[0],
+            dateEnd: today.toISOString().split('T')[0]
+        },
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log(data);
+            let html = ''
+            $.each(data, function (index, item) {
+                html += `<tr class="align-middle text-center">
+                                        <th scope="row"><img src="${item.imageUrl}" alt="" style="width: 100%"></th>
+                                        <td class="fw-bold">${item.productName}</td>
+                                        <td class="">${item.price.toLocaleString('en-US')} VNĐ</td>
+                                        <td class="fw-bold ">${item.totalSales.toLocaleString('en-US') }</td>
+                                        <td class="">$5,828</td>
+                                    </tr>`
+            });
+            $("#product_bestsale_week").html(html);
+
+            
+        },
+        error: function (err) {
+            alert(err.responseText);
+        }
+    });
 }

@@ -15,7 +15,7 @@
     <link href="~/assets/admin/vendor/simple-datatables/style.css" rel="stylesheet">
     <link href="~/assets/admin/css/style.css" rel="stylesheet" />
     <link href="~/css/select2.min.css" rel="stylesheet" />
-
+    <link href="~/assets/admin/vendor/remixicon/remixicon.css" rel="stylesheet" />
 
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -34,21 +34,9 @@
 
 
     var Role = Context.Session.GetInt32("AccountRole");
-
-
-
     if (Id <= 0)
-
-
-
     {
-
-
-
         Context.Response.Redirect("/Home/Privacy");
-
-
-
     }
 }
 
@@ -341,8 +329,9 @@
     <script src="~/assets/admin/vendor/tinymce/tinymce.min.js"></script>
     <script src="~/assets/admin/vendor/php-email-form/validate.js"></script>
     <script src="~/assets/admin/js/main.js"></script>
-
+    <script src="~/assets/admin/vendor/tinymce/tinymce.min.js"></script>
     <script src="~/js/admin/layout.js"></script>
+
 </body>
 
 

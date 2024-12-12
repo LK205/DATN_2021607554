@@ -25,7 +25,11 @@ namespace CafeShop.Controllers
             Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0) ?? new Account();
             ViewBag.Account = acc;
 
-            List<ProductDto> data = SQLHelper<ProductDto>.ProcedureToList("spGetTop4BestSale", new string[] { "@topSale" }, new object[] {4});
+            DateTime currentDate = DateTime.Now;
+            DateTime dateLastMonth = currentDate.AddDays(-30);
+            DateTime dateStart = new DateTime(dateLastMonth.Year, dateLastMonth.Month, dateLastMonth.Day, 0,0,0);
+            DateTime dateEnd = new DateTime(currentDate.Year, currentDate.Month, currentDate.Day, 23, 59, 59);
+            List<ProductDto> data = SQLHelper<ProductDto>.ProcedureToList("spGetTop4BestSale", new string[] { "@topSale", "@DateStart", "@DateEnd" }, new object[] {4, dateStart, dateEnd });
             ViewBag.TopSeller = data;
             List<ProductDto> lst = SQLHelper<ProductDto>.ProcedureToList("spGetTop4ProductNew", new string[] { }, new object[] { });
             ViewBag.TopNew = lst;
