@@ -4,6 +4,7 @@ using CafeShop.Config;
 using Microsoft.AspNetCore.Mvc;
 using CafeShop.Repository;
 using System;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CafeShop.Areas.Admin.Controllers
 {
@@ -58,6 +59,60 @@ namespace CafeShop.Areas.Admin.Controllers
         {
             OrderHomeDTO data = SQLHelper<OrderHomeDTO>.ProcedureToModel("spGetTotalOrderForMessage", new string[] { }, new object[] { });
             return Json(data);
+        }
+
+        public JsonResult GetPercentOrderSuccess(int typeTable)
+        {
+            //typeTable 1: Tuần ; 2: Tháng; 3: Năm
+            DateTime currentDate = DateTime.Now;
+            DateTime dateEnd = new DateTime(currentDate.Year, currentDate.Month, currentDate.Day, 23,59,59);
+            DateTime dateStart = currentDate;
+            switch (typeTable)
+            {
+                case 1: //Tuần
+                    dateStart = currentDate.AddDays(-7);
+                    break;
+                case 2: // Tháng
+                    dateStart = currentDate.AddMonths(-1);
+                    break;
+                case 3: // Năm
+                    dateStart = currentDate.AddYears(-1);
+                    break;
+                default:
+                    return Json(new {status = 0, message = "Tham số không hợp lệ!"});
+            }
+            dateStart = new DateTime(dateStart.Year, dateStart.Month, dateStart.Day, 00, 00, 00);
+
+
+            ChartOrderSuccessDTO result = SQLHelper<ChartOrderSuccessDTO>.ProcedureToModel("spGetPercentOrderSuccess", new string[] { "@DateStart", "@DateEnd" }, new object[] { dateStart, dateEnd });
+            return Json(new {status = 1, data = result });
+        }
+
+        public JsonResult GetTopBestSaleTopping(int typeTopping)
+        {
+            //typeTable 1: Tuần ; 2: Tháng; 3: Năm
+            DateTime currentDate = DateTime.Now;
+            DateTime dateEnd = new DateTime(currentDate.Year, currentDate.Month, currentDate.Day, 23, 59, 59);
+            DateTime dateStart = currentDate;
+            switch (typeTopping)
+            {
+                case 1: //Tuần
+                    dateStart = currentDate.AddDays(-7);
+                    break;
+                case 2: // Tháng
+                    dateStart = currentDate.AddMonths(-1);
+                    break;
+                case 3: // Năm
+                    dateStart = currentDate.AddYears(-1);
+                    break;
+                default:
+                    return Json(new { status = 0, message = "Tham số không hợp lệ!" });
+            }
+            dateStart = new DateTime(dateStart.Year, dateStart.Month, dateStart.Day, 00, 00, 00);
+
+
+            List<ToppingDTO> result = SQLHelper<ToppingDTO>.ProcedureToList("spGetBestSaleTopping", new string[] { "@DateStart", "@DateEnd" }, new object[] { dateStart, dateEnd });
+            return Json(new { status = 1, data = result });
         }
     }
 

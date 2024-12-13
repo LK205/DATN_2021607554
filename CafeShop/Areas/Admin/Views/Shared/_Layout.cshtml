@@ -16,23 +16,17 @@
     <link href="~/assets/admin/css/style.css" rel="stylesheet" />
     <link href="~/css/select2.min.css" rel="stylesheet" />
     <link href="~/assets/admin/vendor/remixicon/remixicon.css" rel="stylesheet" />
-
-
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link href="~/assets/admin/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="~/assets/admin/vendor/dist/apexcharts.css" rel="stylesheet" />
     <script src="~/assets/admin/js/jquery.js"></script>
     <script src="~/js/select2.full.min.js"></script>
-
+    <script src="~/js/moment.min.2.29.2.js"></script>
+    <script src="~/assets/admin/vendor/dist/apexcharts.min.js"></script>
 </head>
 
 @{
     var FullName = Context.Session.GetString("FullName");
-
-
-
     var Id = Context.Session.GetInt32("AccountId");
-
-
-
     var Role = Context.Session.GetInt32("AccountRole");
     if (Id <= 0)
     {
@@ -297,11 +291,11 @@
     </aside><!-- End Sidebar-->
 
 
-    <div class="container mb-4">
-        <main role="main" id="main" class="main" style="margin-left:">
+    <main role="main" id="main" class="main">
+        <section class="section">
             @RenderBody()
-        </main>
-    </div>
+        </section>
+    </main>
 
 
     <div style="height: 100px"></div>
@@ -319,7 +313,6 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="~/assets/admin/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="~/assets/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/admin/vendor/chart.js/chart.umd.js"></script>
@@ -331,6 +324,7 @@
     <script src="~/assets/admin/js/main.js"></script>
     <script src="~/assets/admin/vendor/tinymce/tinymce.min.js"></script>
     <script src="~/js/admin/layout.js"></script>
+    <script src="~/js/moment.min.2.29.2.js"></script>
 
 </body>
 

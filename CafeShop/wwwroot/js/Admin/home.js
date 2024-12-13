@@ -2,13 +2,13 @@
     ChartTopSale();
     ChartHardestToSell();
     ChartPuchase();
-
-
+    ChartBestSaleTopping()
+    ChartPercentSuccessOrder();
     GetFiveTopSale();
     GetDataForMessage();
     setInterval(function () {
         GetDataForMessage();
-    }, 6000);
+    }, 300000);
 })
 
 function getTopSale() {
@@ -261,7 +261,7 @@ async function ChartPuchase() {
         dataLabels: {
             enabled: true,
             formatter: function (val) {
-                return val;
+                return val.toLocaleString('en-US');
             },
             offsetY: -20,
             style: {
@@ -305,7 +305,7 @@ async function ChartPuchase() {
             labels: {
                 show: false,
                 formatter: function (val) {
-                    return val.toLocaleString() + " VNĐ";
+                    return val.toLocaleString('en-US') + " VNĐ";
                 }
             }
 
@@ -343,6 +343,87 @@ function reloadChartPuchase() {
 
 
 //===============================================================================================================================================================
+let typeTable = 1
+function getOrderPercent() {
+    
+    return new Promise(resolve => {
+        $.get({
+            url: `/Admin/Home/GetPercentOrderSuccess`,
+            data: { typeTable },
+            success: data => resolve(data),
+            error: error => resolve(null)
+        })
+    })
+}
+function SetTypeTable(id) {
+    typeTable = id;
+    let headerText = id == 1 ? "Tuần" : (id == 2 ? "Tháng" : "Năm" )
+    $("#title_percent_order_success").text(`Tỉ lệ đơn hàng thành công theo ${headerText}`);
+    ChartPercentSuccessOrder();
+}
+async function ChartPercentSuccessOrder() {
+    let result = await getOrderPercent();
+    if (result.status != 1) return;
+    var options = {
+        series: [result.data.totalSuccess, result.data.totalFalse ],
+        chart: {
+            width: 380,
+            type: 'pie',
+        },
+        colors: ['#008FFB', '#F44336'],
+        labels: ['Thành công', 'Bị hủy']
+    };
+
+    $("#chart_percent_order_success").html("");
+    var chart = new ApexCharts(document.querySelector("#chart_percent_order_success"), options);
+    chart.render();
+}
+
+
+let typeTopping = 1
+function getBestSaleTopping() {
+
+    return new Promise(resolve => {
+        $.get({
+            url: `/Admin/Home/GetTopBestSaleTopping`,
+            data: { typeTopping },
+            success: data => resolve(data),
+            error: error => resolve(null)
+        })
+    })
+}
+function SetTypeTopping(id) {
+    typeTopping = id;
+    let headerText = id == 1 ? "Tuần" : (id == 2 ? "Tháng" : "Năm")
+    $("#title_topping_best_sale").text(`Top 5 Topping bán chạy theo ${headerText}`);
+    ChartBestSaleTopping();
+}
+async function ChartBestSaleTopping() {
+    let result = await getBestSaleTopping();
+    if (result.status != 1) return;
+    let data = [];
+    let catalog = [];
+
+        result.data.forEach(res => {
+            data.push(parseInt(res.totalSale));
+            catalog.push(res.toppingName);
+        })
+
+    var options = {
+        series: data,
+        chart: {
+            width: 380,
+            type: 'pie',
+        },
+        labels: catalog
+    };
+
+    $("#chart_topping_best_sale").html("");
+    var chart = new ApexCharts(document.querySelector("#chart_topping_best_sale"), options);
+    chart.render();
+}
+
+
 
 function GetDataForMessage() {
     $.ajax({
@@ -357,7 +438,7 @@ function GetDataForMessage() {
                             <span class="${totalInCreaseSale > 0 ? 'text-success' : 'text-danger'} small pt-1 fw-bold">${(Math.abs(totalInCreaseSale)).toFixed(2)}%</span> <span class="text-muted small pt-2 ps-1">${totalInCreaseSale > 0 ? 'tăng' : 'giảm'}</span>`
             $("#total_sales").html(htmlSale);
 
-            let totalInCreaseRevenue = (data.moneyCurrentWeek - (data.moneyLastWeek == 1 ? 0 : data.moneyLastWeek)) / data.totalLastWeek
+            let totalInCreaseRevenue = (data.moneyCurrentWeek - (data.moneyLastWeek == 1 ? 0 : data.moneyLastWeek)) / data.moneyLastWeek
             let htmlRevenue = `
                             <h6 >${data.moneyCurrentWeek.toLocaleString('en-US') }</h6>
                             <span class="${totalInCreaseRevenue >= 0.00 ? 'text-success' : 'text-danger'} small pt-1 fw-bold">${(Math.abs(totalInCreaseRevenue)).toFixed(2)}%</span> <span class="text-muted small pt-2 ps-1">${totalInCreaseRevenue >= 0.00 ? 'tăng' : 'giảm'}</span>`
@@ -375,7 +456,6 @@ function GetFiveTopSale() {
     let today = new Date();
     let sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(today.getDate() - 7);
-    console.log(today.toISOString().split('T')[0])
     $.ajax({
         url: "/Admin/Home/GetTopSale",
         type: 'GET',
@@ -387,7 +467,6 @@ function GetFiveTopSale() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            console.log(data);
             let html = ''
             $.each(data, function (index, item) {
                 html += `<tr class="align-middle text-center">
@@ -395,7 +474,7 @@ function GetFiveTopSale() {
                                         <td class="fw-bold">${item.productName}</td>
                                         <td class="">${item.price.toLocaleString('en-US')} VNĐ</td>
                                         <td class="fw-bold ">${item.totalSales.toLocaleString('en-US') }</td>
-                                        <td class="">$5,828</td>
+                                        <td class="">${item.productRevenue.toLocaleString('en-US') } VNĐ</td>
                                     </tr>`
             });
             $("#product_bestsale_week").html(html);

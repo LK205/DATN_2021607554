@@ -4,7 +4,6 @@
 
 <style>
     .card-title {
-        
     }
 </style>
 
@@ -31,7 +30,7 @@
                                 <i class="bi bi-cart"></i>
                             </div>
                             <div class="ps-3" id="total_sales">
-                                <h6 >145</h6>
+                                <h6>145</h6>
                                 <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
 
                             </div>
@@ -66,7 +65,7 @@
 
                 <div class="card info-card customers-card">
 
-                   
+
 
                     <div class="card-body">
                         <a asp-controller="Order" asp-action="Index">
@@ -87,9 +86,82 @@
         </div>
     </div>
 
+    <!-- Top Selling -->
+    <div class="col-12 row">
+        <div class="col-lg-4 col-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-11">
+                            <h6 class="p-0 mb-0 w-100 text-center fw-bold mt-1" id="title_topping_best_sale">TOP 5 topping bán chạy trong Tuần</h6>
+                        </div>
+                        <div class="col-1">
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow px-2">
+                                    <li class="p-1"><span class="btn btn-sm btn-primary w-100" onclick="SetTypeTopping(1)"> Tuần</span></li>
+                                    <li class="p-1"><span class="btn btn-sm btn-primary w-100" onclick="SetTypeTopping(2)"> Tháng</span></li>
+                                    <li class="p-1"><span class="btn btn-sm btn-primary w-100" onclick="SetTypeTopping(3)"> Năm</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chart_topping_best_sale"></div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-11">
+                            <h6 class="p-0 mb-0 w-100 text-center fw-bold mt-1" id="title_percent_order_success">Tỉ lệ đơn hàng thành công theo Tuần</h6>
+                        </div>
+                        <div class="col-1">
+                            <div class="filter">
+                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow px-2">
+                                    <li class="p-1"><span class="btn btn-sm btn-primary w-100" onclick="SetTypeTable(1)"> Tuần</span></li>
+                                    <li class="p-1"><span class="btn btn-sm btn-primary w-100" onclick="SetTypeTable(2)"> Tháng</span></li>
+                                    <li class="p-1"><span class="btn btn-sm btn-primary w-100" onclick="SetTypeTable(3)"> Năm</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chart_percent_order_success"></div>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="col-lg-8 col-6">
+            <div class="card top-selling overflow-auto">
+                <div class="card-body pb-0">
+                    <h5 class="card-title" style="padding: 20px 0 15px 0; font-size: 18px; font-weight: 500; color: #012970;">Top Selling <span>| Tuần</span></h5>
+
+                    <table class="table table-border table-responsive">
+                        <thead>
+                            <tr class="align-middle text-center">
+                                <th scope="col" style="width: 10%">Hình ảnh</th>
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col">Giá</th>
+                                <th scope="col">Lượt bán</th>
+                                <th scope="col">Doanh thu</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product_bestsale_week">
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div><!-- End Top Selling -->
+
 
     <div class="card-body pb-0">
-        <div class="row gy-0 mt-1">
+        <div class="row gy-3 mt-1">
+
             <div class="col-12 mb-1 pe-0">
                 <div class="card m-0 p-1" id="card_okng">
                     <div class="row">
@@ -106,7 +178,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-12 mb-1 pe-0">
+            <div class="col-12 mb-1 pe-0">
                 <div class="card m-0 p-1" id="card_okng">
                     <div class="row">
 
@@ -136,7 +208,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-12 mb-1 pe-0">
+            <div class="col-12 mb-1 pe-0">
                 <div class="card m-0 p-1" id="card_okng">
                     <div class="row">
                         <div class="col-sm-3 col-6">
@@ -166,45 +238,10 @@
             </div>
 
 
-            <!-- Top Selling -->
-            <div class="col-12">
-                <div class="card top-selling overflow-auto">
-                    <div class="card-body pb-0">
-                        <h5 class="card-title" style="padding: 20px 0 15px 0; font-size: 18px; font-weight: 500; color: #012970;">Top Selling <span>| Tuần</span></h5>
 
-                        <table class="table table-border">
-                            <thead>
-                                <tr class="align-middle text-center">
-                                    <th scope="col" style="width: 10%">Hình ảnh</th>
-                                    <th scope="col">Sản phẩm</th>
-                                    <th scope="col">Giá</th>
-                                    <th scope="col">Lượt bán</th>
-                                    <th scope="col">Doanh thu</th>
-                                </tr>
-                            </thead>
-                            <tbody id="product_bestsale_week">
-                                @for (int i = 0; i < 5; i++)
-                                {
-                                    <tr class="align-middle text-center">
-                                        <th scope="row"><img src="~/images/product/caphemay/sp11/cfdenda-espressoda_185438_1515261ef60b482eb58e1c545e7410a3.webp" alt="" style="width: 100%"></th>
-                                        <td class="fw-bold">Ut inventore ipsa voluptas nulla</td>
-                                        <td class="">2.000.000 VNĐ</td>
-                                        <td class="fw-bold ">124</td>
-                                        <td class="">$5,828</td>
-                                    </tr>
-                                    
-                                }
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>
-            </div><!-- End Top Selling -->
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script src="~/js/admin/home.js"></script>
 
