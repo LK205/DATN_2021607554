@@ -241,3 +241,37 @@ function DeleteById(id) {
         });
     }
 }
+
+function DowLoadExcel() {
+    const apiURL = "/Admin/Material/ExportExcel";
+    //const params = {
+    //    userId: 123,     
+    //    fileType: "pdf"  
+    //};
+    //const queryString = new URLSearchParams(params).toString();
+    //const fullURL = `${apiURL}?${queryString}`;
+
+    fetch(apiURL, {
+        method: 'GET',
+    })
+        .then(response => {
+            if (!response.ok) {
+                alert('Lỗi khi tải file');
+            }
+            return response.blob(); 
+        })
+        .then(blob => {
+            // Tạo link tạm thời để tải file
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "Material.xlsx"; 
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url); 
+        })
+        .catch(error => {
+            console.error('Có lỗi xảy ra:', error);
+        });
+}

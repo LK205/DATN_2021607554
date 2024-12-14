@@ -42,6 +42,8 @@ namespace CafeShop.Controllers
             HttpContext.Session.Remove("AccountId");
             HttpContext.Session.Remove("AccountRole");
             HttpContext.Session.Remove("FullName");
+            HttpContext.Session.Clear();
+
             return View();
         }
 

@@ -1,14 +1,37 @@
 ﻿$(document).ready(() => {
-    ChartTopSale();
-    ChartHardestToSell();
-    ChartPuchase();
-    ChartBestSaleTopping()
-    ChartPercentSuccessOrder();
-    GetFiveTopSale();
-    GetDataForMessage();
+    try {
+        ChartTopSale();
+        GetDataForMessage();
+        ChartHardestToSell();
+        ChartBestSaleTopping()
+
+        ChartPercentSuccessOrder();
+        GetFiveTopSale();
+        ChartPuchase();
+        ChartTotalRevanue();
+    } catch (exrr) {
+
+    }
     setInterval(function () {
         GetDataForMessage();
-    }, 300000);
+    }, 60000);
+
+
+    setInterval(function () {
+        try {
+            ChartTopSale();
+            GetDataForMessage();
+            ChartHardestToSell();
+            ChartBestSaleTopping()
+
+            ChartPercentSuccessOrder();
+            GetFiveTopSale();
+            ChartPuchase();
+            ChartTotalRevanue();
+        } catch (exrr) {
+
+        }
+    }, 180000);
 })
 
 function getTopSale() {
@@ -26,11 +49,11 @@ function getTopSale() {
 }
 
 async function ChartTopSale() {
-    let result = await getTopSale();
+    let resultTopSale = await getTopSale();
     let data = [];
     let categories = [];
-    if (result) {
-        result.forEach(res => {
+    if (resultTopSale) {
+        resultTopSale.forEach(res => {
             data.push(parseInt(res.totalSales));
             categories.push(res.productName);
         })
@@ -106,9 +129,13 @@ async function ChartTopSale() {
 
         }
     };
-    $("#chart_top_sale").html("");
-    var chart = new ApexCharts(document.querySelector("#chart_top_sale"), options);
-    chart.render();
+    try {
+        $("#chart_top_sale").html("");
+        var chart = new ApexCharts(document.querySelector("#chart_top_sale"), options);
+        chart.render();
+    } catch (exrr) {
+
+    }
 }
 
 
@@ -127,12 +154,12 @@ function getHardestToSell() {
 }
 
 async function ChartHardestToSell() {
-    let result = await getHardestToSell();
+    let resultHardestToSell = await getHardestToSell();
     let data = [];
     let categories = [];
 
-    if (result) {
-        result.forEach(res => {
+    if (resultHardestToSell) {
+        resultHardestToSell.forEach(res => {
             data.push(parseInt(res.totalSales));
             categories.push(res.productName);
         })
@@ -209,13 +236,19 @@ async function ChartHardestToSell() {
         }
 
     };
-    $("#chart_hardest_to_sell").html("");
-    var chart = new ApexCharts(document.querySelector("#chart_hardest_to_sell"), options);
-    chart.render();
+
+    try {
+        $("#chart_hardest_to_sell").html("");
+        var chart = new ApexCharts(document.querySelector("#chart_hardest_to_sell"), options);
+        chart.render();
+    } catch (exrr) {
+
+    }
 }
 
 function getPuchase() {
     let dateStr = $('#inputMonth').val()
+    if (!dateStr) return;
     let parts = dateStr.split('-');
     let year = parseInt(parts[0], 0);
     let month = parseInt(parts[1], 0);
@@ -230,12 +263,12 @@ function getPuchase() {
 }
 
 async function ChartPuchase() {
-    let result = await getPuchase();
+    let resultPuchase = await getPuchase();
     let data = [];
     let categories = [];
 
-    if (result) {
-        result.forEach(res => {
+    if (resultPuchase) {
+        resultPuchase.forEach(res => {
             data.push(parseInt(res.totalMoney));
             let parts = res.dayInMonth.split('-');
             categories.push(parseInt(parts[0], 0));
@@ -247,7 +280,7 @@ async function ChartPuchase() {
             data: data
         }],
         chart: {
-            height: 250,
+            height: '100%',
             type: 'bar',
         },
         plotOptions: {
@@ -313,8 +346,12 @@ async function ChartPuchase() {
 
     };
     $("#chart_puchase").html("");
-    var chart = new ApexCharts(document.querySelector("#chart_puchase"), options);
-    chart.render();
+    try {
+        var chart = new ApexCharts(document.querySelector("#chart_puchase"), options);
+        chart.render();
+    } catch (exrr) {
+
+    }
 }
 
 
@@ -345,7 +382,7 @@ function reloadChartPuchase() {
 //===============================================================================================================================================================
 let typeTable = 1
 function getOrderPercent() {
-    
+
     return new Promise(resolve => {
         $.get({
             url: `/Admin/Home/GetPercentOrderSuccess`,
@@ -357,15 +394,15 @@ function getOrderPercent() {
 }
 function SetTypeTable(id) {
     typeTable = id;
-    let headerText = id == 1 ? "Tuần" : (id == 2 ? "Tháng" : "Năm" )
+    let headerText = id == 1 ? "Tuần" : (id == 2 ? "Tháng" : "Năm")
     $("#title_percent_order_success").text(`Tỉ lệ đơn hàng thành công theo ${headerText}`);
     ChartPercentSuccessOrder();
 }
 async function ChartPercentSuccessOrder() {
-    let result = await getOrderPercent();
-    if (result.status != 1) return;
+    let resultPercentSuccessOrder = await getOrderPercent();
+    if (resultPercentSuccessOrder.status != 1) return;
     var options = {
-        series: [result.data.totalSuccess, result.data.totalFalse ],
+        series: [resultPercentSuccessOrder.data.totalSuccess, resultPercentSuccessOrder.data.totalFalse],
         chart: {
             width: 380,
             type: 'pie',
@@ -373,10 +410,13 @@ async function ChartPercentSuccessOrder() {
         colors: ['#008FFB', '#F44336'],
         labels: ['Thành công', 'Bị hủy']
     };
+    try {
+        $("#chart_percent_order_success").html("");
+        var chart = new ApexCharts(document.querySelector("#chart_percent_order_success"), options);
+        chart.render();
+    } catch (exrr) {
 
-    $("#chart_percent_order_success").html("");
-    var chart = new ApexCharts(document.querySelector("#chart_percent_order_success"), options);
-    chart.render();
+    }
 }
 
 
@@ -399,15 +439,15 @@ function SetTypeTopping(id) {
     ChartBestSaleTopping();
 }
 async function ChartBestSaleTopping() {
-    let result = await getBestSaleTopping();
-    if (result.status != 1) return;
+    let resultSaleTopping = await getBestSaleTopping();
+    if (resultSaleTopping == null || resultSaleTopping.status != 1) return;
     let data = [];
     let catalog = [];
 
-        result.data.forEach(res => {
-            data.push(parseInt(res.totalSale));
-            catalog.push(res.toppingName);
-        })
+    resultSaleTopping.data.forEach(res => {
+        data.push(parseInt(res.totalSale));
+        catalog.push(res.toppingName);
+    })
 
     var options = {
         series: data,
@@ -418,9 +458,13 @@ async function ChartBestSaleTopping() {
         labels: catalog
     };
 
-    $("#chart_topping_best_sale").html("");
-    var chart = new ApexCharts(document.querySelector("#chart_topping_best_sale"), options);
-    chart.render();
+    try {
+        $("#chart_topping_best_sale").html("");
+        var chart = new ApexCharts(document.querySelector("#chart_topping_best_sale"), options);
+        chart.render();
+    } catch (exrr) {
+
+    }
 }
 
 
@@ -432,15 +476,15 @@ function GetDataForMessage() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            let totalInCreaseSale = (data.totalCurrentWeek - (data.totalLastWeek == 1 ? 0 : data.totalLastWeek) ) / data.totalLastWeek
+            let totalInCreaseSale = (data.totalCurrentWeek - (data.totalLastWeek == 1 ? 0 : data.totalLastWeek)) / data.totalLastWeek
             let htmlSale = `
-                            <h6 >${data.totalCurrentWeek.toLocaleString('en-US') }</h6>
+                            <h6 >${data.totalCurrentWeek.toLocaleString('en-US')}</h6>
                             <span class="${totalInCreaseSale > 0 ? 'text-success' : 'text-danger'} small pt-1 fw-bold">${(Math.abs(totalInCreaseSale)).toFixed(2)}%</span> <span class="text-muted small pt-2 ps-1">${totalInCreaseSale > 0 ? 'tăng' : 'giảm'}</span>`
             $("#total_sales").html(htmlSale);
 
             let totalInCreaseRevenue = (data.moneyCurrentWeek - (data.moneyLastWeek == 1 ? 0 : data.moneyLastWeek)) / data.moneyLastWeek
             let htmlRevenue = `
-                            <h6 >${data.moneyCurrentWeek.toLocaleString('en-US') }</h6>
+                            <h6 >${data.moneyCurrentWeek.toLocaleString('en-US')}</h6>
                             <span class="${totalInCreaseRevenue >= 0.00 ? 'text-success' : 'text-danger'} small pt-1 fw-bold">${(Math.abs(totalInCreaseRevenue)).toFixed(2)}%</span> <span class="text-muted small pt-2 ps-1">${totalInCreaseRevenue >= 0.00 ? 'tăng' : 'giảm'}</span>`
             $("#total_revenue").html(htmlRevenue);
 
@@ -473,16 +517,74 @@ function GetFiveTopSale() {
                                         <th scope="row"><img src="${item.imageUrl}" alt="" style="width: 100%"></th>
                                         <td class="fw-bold">${item.productName}</td>
                                         <td class="">${item.price.toLocaleString('en-US')} VNĐ</td>
-                                        <td class="fw-bold ">${item.totalSales.toLocaleString('en-US') }</td>
-                                        <td class="">${item.productRevenue.toLocaleString('en-US') } VNĐ</td>
+                                        <td class="fw-bold ">${item.totalSales.toLocaleString('en-US')}</td>
+                                        <td class="">${item.productRevenue.toLocaleString('en-US')} VNĐ</td>
                                     </tr>`
             });
             $("#product_bestsale_week").html(html);
 
-            
+
         },
         error: function (err) {
             alert(err.responseText);
         }
     });
+}
+
+
+
+let typeFilter = 1
+function getTotalRevanue() {
+
+    let dateStart = $("#dateStart_total_revenuee").val();
+    let dateEnd = $("#dateEnd_total_revenue").val();
+
+    $("#title_chart_total_revenuee").text(`${moment(dateStart).format('DD/MM/YYYY')} - ${moment(dateEnd).format('DD/MM/YYYY')}`);
+
+    return new Promise(resolve => {
+        $.get({
+            url: `/Admin/Home/GetToToalRevenue`,
+            data: { dateStart, dateEnd },
+            success: data => resolve(data),
+            error: error => resolve(null)
+        })
+    })
+}
+function SetTypeFilter(id) {
+    typeFilter = id;
+    let headerText = id == 1 ? "Tuần" : (id == 2 ? "Tháng" : "Năm")
+    $("#chart_total_revenue_filter_text").text(headerText);
+    ChartTotalRevanue();
+}
+async function ChartTotalRevanue() {
+    let resultTotalRevanue = await getTotalRevanue();
+    if (resultTotalRevanue.status != 1) return;
+    let totalRevenue = resultTotalRevanue.data.totalMoneyOrder - resultTotalRevanue.data.totalMoneyReceipt
+    let htmlRevenue = ` <h6 class="${totalRevenue >= 0 ? 'text-success' : 'text-danger'}">${totalRevenue.toLocaleString('en-US')} VNĐ</h6>`
+    $("#chart_total_revenue_html").html(htmlRevenue);
+
+    var options = {
+        series: [resultTotalRevanue.data.totalMoneyOrder, resultTotalRevanue.data.totalMoneyReceipt],
+        chart: {
+            width: 380,
+            type: 'pie',
+        },
+        labels: ["Tổng thu", "Tổng chi"],
+        legend: {
+            position: 'bottom',
+            show: true,
+            formatter: function (seriesName, opts) {
+                // Tạo custom label cho legend
+                const value = opts.w.globals.series[opts.seriesIndex];
+                return `${seriesName}: ${value.toLocaleString('en-US')} VNĐ`;
+            }
+        }
+    };
+    try {
+        $("#chart_total_revenue").html("");
+        var chart = new ApexCharts(document.querySelector("#chart_total_revenue"), options);
+        chart.render();
+    } catch (exrr) {
+
+    }
 }

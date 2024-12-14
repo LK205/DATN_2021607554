@@ -69,7 +69,7 @@ function GetAll() {
     var request = $('#request').val() ?? "";
     var status = $('#order_status option:selected').val();
     var dateStart = $('#date_start').val();
-    var dateEnd = $('#date_end').val();
+    var dateEnd =   $('#date_end').val();
     let obj = {
         request,
         pageNumber,
@@ -266,3 +266,36 @@ function CallAPICancelOrder() {
     });
 }
 
+function DowLoadExcel() {
+    const apiURL = "/Admin/Order/ExportExcel";
+    const params = {
+        dateStart:$('#date_start').val(),
+        dateEnd: $('#date_end').val()
+    };
+    const queryString = new URLSearchParams(params).toString();
+    const fullURL = `${apiURL}?${queryString}`;
+
+    fetch(fullURL, {
+        method: 'GET',
+    })
+        .then(response => {
+            if (!response.ok) {
+                alert('Lỗi khi tải file');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            // Tạo link tạm thời để tải file
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "Order.xlsx";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            console.error('Có lỗi xảy ra:', error);
+        });
+}

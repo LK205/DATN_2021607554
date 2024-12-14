@@ -3,6 +3,8 @@ using CafeShop.Models.DTOs;
 using CafeShop.Config;
 using Microsoft.AspNetCore.Mvc;
 using CafeShop.Repository;
+using MesWeb.Models.CommonConfig;
+using System.Data;
 
 namespace CafeShop.Areas.Admin.Controllers
 {
@@ -66,6 +68,21 @@ namespace CafeShop.Areas.Admin.Controllers
         {
             List<Order> lst = _repo.GetAll().Where(p => p.Status == 0 && p.IsDeleted == false).ToList();
             return Json(lst.Count);
+        }
+
+        public async Task<FileResult> ExportExcel(DateTime dateStart, DateTime dateEnd)
+        {
+            dateStart = new DateTime(dateStart.Year, dateStart.Month, dateStart.Day, 0, 0, 0);
+            dateEnd = new DateTime(dateEnd.Year, dateEnd.Month, dateEnd.Day, 23, 59, 59);
+            DataSet ds = LoadDataFromSP.GetDataSetSP("spGetAllOrder", new string[] { "@Request", "@PageNumber", "@Status", "@DateStart", "@DateEnd" }
+                                                                          , new object[] { "", "1", -1,dateStart, dateEnd});
+            var result = TextUtils.ConvertDataTable<OrderDto>(ds.Tables[1]);
+            string[] colName = { "Mã đơn hàng", "Trạng thái", "Tổng tiền", "Khách hàng", "Số điện thoại", "Địa chỉ", "Lý do hủy" };
+            string[] colValue = { "OrderCode", "StatusText", "TotalMoney", "CustomerName", "PhoneNumber", "Address", "ReasonCancel" };
+            var (contentFile, contentType, fileName) = Excel.GenerateExcel("Order.xlsx", result.ToList(), colName, colValue);
+            return File(contentFile,
+                        contentType,
+                        fileName);
         }
     }
 }

@@ -80,7 +80,7 @@
                                             <ul class="dropdown-menu dropdown-menu" style="position: absolute; top: 40px; left: -70px;">
                                                 <li><a class="dropdown-item" asp-controller="AccountDetails" asp-action="Index">Cá nhân</a></li>
                                                 <li><a class="dropdown-item" asp-controller="Order" asp-action="Index">Lịch sử mua hàng</a></li>
-                                                @if (Role == 2)
+                                                @if (Role != 1)
                                                 {
                                                     <li><a class="dropdown-item" asp-area="Admin" asp-controller="Home" asp-action="Index">Quản lý</a></li>
                                                 }

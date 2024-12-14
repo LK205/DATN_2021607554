@@ -4,6 +4,7 @@ using CafeShop.Models.DTOs;
 using CafeShop.Reposiory;
 using CafeShop.Repository;
 using Humanizer;
+using MesWeb.Models.CommonConfig;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Data;
@@ -20,7 +21,7 @@ namespace CafeShop.Areas.Admin.Controllers
         public IActionResult Index()
         {
             Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
-            if (acc == null || acc.Role < 2)
+            if (acc == null || acc.Role == 3 || acc.Role == 1)
             {
                 return Redirect("/Home/Index");
             }
@@ -36,7 +37,9 @@ namespace CafeShop.Areas.Admin.Controllers
                                                                        , new object[] { pageNumber, request });
             var data = TextUtils.ConvertDataTable<MaterialDTO>(ds.Tables[0]);
             var totalCount = TextUtils.ConvertDataTable<PaginationDto>(ds.Tables[1]);
-            return Json(new { data, totalCount }, new System.Text.Json.JsonSerializerOptions());
+            var dataTotal = TextUtils.ConvertDataTable<MaterialDTO>(ds.Tables[2]);
+
+            return Json(new { data, totalCount, dataTotal }, new System.Text.Json.JsonSerializerOptions());
         }
 
         public async Task<JsonResult> GetByID(int Id)
@@ -105,6 +108,19 @@ namespace CafeShop.Areas.Admin.Controllers
         public JsonResult GetAllForView()
         {
             return Json(_materialRepo.GetAll(),new System.Text.Json.JsonSerializerOptions());
+        }
+
+        public async Task<FileResult> ExportExcel()
+        {
+            DataSet ds = LoadDataFromSP.GetDataSetSP("spGetAllMaterial", new string[] { "@PageNumber", "@Request" }
+                                                                      , new object[] { 1, "" });
+            var result = TextUtils.ConvertDataTable<MaterialDTO>(ds.Tables[2]);
+            string[] colName = { "Mã nguyên liệu", "Tên nguyên liệu", "Số lượng", "Đơn vị", "Đơn giá", "Nhà cung cấp", "Ghi chú" };
+            string[] colValue = { "MaterialCode", "MaterialName", "ToltalQuantity", "UnitName", "UnitPrice", "SupplierName", "Decription" };
+            var (contentFile, contentType, fileName) = Excel.GenerateExcel("Material.xlsx", result.ToList(), colName, colValue);
+            return File(contentFile,
+                        contentType,
+                        fileName);
         }
     }
 }

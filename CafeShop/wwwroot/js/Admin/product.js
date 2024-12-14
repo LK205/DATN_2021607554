@@ -104,7 +104,6 @@ function GetAll() {
         pageNumber: pageNumber,
         productTypeId: parseInt($("#group_product").val())
     };
-    console.log(obj);
     $.ajax({
         url: "/Admin/Product/GetAll",
         type: 'GET',

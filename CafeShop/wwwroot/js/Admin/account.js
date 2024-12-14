@@ -102,7 +102,6 @@ function GetAll() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-            console.log(data);
             var html = '';
             $.each(data.customer.data, function (index, item) {
                 html += `<tr class="align-middle">

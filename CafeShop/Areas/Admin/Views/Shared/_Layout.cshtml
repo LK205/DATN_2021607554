@@ -43,7 +43,6 @@
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
-        <!-- End Search Bar -->
 
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
@@ -52,73 +51,11 @@
 
                     <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-bell"></i>
-                        <span class="badge bg-primary badge-number">4</span>
+                        <span class="badge bg-primary badge-number" id="layout_notify_material_out_total">0</span>
                     </a><!-- End Notification Icon -->
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <li class="dropdown-header">
-                            You have 4 new notifications
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-exclamation-circle text-warning"></i>
-                            <div>
-                                <h4>Lorem Ipsum</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>30 min. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-x-circle text-danger"></i>
-                            <div>
-                                <h4>Atque rerum nesciunt</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>1 hr. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-check-circle text-success"></i>
-                            <div>
-                                <h4>Sit rerum fuga</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>2 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-info-circle text-primary"></i>
-                            <div>
-                                <h4>Dicta reprehenderit</h4>
-                                <p>Quae dolorem earum veritatis oditseno</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li class="dropdown-footer">
-                            <a href="#">Show all notifications</a>
-                        </li>
-
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" id="layout_notify_material_out_message" style="height: 30vh; overflow-y: auto;">
+                        
                     </ul><!-- End Notification Dropdown Items -->
 
                 </li><!-- End Notification Nav -->
@@ -168,94 +105,84 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#dashboard-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-grid"></i></i><span>DASHBOARD</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link collapsed" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-grid"></i><span>DASHBOARD</span>
                 </a>
-                <ul id="dashboard-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">
-                        <i class="bi bi-grid"></i>
-                        <span>Thống kê MANAGE</span>
+            </li>
+
+            @if (Role != 3)
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#product-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-menu-button-wide"></i><span>Quản lý</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
+                    <ul id="product-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
-                    <a class="nav-link" asp-controller="Home" asp-action="EmpDashboard">
-                        <i class="bi bi-grid"></i>
-                        <span>Thống kê EMP</span>
+                        <li>
+                            <a asp-controller="Product" asp-action="Index">
+                                <i class="bi bi-cup-hot-fill fs-6"></i> Sản phẩm
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Topping" asp-action="Index">
+                                <i class="bi bi-droplet-fill fs-6"></i> Topping
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Product" asp-action="ProductType">
+                                <i class="bi bi-collection fs-6"></i> Loại sản phẩm
+                            </a>
+                        </li>
+
+                        <li>
+                            <a asp-controller="ProductSize" asp-action="Index">
+                                <i class="bi bi-asterisk fs-6"></i> Size sản phẩm
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#warehouse-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-collection fs-6"></i><span>Kho</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
-                </ul>
+                    <ul id="warehouse-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
-            </li>
+                        <li>
+                            <a asp-controller="Material" asp-action="Index">
+                                <i class="bi bi-kanban-fill fs-6"></i> Nguyên vật liệu
+                            </a>
+                        </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#product-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Quản lý</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="product-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a asp-controller="GoodsReceipt" asp-action="Index">
+                                <i class="bi bi-folder-plus fs-6"></i> Phiếu nhập
+                            </a>
+                        </li>
 
-                    <li>
-                        <a asp-controller="Product" asp-action="Index">
-                            <i class="bi bi-cup-hot-fill fs-6"></i> Sản phẩm
-                        </a>
-                    </li>
+                        <li>
+                            <a asp-controller="GoodsIssue" asp-action="Index">
+                                <i class="bi bi-folder-symlink fs-6"></i> Phiếu xuất
+                            </a>
+                        </li>
 
-                    <li>
-                        <a asp-controller="Topping" asp-action="Index">
-                            <i class="bi bi-droplet-fill fs-6"></i> Topping
-                        </a>
-                    </li>
+                        <li>
+                            <a asp-controller="Supplier" asp-action="Index">
+                                <i class="bi bi-suitcase-lg-fill fs-6"></i> Nhà cung cấp
+                            </a>
+                        </li>
 
-                    <li>
-                        <a asp-controller="Product" asp-action="ProductType">
-                            <i class="bi bi-collection fs-6"></i> Loại sản phẩm
-                        </a>
-                    </li>
+                        <li>
+                            <a asp-controller="Unit" asp-action="Index">
+                                <i class="bi bi-inbox-fill fs-6"></i> Đơn vị
+                            </a>
+                        </li>
 
-                    <li>
-                        <a asp-controller="ProductSize" asp-action="Index">
-                            <i class="bi bi-asterisk fs-6"></i> Size sản phẩm
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#warehouse-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-collection fs-6"></i><span>Kho</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="warehouse-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-
-                    <li>
-                        <a asp-controller="Material" asp-action="Index">
-                            <i class="bi bi-kanban-fill fs-6"></i> Nguyên vật liệu
-                        </a>
-                    </li>
-
-                    <li>
-                        <a asp-controller="GoodsReceipt" asp-action="Index">
-                            <i class="bi bi-folder-plus fs-6"></i> Phiếu nhập
-                        </a>
-                    </li>
-
-                    <li>
-                        <a asp-controller="GoodsIssue" asp-action="Index">
-                            <i class="bi bi-folder-symlink fs-6"></i> Phiếu xuất
-                        </a>
-                    </li>
-
-                    <li>
-                        <a asp-controller="Supplier" asp-action="Index">
-                            <i class="bi bi-suitcase-lg-fill fs-6"></i> Nhà cung cấp
-                        </a>
-                    </li>
-
-                    <li>
-                        <a asp-controller="Unit" asp-action="Index">
-                            <i class="bi bi-inbox-fill fs-6"></i> Đơn vị
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-
+                    </ul>
+                </li>
+            }
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#account-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-person-vcard "></i><span>Tài khoản</span><i class="bi bi-chevron-down ms-auto"></i>

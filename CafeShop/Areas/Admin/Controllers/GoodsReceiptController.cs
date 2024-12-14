@@ -8,6 +8,7 @@ using CafeShop.Reposiory;
 using System.Xml;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MesWeb.Models.CommonConfig;
 
 namespace CafeShop.Areas.Admin.Controllers
 {
@@ -24,7 +25,7 @@ namespace CafeShop.Areas.Admin.Controllers
         public IActionResult Index()
         {
             Account acc = _accRepo.GetByID(HttpContext.Session.GetInt32("AccountId") ?? 0);
-            if (acc == null || acc.Role < 2)
+            if (acc == null || acc.Role == 3 || acc.Role == 1)
             {
                 return Redirect("/Home/Index");
             }
@@ -228,6 +229,21 @@ namespace CafeShop.Areas.Admin.Controllers
             }
             string goodsRecriptCode = $"PNH{curentDate.ToString("yyyyMMdd")}T{totalcount}";
             return goodsRecriptCode;
+        }
+
+        public async Task<FileResult> ExportExcel(DateTime dateStart, DateTime dateEnd)
+        {
+            dateStart = new DateTime(dateStart.Year, dateStart.Month, dateStart.Day, 0, 0, 0);
+            dateEnd = new DateTime(dateEnd.Year, dateEnd.Month, dateEnd.Day, 23, 59, 59);
+            DataSet ds = LoadDataFromSP.GetDataSetSP("spGetAllGoodsReceipt", new string[] { "@PageNumber", "@Request", "@DateStart", "@DateEnd", "@AccountID" }
+                                                                          , new object[] { "1", "", dateStart, dateEnd, 0 });
+            var result = TextUtils.ConvertDataTable<GoodReceiptResponeDTO>(ds.Tables[2]);
+            string[] colName = { "Mã phiếu nhập", "Ngày nhập", "Tổng tiền", "Nhà cung cấp", "Người nhập", "Ghi chú" };
+            string[] colValue = { "GoodsReceiptCode", "ReceiptedDate", "TotalMoney", "SupplierName", "FullName", "Decription" };
+            var (contentFile, contentType, fileName) = Excel.GenerateExcel("GoodsReceipt.xlsx", result.ToList(), colName, colValue);
+            return File(contentFile,
+                        contentType,
+                        fileName);
         }
     }
 }
