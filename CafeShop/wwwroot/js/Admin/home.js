@@ -32,6 +32,10 @@
 
         }
     }, 180000);
+
+
+    ShowSpinnerClient();
+
 })
 
 function getTopSale() {

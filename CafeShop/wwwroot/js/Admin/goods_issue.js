@@ -248,7 +248,6 @@ function GetDetails(id, event) {
 }
 
 function GetById(id) {
-        ShowSpinnerClient();
     $('#btn_deleteModal').show();
     $('#staticBackdropLabel').text("Cập nhật Phiếu nhập");
     modelID = id;

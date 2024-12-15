@@ -55,7 +55,6 @@
                     </a><!-- End Notification Icon -->
 
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications" id="layout_notify_material_out_message" style="height: 30vh; overflow-y: auto;">
-                        
                     </ul><!-- End Notification Dropdown Items -->
 
                 </li><!-- End Notification Nav -->
@@ -238,7 +237,8 @@
     </div><!-- End Footer -->
     <div class="modal fade" id="model_spinner_layout_client" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="model_spinner_layout_client" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <img src="~/assets/xosx.gif" id="spinner_layout_client" style="width: 30%; margin: auto" />
+             @* <img src="~/assets/xosx.gif" id="spinner_layout_client" style="width: 30%; margin: auto" /> *@
+            <img src="~/assets/Vg1.gif" id="spinner_layout_client" />
         </div>
     </div>
 
@@ -257,8 +257,9 @@
     <script src="~/js/admin/layout.js"></script>
     <script src="~/js/moment.min.2.29.2.js"></script>
     <script src="~/js/client/layout_spinner.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 
 
-@await RenderSectionAsync("Scripts", required: false)
 </html>

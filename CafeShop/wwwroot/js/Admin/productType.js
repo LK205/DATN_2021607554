@@ -134,7 +134,6 @@ function GetAll() {
 
 
 function GetById(id) {
-    ShowSpinnerClient();
     $('#btn_deleteModal').show();
     $('#staticBackdropLabel').text("Cập nhật loại sản phẩm");
     productTypeId = id;

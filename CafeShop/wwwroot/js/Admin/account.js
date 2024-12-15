@@ -88,7 +88,7 @@ $('#btn_deleteModal').click(function () {
     DeleteById(accountId);
 });
 function GetAll() {
-        ShowSpinnerClient();
+    ShowSpinnerClient();
     let _url = "/Admin/Account/GetAll?";
     var request = $('#request').val();
     var groupId = $('#groupId option:selected').val();
@@ -115,7 +115,8 @@ function GetAll() {
                             <td scope="col">${item.roleText}</td>
                             <td scope="col">${item.phoneNumber}</td>
                             <td scope="col">${item.address}</td>
-                            
+                            <td scope="col">${item.totalOrderSuccess}</td>
+                            <td scope="col">${item.totalOrderCancel}</td>
                         </tr>`;
             })
             let total = Math.ceil(data.customer.totalCount[0].totalCount / 10);
@@ -169,7 +170,6 @@ function GetAll() {
 
 
 function GetById(id) {
-        ShowSpinnerClient();
     $('#btn_deleteModal').show();
     $('#staticBackdropLabel').text("Cập nhật Size");
     accountId = id;
@@ -212,7 +212,7 @@ function CreateOrUpdate() {
         return
     }
 
-  
+
     ShowSpinnerClient();
     var obj = {
         Id: accountId,
