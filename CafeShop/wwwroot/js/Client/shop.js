@@ -54,6 +54,7 @@ $('#btn_search').click(function () {
     GetAll();
 })
 function GetAll() {
+    ShowSpinnerClient();
     let _url = "/Shop/GetALlProduct?";
     var request = $('#request').val();
     var groupId = $('#groupId option:selected').val();
@@ -107,9 +108,11 @@ function GetAll() {
         },
 
         error: function (err) {
-            MessageError(err.responseText);
+            alert(err.responseText);
+
         }
     });
+    HideSpinnerClient();
 }
 function GetAllProductType() {
     $.ajax({
@@ -141,7 +144,7 @@ function GetAllProductType() {
     });
 }
 
-function changeType(type){
+function changeType(type) {
     typeId = type;
     pageNumber = 1;
     GetAll();

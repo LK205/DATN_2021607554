@@ -88,6 +88,7 @@ $('#btn_deleteModal').click(function () {
     DeleteById(accountId);
 });
 function GetAll() {
+        ShowSpinnerClient();
     let _url = "/Admin/Account/GetAll?";
     var request = $('#request').val();
     var groupId = $('#groupId option:selected').val();
@@ -168,6 +169,7 @@ function GetAll() {
 
 
 function GetById(id) {
+        ShowSpinnerClient();
     $('#btn_deleteModal').show();
     $('#staticBackdropLabel').text("Cập nhật Size");
     accountId = id;
@@ -211,7 +213,7 @@ function CreateOrUpdate() {
     }
 
   
-
+    ShowSpinnerClient();
     var obj = {
         Id: accountId,
         FullName: $("#formName").val(),

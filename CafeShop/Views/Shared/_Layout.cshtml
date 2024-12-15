@@ -106,10 +106,14 @@
             </div>
         </nav>
     </header>
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-
+   @*   <main role="main" class="pb-3">
+         @RenderBody()
+     </main> *@
+    <div class="container mb-3">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
     <footer class="bg-dark" id="tempaltemo_footer">
         <div class="container">
             <div class="row">
@@ -184,6 +188,12 @@
         </div>
     </footer>
 
+    <div class="modal fade" id="model_spinner_layout_client" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="model_spinner_layout_client" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <img src="~/assets/xosx.gif" id="spinner_layout_client" style="width: 30%; margin: auto" />
+        </div>
+    </div>
+
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/bootstrap.bundle.min.js"></script>
@@ -191,7 +201,7 @@
     <script src="~/js/jquery-migrate-1.2.1.min.js"></script>
     <script src="~/js/templatemo.min.js"></script>
     <script src="~/js/moment.min.2.29.2.js"></script>
-
+    <script src="~/js/client/layout_spinner.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

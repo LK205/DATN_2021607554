@@ -90,6 +90,7 @@ $('#btn_deleteModal').click(function () {
 });
 
 function GetAll() {
+    ShowSpinnerClient()
     let _url = "/Admin/Unit/GetAll?";
     var request = $('#request').val();
     if (request.length > 0) {
@@ -134,6 +135,7 @@ function GetAll() {
 
 
 function GetById(id) {
+    ShowSpinnerClient()
     $('#btn_deleteModal').show();
     $('#staticBackdropLabel').text("Cập nhật đơn vị");
     modelID = id;
@@ -177,6 +179,7 @@ function CreateOrUpdate() {
     }
 
     if (isValid) {
+        ShowSpinnerClient();
         let _url = "/Admin/Unit/CreateOrUpdate";
         $.ajax({
             type: 'POST',
@@ -188,8 +191,8 @@ function CreateOrUpdate() {
                     alert(result.statusText)
                 }
                 else {
-                    CloseModal();
                     GetAll();
+                    CloseModal();
                 }
             },
             error: function (err) {
@@ -200,6 +203,7 @@ function CreateOrUpdate() {
 }
 function DeleteById(id) {
     if (confirm("Bạn có chắc chắn muốn thực hiện thao tác này?") == true) {
+        ShowSpinnerClient()
         let _url = "/Admin/Unit/Delete";
         $.ajax({
             type: 'GET',

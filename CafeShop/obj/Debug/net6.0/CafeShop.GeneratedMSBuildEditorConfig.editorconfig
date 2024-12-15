@@ -9,147 +9,147 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CafeShop
 build_property.RootNamespace = CafeShop
-build_property.ProjectDir = D:\DATN\Code\DATN\CafeShop\CafeShop\
+build_property.ProjectDir = D:\LMK205\DATN\Code\DATN_2021607554\DATN_2021607554\CafeShop\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\DATN\Code\DATN\CafeShop\CafeShop
+build_property.MSBuildProjectDirectory = D:\LMK205\DATN\Code\DATN_2021607554\DATN_2021607554\CafeShop
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Account/actionResult.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Account/actionResult.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxhY3Rpb25SZXN1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Account/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Account/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWNjb3VudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/GoodsIssue/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/GoodsIssue/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcR29vZHNJc3N1ZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/GoodsReceipt/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/GoodsReceipt/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcR29vZHNSZWNlaXB0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Home/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Material/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Material/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcTWF0ZXJpYWxcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Order/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Order/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcT3JkZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/ProductSize/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/ProductSize/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdFNpemVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Product/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Product/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Product/ProductType.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Product/ProductType.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUHJvZHVjdFxQcm9kdWN0VHlwZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Shared/Error.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Supplier/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Supplier/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU3VwcGxpZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Topping/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Topping/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVG9wcGluZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Unit/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Unit/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVW5pdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/_ViewImports.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/_ViewStart.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/About/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/About/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/AccountDetails/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/AccountDetails/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudERldGFpbHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Account/Register.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Cart/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Cart/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Contact/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Contact/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Home/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Home/Privacy.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Order/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Order/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Order/OrderDetails.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Order/OrderDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJcT3JkZXJEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Shared/Error.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Shop/Index.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Shop/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Shop/IndexDetails.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Shop/IndexDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hvcFxJbmRleERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/_ViewImports.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/_ViewStart.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Areas/Admin/Views/Shared/_Layout.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Areas/Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-lgzti873bz
 
-[D:/DATN/Code/DATN/CafeShop/CafeShop/Views/Shared/_Layout.cshtml]
+[D:/LMK205/DATN/Code/DATN_2021607554/DATN_2021607554/CafeShop/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ouf7m45xk0

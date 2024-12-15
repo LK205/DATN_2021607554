@@ -97,6 +97,7 @@ $('#btn_deleteModal').click(function () {
     DeleteById(productId);
 });
 function GetAll() {
+    ShowSpinnerClient();
     var groupId = $('#groupId option:selected').val();
 
     let obj = {
@@ -140,6 +141,7 @@ function GetAll() {
     });
 }
 function GetById(id) {
+    ShowSpinnerClient();
     $('#btn_deleteModal').show();
     $('#staticBackdropLabel').text("Cập nhật sản phẩm");
     productId = id;
@@ -247,6 +249,7 @@ function Validate() {
 }
 function CreateOrUpdate() {
     if (Validate()) {
+        ShowSpinnerClient();
         let arrDetails = [];
         if ($(".product_details_item").length > 0) {
             $(".product_details_item").each(function (index, el) {
@@ -309,6 +312,7 @@ function CreateOrUpdate() {
 }
 function DeleteById(id) {
     if (confirm("Bạn có chắc chắn muốn thực hiện thao tác này?") == true) {
+        ShowSpinnerClient();
         let _url = "/Admin/Product/Delete";
         $.ajax({
             type: 'GET',

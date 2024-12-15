@@ -29,6 +29,8 @@ function UpdateLoadData() {
 
 
         if (isValid) {
+            ShowSpinnerClient();
+
             let obj = {
                 Id: parseInt($("#Account_ID").val()),
                 FullName: fullName,
@@ -121,6 +123,8 @@ function ChangePassword() {
 
 
     if (isValid) {
+        ShowSpinnerClient();
+
         let obj = {
             AccountID: parseInt($("#Account_ID").val()),
             OldPassword: oldPassword,

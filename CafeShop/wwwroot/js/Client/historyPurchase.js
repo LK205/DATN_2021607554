@@ -4,6 +4,7 @@ $(document).ready(function (e) {
 });
 
 function GetAll() {
+    ShowSpinnerClient();
     var request = $('#request').val() ?? "";
     var dateStart = $('#date_start').val();
     var dateEnd = $('#date_end').val();
@@ -91,7 +92,7 @@ function GetAll() {
                                                         <span class=" me-2">Size:</span><span>${item.sizeName}</span>
                                                     </p>
                                                     <p class="fw-bold mb-0">
-                                                        <span class="text-danger">${item.unitPrice.toLocaleString('en-US') } VNĐ</span>
+                                                        <span class="text-danger">${item.unitPrice.toLocaleString('en-US')} VNĐ</span>
                                                     </p>
                                                 </div>
                                                 <div class="col-md-5 mb-4 mb-md-0">
@@ -99,7 +100,7 @@ function GetAll() {
                                                        <span class="align-middle">Tổng tiền:</span>
                                                     </h5>
                                                     <h5 class="mb-2">
-                                                       <span class="align-middle text-danger fw-bold">${item.totalMoney.toLocaleString('en-US') } VNĐ</span>
+                                                       <span class="align-middle text-danger fw-bold">${item.totalMoney.toLocaleString('en-US')} VNĐ</span>
                                                     </h5>
                                                     
                                                     <div class="d-flex justify-content-end">
@@ -153,7 +154,7 @@ function StatusApproved(orderId, status) {
     }
 }
 
-function ShowReasonCancel(status,reasonCancel) {
+function ShowReasonCancel(status, reasonCancel) {
     if (status != 3) return;
 
 

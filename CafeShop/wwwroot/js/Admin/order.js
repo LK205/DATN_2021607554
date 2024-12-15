@@ -66,6 +66,7 @@ $('#btn_search').click(function () {
     GetAll();
 })
 function GetAll() {
+    ShowSpinnerClient();
     var request = $('#request').val() ?? "";
     var status = $('#order_status option:selected').val();
     var dateStart = $('#date_start').val();

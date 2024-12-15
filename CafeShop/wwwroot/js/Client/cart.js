@@ -4,6 +4,7 @@
 
 
 function GetAll() {
+    ShowSpinnerClient();
     $.ajax({
         url: "/Cart/GetCartByAccountId",
         type: 'GET',
@@ -102,7 +103,6 @@ function GetAll() {
             $("#cart_item").html(html);
             TotalMoney();
         },
-
         error: function (err) {
             alert(err.responseText);
         }

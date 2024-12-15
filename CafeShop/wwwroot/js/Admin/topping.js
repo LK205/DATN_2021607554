@@ -89,6 +89,8 @@ $('#btn_deleteModal').click(function () {
     DeleteById(modelID);
 });
 function GetAll() {
+    ShowSpinnerClient();
+
     let _url = "/Admin/Topping/GetAll?";
     var request = $('#request').val();
     var groupId = $('#groupId option:selected').val();
@@ -133,6 +135,7 @@ function GetAll() {
 
 
 function GetById(id) {
+    ShowSpinnerClient();
     $('#btn_deleteModal').show();
     $('#staticBackdropLabel').text("Cập nhật topping");
     modelID = id;
@@ -181,6 +184,7 @@ function CreateOrUpdate() {
 
 
     if (isValid) {
+        ShowSpinnerClient();
         let _url = "/Admin/Topping/CreateOrUpdate";
         $.ajax({
             type: 'POST',
@@ -192,8 +196,8 @@ function CreateOrUpdate() {
                     alert(result.statusText)
                 }
                 else {
-                    CloseModal();
                     GetAll();
+                    CloseModal();
                 }
             },
             error: function (err) {
@@ -204,6 +208,7 @@ function CreateOrUpdate() {
 }
 function DeleteById(id) {
     if (confirm("Bạn có chắc chắn muốn thực hiện thao tác này?") == true) {
+        ShowSpinnerClient();
         let _url = "/Admin/Topping/Delete";
         $.ajax({
             type: 'GET',
