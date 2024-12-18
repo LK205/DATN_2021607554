@@ -45,7 +45,7 @@ function GetAll() {
                                             <i class="bi bi-x-circle"></i>  <span class="fw-bold">Lý do hủy:</span> ${item.reasonCancel}
                                         </li>`
                 let styleButton = (item.status == 0 || item.status == 1) ? "warning" : ((item.status == 2) ? "success" : "danger")
-                htmlCard += `<div class="card p-0">
+                htmlCard += `<div class="card p-0 mb-3">
                                 <div class="card-body p-1">
                                     <div class="container">
                                         <div class="container">

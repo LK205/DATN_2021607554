@@ -302,7 +302,7 @@ async function ChartPuchase() {
             },
             offsetY: -20,
             style: {
-                fontSize: '12px',
+                fontSize: '8px',
                 colors: ["#304758"]
             }
         },
@@ -482,17 +482,17 @@ function GetDataForMessage() {
         success: function (data) {
             let totalInCreaseSale = (data.totalCurrentWeek - (data.totalLastWeek == 1 ? 0 : data.totalLastWeek)) / data.totalLastWeek
             let htmlSale = `
-                            <h6 >${data.totalCurrentWeek.toLocaleString('en-US')}</h6>
+                            <h6 >${data.totalCurrentWeek.toLocaleString('en-US')} lượt</h6>
                             <span class="${totalInCreaseSale > 0 ? 'text-success' : 'text-danger'} small pt-1 fw-bold">${(Math.abs(totalInCreaseSale)).toFixed(2)}%</span> <span class="text-muted small pt-2 ps-1">${totalInCreaseSale > 0 ? 'tăng' : 'giảm'}</span>`
             $("#total_sales").html(htmlSale);
 
             let totalInCreaseRevenue = (data.moneyCurrentWeek - (data.moneyLastWeek == 1 ? 0 : data.moneyLastWeek)) / data.moneyLastWeek
             let htmlRevenue = `
-                            <h6 >${data.moneyCurrentWeek.toLocaleString('en-US')}</h6>
+                            <h6 >${data.moneyCurrentWeek.toLocaleString('en-US')} VNĐ</h6>
                             <span class="${totalInCreaseRevenue >= 0.00 ? 'text-success' : 'text-danger'} small pt-1 fw-bold">${(Math.abs(totalInCreaseRevenue)).toFixed(2)}%</span> <span class="text-muted small pt-2 ps-1">${totalInCreaseRevenue >= 0.00 ? 'tăng' : 'giảm'}</span>`
             $("#total_revenue").html(htmlRevenue);
 
-            $("#total_order_unprocess").text(data.totalUnProcess);
+            $("#total_order_unprocess").text(`${data.totalUnProcess} ĐH`);
         },
         error: function (err) {
             alert(err.responseText);
