@@ -156,9 +156,9 @@ namespace CafeShop.Controllers
             int currentYear = DateTime.Now.Year;
             List<Order> lst = SQLHelper<Order>.SqlToList($"SELECT * FROM [Order] WHERE YEAR(CreateDate) = {currentYear}");
             string numberCode = (lst.Count + 1).ToString(); 
-            while (numberCode.Length < 6)
+            while (numberCode.Length < 7)
             {
-                numberCode += "0" + numberCode;
+                numberCode = "0" + numberCode;
             }
             string code = $"CFS{currentYear}{numberCode}";
             return code;

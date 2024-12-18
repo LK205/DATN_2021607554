@@ -344,32 +344,32 @@ function Validate() {
         isValid = false;
         return false;
     }
-    $(".goodsReceipt_details_item").each(function (index, el) {
-        let price = ($(el).find(".material-price").val());
-        let materialID = parseInt($(el).find(".material-Id").val());
-        let materialQuantity = parseInt($(el).find(".material-total").val());
-        if (!materialID || materialID <= 0) {
-            alert("Trường Nguyên vật liệu không được bỏ trống!");
-            isValid = false;
-            return false;
-        }
-        if (!price || price.trim().length <= 0) {
-            alert("Vui lòng nhập đủ giá tiền cho Nguyên vật liệu!");
-            isValid = false;
-            return false;
-        }
-        if (materialQuantity <= 0) {
-            alert("Vui lòng nhập đủ số lượng cho Nguyên vật liệu!");
-            isValid = false;
-            return false;
-        }
+    //$(".goodsReceipt_details_item").each(function (index, el) {
+    //    let price = ($(el).find(".material-price").val());
+    //    let materialID = parseInt($(el).find(".material-Id").val());
+    //    let materialQuantity = parseInt($(el).find(".material-total").val());
+    //    if (!materialID || materialID <= 0) {
+    //        alert("Trường Nguyên vật liệu không được bỏ trống!");
+    //        isValid = false;
+    //        return false;
+    //    }
+    //    if (!price || price.trim().length <= 0) {
+    //        alert("Vui lòng nhập đủ giá tiền cho Nguyên vật liệu!");
+    //        isValid = false;
+    //        return false;
+    //    }
+    //    if (materialQuantity <= 0) {
+    //        alert("Vui lòng nhập đủ số lượng cho Nguyên vật liệu!");
+    //        isValid = false;
+    //        return false;
+    //    }
 
-        if (isMaterial == materialID) {
-            alert("Không được tồn tại nguyên vật liệu giống nhau!");
-            isValid = false;
-            return false;
-        }
-    });
+    //    if (isMaterial == materialID) {
+    //        alert("Không được tồn tại nguyên vật liệu giống nhau!");
+    //        isValid = false;
+    //        return false;
+    //    }
+    //});
     return isValid;
 }
 function CreateOrUpdate() {
@@ -378,7 +378,10 @@ function CreateOrUpdate() {
         let arrDetails = [];
         $(".goodsReceipt_details_item").each(function (index, el) {
             let materialID = parseInt($(el).find(".material-Id").val());
-            let price = parseInt($(el).find(".material-price").val().replaceAll(",", ""));
+            let price = $(el).find(".material-price").val()
+            if (!price || isNaN(price)) return;
+
+            price = parseInt(price.replaceAll(",", ""));
             let quantity = parseInt($(el).find(".material-total").val());
 
             let objDetails = {

@@ -3,6 +3,9 @@
     GetAllSize();
     GetAllProductType();
     $(".select2").select2();
+    $(".select2_formProductTypeId").select2({
+        dropdownParent: $("#staticBackdrop")
+    });
 });
 var pageNumber = 1;
 var totalPage = 0;

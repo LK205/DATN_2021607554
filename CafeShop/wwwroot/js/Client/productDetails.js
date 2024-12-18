@@ -22,7 +22,6 @@ function AddCart(event) {
         alert("Hãy chọn size sản phẩm!");
         return;
     }
-    ShowSpinnerClient();
     let quantity = $("#product-quanity").val();
     let toppingIDs = [];
     $(".input-topping").each(function (index, el) {
@@ -57,7 +56,6 @@ function AddCart(event) {
             alert(err.responseText);
         }
     });
-    HideSpinnerClient();
 }
 
 function changeImage(event) {

@@ -135,7 +135,6 @@ function GetAll() {
 
 
 function GetById(id) {
-    ShowSpinnerClient();
     $('#btn_deleteModal').show();
     $('#staticBackdropLabel').text("Cập nhật topping");
     modelID = id;
@@ -184,7 +183,6 @@ function CreateOrUpdate() {
 
 
     if (isValid) {
-        ShowSpinnerClient();
         let _url = "/Admin/Topping/CreateOrUpdate";
         $.ajax({
             type: 'POST',
@@ -208,7 +206,6 @@ function CreateOrUpdate() {
 }
 function DeleteById(id) {
     if (confirm("Bạn có chắc chắn muốn thực hiện thao tác này?") == true) {
-        ShowSpinnerClient();
         let _url = "/Admin/Topping/Delete";
         $.ajax({
             type: 'GET',

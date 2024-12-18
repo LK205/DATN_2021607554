@@ -4,7 +4,6 @@
 
 
 function GetAll() {
-    ShowSpinnerClient();
     $.ajax({
         url: "/Cart/GetCartByAccountId",
         type: 'GET',

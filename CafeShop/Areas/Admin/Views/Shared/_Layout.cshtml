@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["CafeShop"] - CafeShop</title>
+    <title>CafeShop - Admin</title>
+    <link rel="icon" type="image/png" href="~/assets/logo.jpg">
+
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CafeShop.styles.css" asp-append-version="true" />
     <link href="~/assets/admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -38,7 +41,7 @@
     <div id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center">
                 <span class="d-none d-lg-block">Coffe Shop Admin</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
