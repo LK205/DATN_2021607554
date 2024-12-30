@@ -41,6 +41,14 @@
       "PackagePath": "staticwebassets\\GoodsReceipt\\2024\\12\\PNH20241205T000002_0512YYYY\\BTL-Nhom8-Final.docx"
     },
     {
+      "Id": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\GoodsReceipt\\2024\\12\\PNH20241219T000002_13122024\\Material.xlsx",
+      "PackagePath": "staticwebassets\\GoodsReceipt\\2024\\12\\PNH20241219T000002_13122024\\Material.xlsx"
+    },
+    {
+      "Id": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\GoodsReceipt\\2024\\12\\PNH20241219T000002_13122024\\logo.jpg",
+      "PackagePath": "staticwebassets\\GoodsReceipt\\2024\\12\\PNH20241219T000002_13122024\\logo.jpg"
+    },
+    {
       "Id": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\Images\\Avatar\\Account2\\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg",
       "PackagePath": "staticwebassets\\Images\\Avatar\\Account2\\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg"
     },
@@ -177,8 +185,8 @@
       "PackagePath": "staticwebassets\\Images\\Product\\TraTraiCay\\TeaTraiCay03\\1719200101_kimquat_892a8e85be0e4ab9951626bd2e2e04c6.webp"
     },
     {
-      "Id": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\Images\\Product\\TraTraiCay\\TeaTraiCay04\\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.jpg",
-      "PackagePath": "staticwebassets\\Images\\Product\\TraTraiCay\\TeaTraiCay04\\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.jpg"
+      "Id": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\Images\\Product\\TraTraiCay\\TeaTraiCay04\\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.webp",
+      "PackagePath": "staticwebassets\\Images\\Product\\TraTraiCay\\TeaTraiCay04\\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.webp"
     },
     {
       "Id": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\Images\\Product\\TraTraiCay\\TeaTraiCay05\\tra-sen_905594_6f6088347912437a9a0d851bdaa510a6.webp",

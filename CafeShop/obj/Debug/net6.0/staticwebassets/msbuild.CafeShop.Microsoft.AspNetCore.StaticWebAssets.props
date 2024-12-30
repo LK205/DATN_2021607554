@@ -14768,6 +14768,38 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241205T000002_0512YYYY\BTL-Nhom8-Final.docx))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241219T000002_13122024\logo.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>GoodsReceipt/2024/12/PNH20241219T000002_13122024/logo.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241219T000002_13122024\logo.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241219T000002_13122024\Material.xlsx))">
+      <SourceType>Package</SourceType>
+      <SourceId>CafeShop</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/CafeShop</BasePath>
+      <RelativePath>GoodsReceipt/2024/12/PNH20241219T000002_13122024/Material.xlsx</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\GoodsReceipt\2024\12\PNH20241219T000002_13122024\Material.xlsx))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Avatar\Account2\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg))">
       <SourceType>Package</SourceType>
       <SourceId>CafeShop</SourceId>
@@ -15312,12 +15344,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\TraTraiCay\TeaTraiCay03\1719200101_kimquat_892a8e85be0e4ab9951626bd2e2e04c6.webp))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\TraTraiCay\TeaTraiCay04\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\TraTraiCay\TeaTraiCay04\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.webp))">
       <SourceType>Package</SourceType>
       <SourceId>CafeShop</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/CafeShop</BasePath>
-      <RelativePath>Images/Product/TraTraiCay/TeaTraiCay04/1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.jpg</RelativePath>
+      <RelativePath>Images/Product/TraTraiCay/TeaTraiCay04/1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.webp</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -15326,7 +15358,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\TraTraiCay\TeaTraiCay04\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\TraTraiCay\TeaTraiCay04\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.webp))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\Images\Product\TraTraiCay\TeaTraiCay05\tra-sen_905594_6f6088347912437a9a0d851bdaa510a6.webp))">
       <SourceType>Package</SourceType>

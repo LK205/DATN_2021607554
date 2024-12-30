@@ -31,7 +31,7 @@
         } catch (exrr) {
 
         }
-    }, 180000);
+    }, 75000);
 
 
     ShowSpinnerClient();

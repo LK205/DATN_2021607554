@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1THtrVSPHkBNHnz7Noe8lGAPCiq59AegzqhTa+eGI1k=",
+  "Hash": "EzlatwG/TsixckU6UUPPO+LkDCCFc0ABKdzBUyR/7f0=",
   "Source": "CafeShop",
   "BasePath": "_content/CafeShop",
   "Mode": "Default",
@@ -17573,6 +17573,44 @@
       "OriginalItemSpec": "wwwroot\\GoodsReceipt\\2024\\12\\PNH20241205T000002_0512YYYY\\BTL-Nhom8-Final.docx"
     },
     {
+      "Identity": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\GoodsReceipt\\2024\\12\\PNH20241219T000002_13122024\\logo.jpg",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "GoodsReceipt/2024/12/PNH20241219T000002_13122024/logo.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\GoodsReceipt\\2024\\12\\PNH20241219T000002_13122024\\logo.jpg"
+    },
+    {
+      "Identity": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\GoodsReceipt\\2024\\12\\PNH20241219T000002_13122024\\Material.xlsx",
+      "SourceId": "CafeShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\",
+      "BasePath": "_content/CafeShop",
+      "RelativePath": "GoodsReceipt/2024/12/PNH20241219T000002_13122024/Material.xlsx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\GoodsReceipt\\2024\\12\\PNH20241219T000002_13122024\\Material.xlsx"
+    },
+    {
       "Identity": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\Images\\Avatar\\Account2\\1732197236_caphe_2de6b75bab2f456883e0f741c8c40120.jpg",
       "SourceId": "CafeShop",
       "SourceType": "Discovered",
@@ -18219,12 +18257,12 @@
       "OriginalItemSpec": "wwwroot\\Images\\Product\\TraTraiCay\\TeaTraiCay03\\1719200101_kimquat_892a8e85be0e4ab9951626bd2e2e04c6.webp"
     },
     {
-      "Identity": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\Images\\Product\\TraTraiCay\\TeaTraiCay04\\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.jpg",
+      "Identity": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\Images\\Product\\TraTraiCay\\TeaTraiCay04\\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.webp",
       "SourceId": "CafeShop",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\",
       "BasePath": "_content/CafeShop",
-      "RelativePath": "Images/Product/TraTraiCay/TeaTraiCay04/1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.jpg",
+      "RelativePath": "Images/Product/TraTraiCay/TeaTraiCay04/1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.webp",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -18235,7 +18273,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Images\\Product\\TraTraiCay\\TeaTraiCay04\\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.jpg"
+      "OriginalItemSpec": "wwwroot\\Images\\Product\\TraTraiCay\\TeaTraiCay04\\1669736819_tra-dao-cam-sa-da_63defc32ce214da487850604a63ff281.webp"
     },
     {
       "Identity": "D:\\LMK205\\DATN\\Code\\DATN_2021607554\\DATN_2021607554\\CafeShop\\wwwroot\\Images\\Product\\TraTraiCay\\TeaTraiCay05\\tra-sen_905594_6f6088347912437a9a0d851bdaa510a6.webp",

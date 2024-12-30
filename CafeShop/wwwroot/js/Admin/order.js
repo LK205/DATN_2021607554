@@ -1,6 +1,9 @@
 ﻿$(document).ready(function (e) {
     $(".select2").select2();
     GetAll();
+    setInterval(function () {
+        GetAll();
+    }, 10000);
 });
 var pageNumber = 1;
 var totalPage = 0;
@@ -66,7 +69,6 @@ $('#btn_search').click(function () {
     GetAll();
 })
 function GetAll() {
-    ShowSpinnerClient();
     var request = $('#request').val() ?? "";
     var status = $('#order_status option:selected').val();
     var dateStart = $('#date_start').val();
